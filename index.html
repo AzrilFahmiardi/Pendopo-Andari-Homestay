@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pendopo Andari - Editorial Javanese Heritage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e5e2dc",
+                        "primary-container": "#795548",
+                        "secondary": "#50652a",
+                        "surface": "#fcf9f3",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#5f3e32",
+                        "background": "#fcf9f3",
+                        "on-surface": "#1c1c18",
+                        "outline": "#82746f",
+                        "outline-variant": "#d4c3bd",
+                        "wood-brown": "#5f3e32",
+                        "bone-white": "#fcf9f3",
+                        "leaf-green": "#50652a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            html {
+                scroll-behavior: smooth;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+        }
+        .photo-reveal {
+            clip-path: inset(0 0 0 0);
+            transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        /* Scroll Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes floatIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            50% { opacity: 1; }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Animation Classes */
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+        .animate-slide-up { animation: slideInUp 0.8s ease-out forwards; opacity: 0; }
+        .animate-slide-left { animation: slideInLeft 0.8s ease-out forwards; opacity: 0; }
+        .animate-slide-right { animation: slideInRight 0.8s ease-out forwards; opacity: 0; }
+        .animate-scale-in { animation: scaleIn 0.6s ease-out forwards; opacity: 0; }
+        .animate-float-in { animation: floatIn 1s ease-out forwards; opacity: 0; }
+        
+        /* Staggered animations for groups */
+        .stagger-item:nth-child(1) { animation-delay: 0s; }
+        .stagger-item:nth-child(2) { animation-delay: 0.15s; }
+        .stagger-item:nth-child(3) { animation-delay: 0.3s; }
+        .stagger-item:nth-child(4) { animation-delay: 0.45s; }
+        .stagger-item:nth-child(5) { animation-delay: 0.6s; }
+        .stagger-item:nth-child(6) { animation-delay: 0.75s; }
+        
+        /* Image reveal effects */
+        .image-reveal { position: relative; overflow: hidden; }
+        .image-reveal img { transition: transform 0.6s cubic-bezier(0.33, 0.66, 0.66, 1); }
+        .image-reveal:hover img { transform: scale(1.05); }
+        
+        /* Smooth room image hover */
+        .room-image-showcase {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .room-image-showcase img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.33, 0.66, 0.66, 1);
+        }
+        
+        .room-image-showcase:hover img {
+            transform: scale(1.08);
+        }
+        
+        /* Enhanced card effects */
+        .card-hover { transition: all 0.4s cubic-bezier(0.33, 0.66, 0.66, 1); }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(95, 62, 50, 0.15); }
+        
+        /* Hero animations */
+        .hero-title { animation: slideInUp 1s ease-out 0.2s forwards; opacity: 0; }
+        .hero-subtitle { animation: slideInUp 1s ease-out 0.4s forwards; opacity: 0; }
+        .hero-tagline { animation: fadeIn 0.8s ease-out 0.1s forwards; opacity: 0; }
+        
+        /* Button animations */
+        .btn-animate { position: relative; overflow: hidden; transition: all 0.3s ease-out; }
+        .btn-animate::before { 
+            content: ''; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            width: 0; 
+            height: 0; 
+            background: rgba(255, 255, 255, 0.1); 
+            border-radius: 50%; 
+            transform: translate(-50%, -50%); 
+            transition: width 0.6s, height 0.6s; 
+        }
+        .btn-animate:hover::before { width: 300px; height: 300px; }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: rgba(0, 0, 0, 0.7) !important;
+            z-index: 1000 !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transition: opacity 0.3s ease-out, visibility 0.3s ease-out !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            pointer-events: none !important;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+        }
+        
+        .modal-container {
+            position: relative !important;
+            background: white !important;
+            width: 90vw !important;
+            max-width: 1200px !important;
+            max-height: 85vh !important;
+            border-radius: 0 !important;
+            overflow-y: auto !important;
+            transform: scale(0.95) !important;
+            transition: transform 0.3s ease-out !important;
+            pointer-events: auto !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .modal-overlay.active .modal-container {
+            transform: scale(1) !important;
+        }
+        
+        .modal-close {
+            position: absolute !important;
+            top: 24px !important;
+            right: 24px !important;
+            background: white !important;
+            border: 2px solid #5f3e32 !important;
+            width: 40px !important;
+            height: 40px !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 10 !important;
+            transition: all 0.3s ease !important;
+            padding: 0 !important;
+            font-size: 24px !important;
+            line-height: 1 !important;
+            color: #5f3e32 !important;
+        }
+        
+        .modal-close:hover {
+            background: #5f3e32 !important;
+            color: white !important;
+        }
+        
+        .modal-gallery {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+            gap: 16px !important;
+            padding: 48px 24px !important;
+        }
+        
+        .gallery-item {
+            overflow: hidden !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            aspect-ratio: 4/3 !important;
+        }
+        
+        .gallery-item img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            transition: transform 0.4s cubic-bezier(0.33, 0.66, 0.66, 1) !important;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1) !important;
+        }
+        
+        /* Accordion Styles */
+        .faq-item {
+            border-bottom: 1px solid #d4c3bd;
+            padding: 24px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            font-weight: 500;
+            color: #5f3e32;
+            transition: color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: #50652a;
+        }
+        
+        .faq-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: #1c1c18;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            margin-top: 16px;
+        }
+        
+        /* Room card click effect */
+        .room-clickable {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        
+        .room-clickable:hover {
+            background-color: #f5f3f0 !important;
+        }
+        
+        .room-clickable:hover h3 {
+            color: #50652a;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+                padding: 32px 16px;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .modal-overlay, .modal-container, .gallery-item img, 
+            .faq-icon, .faq-answer, .faq-question {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+        
+        /* Leaflet Map Styling */
+        #locationMap {
+            background: #f5f5f5 !important;
+            border-radius: 4px !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+            z-index: 1 !important;
+            position: relative !important;
+        }
+
+        .leaflet-container {
+            z-index: 1 !important;
+        }
+        
+        .pendopo-marker {
+            filter: drop-shadow(0 2px 4px rgba(95, 62, 50, 0.3)) !important;
+        }
+        
+        .leaflet-popup-content-wrapper {
+            border-radius: 4px !important;
+            background: white !important;
+            border: 1px solid #e5e2dc !important;
+            z-index: 10 !important;
+        }
+        
+        .leaflet-popup-tip {
+            background: white !important;
+            border: 1px solid #e5e2dc !important;
+            z-index: 10 !important;
+        }
+
+        .leaflet-popup {
+            z-index: 10 !important;
+        }
+        
+        .leaflet-control-zoom {
+            border-radius: 4px !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+            z-index: 5 !important;
+        }
+        
+        .leaflet-control-zoom-in,
+        .leaflet-control-zoom-out {
+            background: #5f3e32 !important;
+            color: white !important;
+            font-weight: bold !important;
+            border: none !important;
+        }
+        
+        .leaflet-control-zoom-in:hover,
+        .leaflet-control-zoom-out:hover {
+            background: #50652a !important;
+        }
+
+        /* Attraction Marker Styles */
+        .attraction-marker {
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .attraction-marker:hover {
+            opacity: 1 !important;
+        }
+
+        .attraction-marker.active {
+            filter: drop-shadow(0 0 8px rgba(80, 101, 42, 0.6)) !important;
+        }
+
+        /* Clickable Distance Button in Popup */
+        .distance-clickable {
+            transition: all 0.2s ease !important;
+            box-shadow: 0 2px 4px rgba(80, 101, 42, 0.2) !important;
+        }
+
+        .distance-clickable:hover {
+            background: #3d4d1f !important;
+            box-shadow: 0 4px 8px rgba(80, 101, 42, 0.4) !important;
+            transform: translateY(-1px) !important;
+        }
+
+        .attraction-popup {
+            font-family: 'Manrope', sans-serif !important;
+        }
+
+        /* Clickable Walking Distance List Items */
+        .walking-distance-item {
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            padding: 8px 12px !important;
+            margin-left: -12px !important;
+            margin-right: -12px !important;
+            border-radius: 4px !important;
+            position: relative !important;
+        }
+
+        .walking-distance-item:hover {
+            background: rgba(80, 101, 42, 0.1) !important;
+            transform: translateX(4px) !important;
+        }
+
+        .walking-distance-item.active {
+            background: rgba(80, 101, 42, 0.2) !important;
+            padding-left: 16px !important;
+        }
+
+        /* Polyline connecting homestay to attraction */
+        .distance-polyline {
+            stroke: #50652a !important;
+            stroke-width: 3 !important;
+            stroke-dasharray: 8, 4 !important;
+            opacity: 0.85 !important;
+        }
+        
+    </style>
+</head>
+<body class="bg-bone-white text-on-surface font-body antialiased selection:bg-primary-container selection:text-white">
+<header class="fixed top-0 z-50 w-full bg-bone-white/80 backdrop-blur-sm border-b border-wood-brown/10">
+<div class="flex justify-between items-center w-full px-8 lg:px-16 py-6 mx-auto">
+<div class="text-3xl font-headline italic text-wood-brown tracking-tight" style="">
+            Pendopo Andari
+        </div>
+<nav class="hidden lg:flex space-x-12">
+<a class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors" href="#story" style="">The Story</a>
+<a class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors" href="#rooms" style="">Sanctuaries</a>
+<a class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors" href="#facilities" style="">Rituals</a>
+<a class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors" href="#faq" style="">FAQ</a>
+<a class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors" href="#location" style="">Address</a>
+</nav>
+<a class="bg-wood-brown text-bone-white px-8 py-3 text-xs uppercase tracking-[0.2em] hover:bg-leaf-green transition-colors" href="#cta" style="">
+            Inquire
+        </a>
+</div>
+</header>
+<section class="relative h-screen min-h-[800px] flex items-end overflow-hidden">
+<div class="absolute inset-0 z-0 scale-105">
+<img alt="Atmospheric view of Javanese architecture" class="w-full h-full object-cover brightness-75" src="./assets/tampak_depan1.jpg" style=""/>
+<div class="absolute inset-0 bg-gradient-to-t from-wood-brown/60 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full px-8 lg:px-16 pb-24 max-w-7xl mx-auto">
+<div class="max-w-4xl">
+<span class="text-bone-white text-xs uppercase tracking-[0.4em] mb-6 block opacity-80 hero-tagline" style="">A Private Heritage Sanctuary</span>
+<h1 class="font-headline text-6xl md:text-8xl lg:text-[10rem] text-bone-white leading-[0.85] -ml-1 hero-title" style="">
+                Ketenangan <br/>
+<span class="italic font-normal" style="">Personal.</span>
+</h1>
+<p class="font-headline text-xl md:text-2xl text-bone-white/90 mt-12 max-w-xl font-light italic hero-subtitle" style="">
+                In the heart of Yogyakarta, we prioritize quality over volume. Seven rooms, infinite warmth.
+            </p>
+</div>
+</div>
+</section>
+<section class="py-32 lg:py-48 px-8 lg:px-16" id="story">
+<div class="max-w-7xl mx-auto editorial-grid gap-y-24">
+<div class="col-span-12 lg:col-span-7 relative z-10">
+<h2 class="font-headline text-5xl md:text-7xl text-wood-brown leading-tight mb-12 animate-slide-left opacity-0" style="">
+                Bukan Sekadar Penginapan, <br/>
+<span class="italic text-leaf-green" style="">Ini Rumah Anda</span>
+</h2>
+<div class="max-w-xl space-y-8 text-lg font-light leading-relaxed text-on-surface/80 animate-slide-left opacity-0">
+<p class="" style="">Pendopo Andari lahir dari dedikasi masa pensiun Bapak Dodi dan Ibu Andari. Kami percaya bahwa perjalanan yang bermakna dimulai dari tempat Anda beristirahat.</p>
+<p class="font-headline italic text-2xl text-wood-brown border-l-2 border-leaf-green pl-8 py-4" style="">
+                    "Filosofi kami sederhana: Kualitas di atas kuantitas. Dengan hanya tujuh kamar, perhatian kami tak terbagi."
+                </p>
+<p class="" style="">Setiap sudut dirancang dengan sentuhan personal, interaksi yang hangat, dan pelayanan dari hati yang layaknya keluarga sendiri. Di sini, Anda bukan sekadar nomor kamar, melainkan tamu di rumah kami.</p>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 lg:col-start-9 lg:-mt-24">
+<div class="aspect-[3/4] overflow-hidden shadow-2xl">
+<img alt="Javanese heritage details" class="w-full h-full object-cover" src="./assets/ruang_tamu_piano.jpg" style=""/>
+</div>
+<p class="mt-6 text-xs uppercase tracking-widest text-wood-brown/60 font-medium" style="">The Living Sanctuary — Est. 2024</p>
+</div>
+</div>
+</section>
+<div class="w-full bg-wood-brown py-32 text-bone-white text-center px-8">
+<div class="max-w-4xl mx-auto">
+<span class="material-symbols-outlined text-5xl mb-8 opacity-40" style="">filter_vintage</span>
+<h3 class="font-headline text-4xl italic font-light leading-relaxed" style="">
+            "Kami mengundang Anda untuk melambat, bernapas, dan merasapi keheningan Yogyakarta yang sesungguhnya."
+        </h3>
+<p class="mt-8 text-xs uppercase tracking-[0.4em] opacity-60" style="">— Pak Dodi &amp; Ibu Andari</p>
+</div>
+</div>
+<section class="bg-bone-white" id="rooms">
+    <div class="max-w-7xl mx-auto px-8 lg:px-16 py-16">
+        <h2 class="font-headline text-6xl md:text-7xl text-wood-brown mb-20 text-center">
+            Our <br/>
+            <span class="italic text-leaf-green">Sanctuaries</span>
+        </h2>
+        
+        <!-- Room Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Deluxe Room Card -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <div class="h-64 overflow-hidden">
+                    <img alt="Deluxe Room" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="./assets/kamar_deluxe_1.jpg" />
+                </div>
+                <div class="p-8">
+                    <span class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-3 block">01 / Sanctuary</span>
+                    <h3 class="font-headline text-3xl text-wood-brown mb-4">Deluxe Room</h3>
+                    <p class="text-sm font-light text-on-surface/70 leading-relaxed mb-6">
+                        Kamar terluas kami dengan pemandangan langsung ke taman dalam. Menampilkan furnitur jati antik dan area duduk pribadi.
+                    </p>
+                    <div class="mb-6 pb-6 border-b border-wood-brown/20">
+                        <p class="text-sm uppercase tracking-widest text-leaf-green font-semibold">Rp 150.000 / malam</p>
+                    </div>
+                    <ul class="grid grid-cols-2 gap-3 text-xs tracking-wide text-wood-brown mb-8">
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">king_bed</span> King-size Bed</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">deck</span> Private Terrace</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">bathtub</span> En-suite Bathtub</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">ac_unit</span> Smart AC</li>
+                    </ul>
+                    <button class="w-full bg-wood-brown text-bone-white py-3 rounded hover:bg-leaf-green transition-colors font-semibold uppercase tracking-widest text-xs" onclick="openRoomModal('deluxe'); return false;">View Gallery</button>
+                </div>
+            </div>
+            
+            <!-- Superior Room Card -->
+            <div class="bg-bone-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <div class="h-64 overflow-hidden">
+                    <img alt="Superior Room" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="./assets/kamar_superior_1.webp" />
+                </div>
+                <div class="p-8">
+                    <span class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-3 block">02 / Intimate</span>
+                    <h3 class="font-headline text-3xl text-wood-brown mb-4">Superior Room</h3>
+                    <p class="text-sm font-light text-on-surface/70 leading-relaxed mb-6">
+                        Keseimbangan sempurna antara kenyamanan modern dan nuansa tradisional. Ideal untuk pasangan yang mencari suasana romantis.
+                    </p>
+                    <div class="mb-6 pb-6 border-b border-wood-brown/20">
+                        <p class="text-sm uppercase tracking-widest text-leaf-green font-semibold">Rp 150.000 / malam</p>
+                    </div>
+                    <ul class="grid grid-cols-2 gap-3 text-xs tracking-wide text-wood-brown mb-8">
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">king_bed</span> Queen-size Bed</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">laptop_mac</span> Desk Area</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">shower</span> En-suite Bath</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">tv</span> Smart TV</li>
+                    </ul>
+                    <button class="w-full bg-wood-brown text-bone-white py-3 rounded hover:bg-leaf-green transition-colors font-semibold uppercase tracking-widest text-xs" onclick="openRoomModal('superior'); return false;">View Gallery</button>
+                </div>
+            </div>
+            
+            <!-- Standard Room Card -->
+            <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <div class="h-64 overflow-hidden">
+                    <img alt="Standard Room" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="./assets/kamar_double_1.jpg" />
+                </div>
+                <div class="p-8">
+                    <span class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-3 block">03 / Essential</span>
+                    <h3 class="font-headline text-3xl text-wood-brown mb-4">Standard Room</h3>
+                    <p class="text-sm font-light text-on-surface/70 leading-relaxed mb-6">
+                        Pilihan cerdas dengan fasilitas lengkap. Nyaman, efisien, dan tetap mempertahankan karakter hangat Pendopo Andari.
+                    </p>
+                    <div class="mb-6 pb-6 border-b border-wood-brown/20">
+                        <p class="text-sm uppercase tracking-widest text-leaf-green font-semibold">Rp 150.000 / malam</p>
+                    </div>
+                    <ul class="grid grid-cols-2 gap-3 text-xs tracking-wide text-wood-brown mb-8">
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">bed</span> Twin/Double</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">window</span> Window View</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">shower</span> Private Bath</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">wifi</span> High Speed Wi-Fi</li>
+                    </ul>
+                    <button class="w-full bg-wood-brown text-bone-white py-3 rounded hover:bg-leaf-green transition-colors font-semibold uppercase tracking-widest text-xs" onclick="openRoomModal('double'); return false;">View Gallery</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<section class="py-32 bg-surface-container-low px-8 lg:px-16" id="facilities">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col lg:flex-row justify-between items-baseline mb-24 gap-8">
+<h2 class="font-headline text-5xl md:text-7xl text-wood-brown" style="">Daily Rituals</h2>
+<p class="max-w-xs text-on-surface/60 font-light text-sm tracking-widest uppercase" style="">Enhancing your stay with authentic Javanese hospitality.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+<div class="space-y-6 group stagger-item animate-scale-in opacity-0">
+<div class="aspect-square bg-white flex items-center justify-center mb-8 border border-wood-brown/5 group-hover:bg-wood-brown group-hover:text-bone-white transition-all duration-500">
+<span class="material-symbols-outlined text-4xl" style="">restaurant</span>
+</div>
+<h4 class="font-headline text-2xl text-wood-brown italic" style="">Authentic Breakfast</h4>
+<p class="text-sm font-light leading-relaxed text-on-surface/70" style="">Sarapan rumahan khas Yogyakarta yang dimasak segar setiap pagi oleh Ibu Andari sendiri.</p>
+</div>
+<div class="space-y-6 group stagger-item animate-scale-in opacity-0">
+<div class="aspect-square bg-white flex items-center justify-center mb-8 border border-wood-brown/5 group-hover:bg-wood-brown group-hover:text-bone-white transition-all duration-500">
+<span class="material-symbols-outlined text-4xl" style="">local_laundry_service</span>
+</div>
+<h4 class="font-headline text-2xl text-wood-brown italic" style="">Free Laundry</h4>
+<p class="text-sm font-light leading-relaxed text-on-surface/70" style="">Layanan cuci pakaian gratis untuk tamu, memastikan Anda bepergian lebih ringan dan nyaman.</p>
+</div>
+<div class="space-y-6 group stagger-item animate-scale-in opacity-0">
+<div class="aspect-square bg-white flex items-center justify-center mb-8 border border-wood-brown/5 group-hover:bg-wood-brown group-hover:text-bone-white transition-all duration-500">
+<span class="material-symbols-outlined text-4xl" style="">kitchen</span>
+</div>
+<h4 class="font-headline text-2xl text-wood-brown italic" style="">Shared Kitchen</h4>
+<p class="text-sm font-light leading-relaxed text-on-surface/70" style="">Dapur terbuka 24 jam dengan teh, kopi, dan camilan lokal yang bebas Anda nikmati kapan saja.</p>
+</div>
+<div class="space-y-6 group stagger-item animate-scale-in opacity-0">
+<div class="aspect-square bg-white flex items-center justify-center mb-8 border border-wood-brown/5 group-hover:bg-wood-brown group-hover:text-bone-white transition-all duration-500">
+<span class="material-symbols-outlined text-4xl" style="">deck</span>
+</div>
+<h4 class="font-headline text-2xl text-wood-brown italic" style="">Area Pendopo</h4>
+<p class="text-sm font-light leading-relaxed text-on-surface/70" style="">Ruang komunal berarsitektur Jawa untuk bersantai, membaca, atau berbincang di sore hari.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-32 px-8 lg:px-16 overflow-hidden bg-bone-white">
+<div class="max-w-7xl mx-auto editorial-grid">
+<div class="col-span-12 lg:col-span-4 mb-16 lg:mb-0">
+<h2 class="font-headline text-5xl text-wood-brown mb-8 leading-tight" style="">Stories From <br/><span class="italic" style="">Our Guests</span></h2>
+<div class="w-24 h-px bg-leaf-green mb-8"></div>
+</div>
+<div class="col-span-12 lg:col-span-8 space-y-24">
+<div class="max-w-xl animate-slide-up opacity-0 lg:ml-auto">
+<p class="font-headline text-2xl italic text-on-surface/80 leading-relaxed mb-6" style="">"Menginap di sini benar-benar terasa seperti pulang ke rumah nenek di Jogja. Suasananya tenang sekali, sarapannya luar biasa enak, dan keramahan Bapak Dodi sangat berkesan."</p>
+<p class="text-xs uppercase tracking-widest text-leaf-green font-bold" style="">— Sarah &amp; Budi, Jakarta</p>
+</div>
+<div class="max-w-xl animate-slide-up opacity-0">
+<p class="font-headline text-2xl italic text-on-surface/80 leading-relaxed mb-6" style="">"Perfect oasis in the middle of Yogyakarta. It's so quiet despite being just a short walk to the main attractions. The small number of rooms means incredible personal attention."</p>
+<p class="text-xs uppercase tracking-widest text-leaf-green font-bold" style="">— Mark, Australia</p>
+</div>
+<div class="max-w-xl lg:ml-auto">
+<p class="font-headline text-2xl italic text-on-surface/80 leading-relaxed mb-6" style="">"Kebersihannya sangat terjaga, dan fasilitas gratis laundry sangat membantu kami yang sedang road trip. Area Pendopo sangat nyaman untuk minum teh sore. Pasti akan kembali lagi."</p>
+<p class="text-xs uppercase tracking-widest text-leaf-green font-bold" style="">— Keluarga Pratama, Surabaya</p>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-wood-brown text-bone-white py-32 px-8 lg:px-16" id="location">
+<div class="max-w-7xl mx-auto editorial-grid gap-16 items-center">
+<div class="col-span-12 lg:col-span-5 order-2 lg:order-1 animate-slide-left opacity-0">
+<h2 class="font-headline text-5xl mb-12" style="">The Neighborhood</h2>
+<div class="space-y-12">
+<div>
+<span class="text-xs uppercase tracking-[0.4em] opacity-60 block mb-4" style="">Address</span>
+<p class="font-headline text-xl italic font-light" style="">Jl. Ibu Ruswo GM 2/232, Prawirodirjan, <br/>Gondomanan, Kota Yogyakarta 55121</p>
+</div>
+<div>
+<span class="text-xs uppercase tracking-[0.4em] opacity-60 block mb-2" style="">Walking Distances</span>
+<p class="text-xs opacity-40 italic mb-4" style="">Klik untuk melihat jarak pada peta</p>
+<ul class="space-y-4 font-light text-lg">
+<li class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item" data-attraction="Keraton Yogyakarta" style="">
+<span class="walking-distance-name" style="">Keraton Yogyakarta</span>
+<span class="italic text-leaf-green" style="">0.68 km</span>
+</li>
+<li class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item" data-attraction="Benteng Vredeburg" style="">
+<span class="walking-distance-name" style="">Benteng Vredeburg & Nol KM</span>
+<span class="italic text-leaf-green" style="">0.51 km</span>
+</li>
+<li class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item" data-attraction="Jalan Malioboro" style="">
+<span class="walking-distance-name" style="">Jalan Malioboro</span>
+<span class="italic text-leaf-green" style="">1.81 km</span>
+</li>
+<li class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item" data-attraction="Taman Sari" style="">
+<span class="walking-distance-name" style="">Taman Sari</span>
+<span class="italic text-leaf-green" style="">1.55 km</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-7 order-1 lg:order-2 h-[600px] rounded overflow-hidden">
+<div id="locationMap" class="w-full h-full" style="background: #f5f5f5; height: 600px; min-height: 600px;"></div>
+</div>
+</div>
+</section>
+<section class="py-48 px-8 bg-bone-white text-center" id="cta">
+<div class="max-w-3xl mx-auto animate-fade-in opacity-0">
+<span class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-8 block" style="">Experience Pendopo Andari</span>
+<h2 class="font-headline text-6xl md:text-8xl text-wood-brown mb-16 leading-tight" style="">Ready to be <br/><span class="italic" style="">Our Guest?</span></h2>
+<div class="flex flex-col items-center space-y-8">
+<a class="bg-wood-brown text-bone-white px-12 py-5 text-sm uppercase tracking-[0.3em] font-medium hover:bg-leaf-green transition-all shadow-xl" href="#" style="">
+                Tanya Pak Dodi (WhatsApp)
+            </a>
+<div class="flex gap-8 text-xs uppercase tracking-widest text-wood-brown/60 font-semibold pt-8">
+<a class="hover:text-wood-brown transition-colors" href="#" style="">Booking.com</a>
+<a class="hover:text-wood-brown transition-colors" href="#" style="">Traveloka</a>
+<a class="hover:text-wood-brown transition-colors" href="#" style="">Instagram</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Room Gallery Modal -->
+<div id="roomModal" class="modal-overlay">
+  <div class="modal-container">
+    <button class="modal-close" onclick="closeRoomModal()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <h2 class="font-headline text-4xl text-wood-brown p-8 pb-4" id="modalTitle">Room Gallery</h2>
+    <div class="modal-gallery" id="modalGallery"></div>
+  </div>
+</div>
+
+<!-- FAQ Section -->
+<section class="py-32 lg:py-48 px-8 lg:px-16 bg-bone-white" id="faq">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="font-headline text-5xl md:text-7xl text-wood-brown mb-16 leading-tight animate-slide-left opacity-0">
+      Pertanyaan yang <br/>
+      <span class="italic text-leaf-green" style="">Sering Ditanyakan</span>
+    </h2>
+    <div class="space-y-4">
+      
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Apakah Pendopo Andari Homestay menawarkan layanan laundry?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">Ya. Pendopo Andari Homestay menawarkan layanan laundry yang siap membantu Anda kapan pun Anda membutuhkan pakaian favorit Anda bersih dan segar sepanjang liburan Anda. Silakan menghubungi properti untuk informasi lebih lanjut.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Tempat wisata menarik apa saja yang ada di sekitar Pendopo Andari Homestay yang dapat ditempuh dengan berjalan kaki?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">Saat menginap di Pendopo Andari Homestay, mulai liburan Anda dengan menjelajahi tempat-tempat wisata menarik di dekat properti dengan berjalan kaki, seperti Roket, Gereja Santo Fransiskus Xaverius Yogyakarta, dan Parabola Berbisik.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Taman umum apa saja yang ada di sekitar Pendopo Andari Homestay?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">Saat menginap di Pendopo Andari Homestay, nikmati jalan-jalan pagi atau sore di taman terdekat seperti Roket, Parabola Berbisik, dan Peraga Observatorium.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Berapa lama tamu biasanya menginap di Pendopo Andari Homestay?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">Tamu terverifikasi yang telah menginap di Pendopo Andari Homestay rata-rata menginap selama 1 malam malam di properti ini.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Dalam bahasa apa saja anggota staf Pendopo Andari Homestay dapat berkomunikasi?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">Pendopo Andari Homestay dapat berbicara dalam 2 bahasa yang mencakup Bahasa Inggris untuk tamu yang lebih memilih bahasa ini. Silakan merujuk ke bagian Fasilitas dan kelengkapan di kategori Bahasa yang digunakan untuk mengetahui bahasa lain yang didukung di properti ini.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Apa yang paling disukai tamu tentang Pendopo Andari Homestay?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">Tamu terverifikasi yang menginap di Pendopo Andari Homestay telah memberikan peringkat 9.211 untuk properti ini karena service yang luar biasa sebagai sorotan utama selama mereka menginap.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Bagaimana hasil konsensus dari ulasan tamu yang terverifikasi terkait kopi di Pendopo Andari Homestay?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">69.0% dari tamu terverifikasi kami memberikan komentar dan penilaian positif terkait kopi yang ditawarkan di properti ini. Anda dapat melihat ulasan dan komentar pelanggan lebih lanjut untuk Pendopo Andari Homestay di kolom ulasan.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Bagaimana hasil konsensus dari ulasan tamu yang terverifikasi terkait layanan untuk hewan peliharaan di Pendopo Andari Homestay?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">100.0% dari tamu terverifikasi kami memberikan komentar dan penilaian positif terkait layanan untuk hewan peliharaan yang ditawarkan di properti ini. Anda dapat melihat ulasan dan komentar pelanggan lebih lanjut untuk Pendopo Andari Homestay di kolom ulasan.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Berapa penilaian rata-rata yang diberikan oleh wisatawan keluarga dengan anak kecil terverifikasi untuk Pendopo Andari Homestay?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">Wisatawan keluarga dengan anak kecil yang pernah menginap sebelumnya di properti ini memberikan penilaian rata-rata sebesar 8.5 kepada Pendopo Andari Homestay. Anda dapat melihat ulasan dan komentar pelanggan yang lebih lanjut dengan mengaktifkan filter jenis wisatawan tertentu yang terverifikasi di kolom ulasan.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Berapa penilaian rata-rata yang diberikan oleh wisatawan keluarga dengan anak usia remaja terverifikasi untuk Pendopo Andari Homestay?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">Wisatawan keluarga dengan anak usia remaja yang pernah menginap sebelumnya di properti ini memberikan penilaian rata-rata sebesar 9.0 kepada Pendopo Andari Homestay. Anda dapat melihat ulasan dan komentar pelanggan yang lebih lanjut dengan mengaktifkan filter jenis wisatawan tertentu yang terverifikasi di kolom ulasan.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Berapa penilaian rata-rata yang diberikan oleh wisatawan rombongan terverifikasi untuk Pendopo Andari Homestay?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">Wisatawan rombongan yang pernah menginap sebelumnya di properti ini memberikan penilaian rata-rata sebesar 8.6 kepada Pendopo Andari Homestay. Anda dapat melihat ulasan dan komentar pelanggan yang lebih lanjut dengan mengaktifkan filter jenis wisatawan tertentu yang terverifikasi di kolom ulasan.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <div class="flex-1">Pukul berapa saya dapat melakukan check-in dan check-out di Pendopo Andari Homestay?</div>
+          <span class="material-symbols-outlined faq-icon">expand_more</span>
+        </div>
+        <div class="faq-answer">Waktu check-in dimulai pukul 12:00 PM dan waktu check-out adalah hingga pukul 12:00 PM. Anda dapat mengajukan check-in lebih awal atau check-out lebih lama saat memesan, namun tergantung pada ketersediaan. Tamu yang melakukan check-in atau check-out sebelum atau setelah periode waktu yang telah ditentukan dapat dibebankan biaya tambahan.</div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+<footer class="bg-white py-24 px-8 lg:px-16 border-t border-wood-brown/5">
+<div class="max-w-7xl mx-auto editorial-grid gap-y-12">
+<div class="col-span-12 lg:col-span-6">
+<div class="text-3xl font-headline italic text-wood-brown mb-6" style="">Pendopo Andari</div>
+<p class="max-w-xs text-sm font-light text-on-surface/60 leading-relaxed" style="">
+                A private home experience in Yogyakarta. <br/>
+                Emphasizing the beauty of simplicity and the luxury of personal attention.
+            </p>
+</div>
+<div class="col-span-12 lg:col-span-6 lg:text-right flex flex-col justify-end">
+<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface/40 mb-2" style="">© 2024 Pendopo Andari Yogyakarta</p>
+<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface/40 italic" style="">A Modern Keraton Experience — Quality Over Volume</p>
+</div>
+</div>
+</footer>
+
+<script>
+    // Global map data store
+    let mapData = {
+        map: null,
+        attractions: [],
+        activeAttraction: null,
+        distanceLine: null,
+        initialized: false
+    };
+
+    // Utility function to calculate distance between two coordinates (Haversine formula)
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371; // Earth radius in kilometers
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                  Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+    }
+
+    // Estimate walking time (assumes ~1.4 km/hour walking speed)
+    function estimateWalkingTime(distanceKm) {
+        const walkingSpeedKmPerHour = 1.4;
+        const minutes = Math.round((distanceKm / walkingSpeedKmPerHour) * 60);
+        if (minutes < 60) {
+            return `${minutes} min walk`;
+        }
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        return `${hours}h ${mins}m walk`;
+    }
+
+    // Leaflet Map Initialization with enhanced interactivity
+    function initializeMap() {
+        // Prevent re-initialization
+        if (mapData.initialized) {
+            return;
+        }
+
+        // Check if Leaflet library is loaded
+        if (typeof L === 'undefined') {
+            console.error('Leaflet library not loaded');
+            setTimeout(initializeMap, 100); // Retry after 100ms
+            return;
+        }
+        
+        const mapContainer = document.getElementById('locationMap');
+        if (!mapContainer) {
+            console.error('Map container not found');
+            return;
+        }
+        
+        // Ensure container has proper size
+        mapContainer.style.height = '600px';
+        mapContainer.style.width = '100%';
+        
+        try {
+            const map = L.map('locationMap').setView([-7.8028947018100805, 110.36836481534104], 15);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 19,
+                crossOrigin: true,
+                referrerPolicy: 'no-referrer-when-downgrade'
+            }).addTo(map);
+            
+            // Custom icon for Pendopo Andari
+            const pendopoIcon = L.icon({
+                iconUrl: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%235f3e32" width="40" height="40"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>',
+                iconSize: [40, 40],
+                iconAnchor: [20, 40],
+                popupAnchor: [0, -40],
+                className: 'pendopo-marker'
+            });
+            
+            const pendopoCoords = [-7.8028947018100805, 110.36836481534104];
+            
+            // Main marker - Pendopo Andari
+            const pendopoMarker = L.marker(pendopoCoords, { icon: pendopoIcon })
+                .bindPopup('<div style="text-align: center; padding: 10px;"><h3 style="margin: 5px 0; color: #5f3e32; font-weight: bold;">Pendopo Andari Homestay</h3><p style="margin: 3px 0; color: #666; font-size: 12px;">Jl. Ibu Ruswo GM 2/232</p><p style="margin: 3px 0; color: #666; font-size: 12px;">Yogyakarta 55121</p></div>', { maxWidth: 250 })
+                .addTo(map)
+                .openPopup();
+            
+            // Nearby attractions data
+            const attractions = [
+                { coords: [-7.7974, 110.3656], name: 'Keraton Yogyakarta', initialDistance: '5 min walk' },
+                { coords: [-7.8009, 110.3642], name: 'Benteng Vredeburg', initialDistance: '5 min walk' },
+                { coords: [-7.7874, 110.3733], name: 'Jalan Malioboro', initialDistance: '10 min walk' },
+                { coords: [-7.7981, 110.3552], name: 'Taman Sari', initialDistance: '15 min walk' }
+            ];
+
+            mapData.map = map;
+            mapData.attractions = attractions;
+
+            // Create attraction markers with interactivity
+            attractions.forEach((place, index) => {
+                const distanceKm = calculateDistance(
+                    pendopoCoords[0], pendopoCoords[1],
+                    place.coords[0], place.coords[1]
+                );
+                const walkingTime = estimateWalkingTime(distanceKm);
+                
+                const marker = L.circleMarker(place.coords, {
+                    radius: 6,
+                    fillColor: '#50652a',
+                    color: '#ffffff',
+                    weight: 2,
+                    opacity: 0.8,
+                    fillOpacity: 0.7
+                });
+
+                const handleAttractionClick = () => {
+                    // Remove previous active state
+                    if (mapData.activeAttraction && mapData.activeAttraction.marker) {
+                        mapData.activeAttraction.marker.setStyle({
+                            radius: 6,
+                            fillOpacity: 0.7,
+                            opacity: 0.8
+                        });
+                        mapData.activeAttraction.marker._path?.classList.remove('active');
+                    }
+
+                    // Set new active state
+                    marker.setStyle({
+                        radius: 8,
+                        fillOpacity: 1,
+                        opacity: 1
+                    });
+                    marker._path?.classList.add('active');
+
+                    // Remove existing distance line
+                    if (mapData.distanceLine) {
+                        map.removeLayer(mapData.distanceLine);
+                    }
+
+                    // Create polyline between homestay and attraction
+                    mapData.distanceLine = L.polyline([pendopoCoords, place.coords], {
+                        color: '#50652a',
+                        weight: 2,
+                        dashArray: '5, 5',
+                        opacity: 0.6,
+                        className: 'distance-polyline'
+                    }).addTo(map);
+
+                    // Fly to show both markers in view with zoom out
+                    const group = L.featureGroup([
+                        L.marker(pendopoCoords),
+                        L.marker(place.coords)
+                    ]);
+                    
+                    map.flyToBounds(group.getBounds(), {
+                        padding: [50, 50],
+                        duration: 1.5,
+                        easeLinearity: 0.5
+                    });
+
+                    mapData.activeAttraction = { marker, coords: place.coords, name: place.name };
+                    
+                    // Update list item active state
+                    updateListItemActiveState(place.name);
+                };
+
+                marker.bindPopup(
+                    `<div style="text-align: center; padding: 12px; cursor: pointer;" class="attraction-popup">
+                        <strong style="color: #5f3e32; display: block; margin-bottom: 8px; font-size: 14px;">${place.name}</strong>
+                        <div style="background: #50652a; color: white; padding: 8px 12px; border-radius: 4px; margin-bottom: 6px; cursor: pointer; font-weight: 500; font-size: 13px; user-select: none;" class="distance-clickable">
+                            📍 ${distanceKm.toFixed(2)} km
+                        </div>
+                        <span style="color: #50652a; font-size: 10px; display: block; margin-top: 6px; font-style: italic;">Klik untuk lihat pada peta</span>
+                    </div>`,
+                    { maxWidth: 240 }
+                );
+
+                // Handle click on the popup distance button
+                marker.on('popupopen', () => {
+                    const popup = marker.getPopup();
+                    if (popup && popup._contentNode) {
+                        const clickableDiv = popup._contentNode.querySelector('.distance-clickable');
+                        if (clickableDiv) {
+                            clickableDiv.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                handleAttractionClick();
+                                marker.closePopup();
+                            });
+                        }
+                    }
+                });
+
+                marker.on('click', () => {
+                    handleAttractionClick();
+                });
+
+                marker.addTo(map);
+                place.marker = marker;
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                setTimeout(() => map.invalidateSize(), 100);
+            });
+            
+            mapData.initialized = true;
+            console.log('Map initialized successfully with interactive attractions!');
+        } catch (error) {
+            console.error('Error initializing map:', error);
+        }
+    }
+    
+    // Function to update list item active state
+    function updateListItemActiveState(attractionName) {
+        const listItems = document.querySelectorAll('.walking-distance-item');
+        listItems.forEach(item => {
+            item.classList.remove('active');
+            const itemName = item.getAttribute('data-attraction');
+            if (itemName === attractionName) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    // Function to trigger attraction from walking distance list
+    function triggerAttractionFromList(attractionName) {
+        if (!mapData.map || !mapData.attractions) {
+            console.warn('Map data not initialized yet');
+            return;
+        }
+
+        const attraction = mapData.attractions.find(a => a.name === attractionName);
+        if (!attraction) {
+            console.warn('Attraction not found:', attractionName);
+            return;
+        }
+
+        // Find and click the corresponding marker
+        const markers = mapData.map._layers;
+        for (let key in markers) {
+            const layer = markers[key];
+            if (layer instanceof L.CircleMarker) {
+                const markerCoords = [layer.getLatLng().lat, layer.getLatLng().lng];
+                if (Math.abs(markerCoords[0] - attraction.coords[0]) < 0.0001 && 
+                    Math.abs(markerCoords[1] - attraction.coords[1]) < 0.0001) {
+                    layer.fire('click');
+                    return;
+                }
+            }
+        }
+    }
+
+    // Attach click handlers to walking distance list items
+    function attachListItemHandlers() {
+        const listItems = document.querySelectorAll('.walking-distance-item');
+        listItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const attractionName = item.getAttribute('data-attraction');
+                triggerAttractionFromList(attractionName);
+                // Scroll map into view
+                const mapElement = document.getElementById('locationMap');
+                if (mapElement) {
+                    mapElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
+    }
+    
+    // Initialize map when DOM is ready and Leaflet is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeMap();
+            attachListItemHandlers();
+        });
+    } else {
+        initializeMap();
+        attachListItemHandlers();
+    }
+    
+    // Fallback: also try after a short delay to ensure all resources loaded
+    window.addEventListener('load', () => {
+        initializeMap();
+        attachListItemHandlers();
+    });
+    
+    // Room Modal Functions - MOVED TO TOP FOR EARLY AVAILABILITY
+    const roomImages = {
+        'deluxe': [
+            'kamar_deluxe_1.jpg', 'kamar_deluxe_2.jpg', 'kamar_deluxe_3.webp', 'kamar_deluxe_4.jpg',
+            'kamar_deluxe_5.webp', 'kamar_deluxe_6.jpg', 'kamar_deluxe_7.jpg', 'kamar_deluxe_8.jpg',
+            'kamar_deluxe_9.jpg', 'kamar_deluxe_10.jpg', 'kamar_deluxe_11.jpg', 'kamar_deluxe_12.webp',
+            'kamar_deluxe_13.jpg', 'kamar_deluxe_14.jpg', 'kamar_deluxe_15.jpeg', 'kamar_deluxe_16.jpg',
+            'kamar_deluxe_17.jpeg', 'kamar_deluxe_19.webp'
+        ],
+        'superior': [
+            'kamar_superior_1.webp', 'kamar_superior_2.jpg', 'kamar_superior_3.webp', 'kamar_superior_4.jpg',
+            'kamar_superior_5.jpg', 'kamar_superior_6.jpg', 'kamar_superior_6.webp', 'kamar_superior_7.webp',
+            'kamar_superior_8.webp', 'kamar_superior_9.webp', 'kamar_superior_10.jpg', 'kamar_superior_11.jpg',
+            'kamar_superior_11.webp', 'kamar_superior_12.jpeg', 'kamar_superior_13.webp', 'kamar_superior_14.webp',
+            'kamar_superior_15.jpeg', 'kamar_superior_16.jpeg'
+        ],
+        'double': [
+            'kamar_double_1.jpg', 'kamar_double_2.webp', 'kamar_double_4.jpg', 'kamar_double_5.webp',
+            'kamar_double_6.webp', 'kamar_double_7.jpg', 'kamar_double_8.webp', 'kamar_double_9.jpg',
+            'kamar_double_10.jpeg', 'kamar_double_11.webp', 'kamar_double_12.jpg', 'kamar_double_13.webp',
+            'kamar_double_14.jpeg', 'kamar_double_15.jpg', 'kamar_double_16.jpg', 'kamar_double_17.jpg',
+            'kamar_double_18.jpeg'
+        ]
+    };
+    
+    const roomTitles = {
+        'deluxe': 'Deluxe Room',
+        'superior': 'Superior Room',
+        'double': 'Standard Room'
+    };
+    
+    function openRoomModal(roomType) {
+        const modal = document.getElementById('roomModal');
+        const gallery = document.getElementById('modalGallery');
+        const title = document.getElementById('modalTitle');
+        
+        console.log('Opening modal for room:', roomType);
+        
+        if (!modal || !gallery) {
+            console.error('Modal elements not found');
+            return;
+        }
+        
+        // Set title
+        if (title) {
+            title.textContent = roomTitles[roomType] + ' - Gallery';
+        }
+        
+        // Clear gallery
+        gallery.innerHTML = '';
+        
+        // Add images
+        if (roomImages[roomType]) {
+            roomImages[roomType].forEach((image, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                const img = document.createElement('img');
+                img.src = './assets/' + image;
+                img.alt = roomTitles[roomType] + ' - Image ' + (index + 1);
+                img.loading = 'lazy';
+                item.appendChild(img);
+                gallery.appendChild(item);
+            });
+        }
+        
+        // Show modal with active class
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        console.log('Modal opened');
+    }
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('opacity-0');
+                if (entry.target.classList.contains('animate-fade-in')) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                } else if (entry.target.classList.contains('animate-slide-up')) {
+                    entry.target.style.animation = 'slideInUp 0.8s ease-out forwards';
+                } else if (entry.target.classList.contains('animate-slide-left')) {
+                    entry.target.style.animation = 'slideInLeft 0.8s ease-out forwards';
+                } else if (entry.target.classList.contains('animate-slide-right')) {
+                    entry.target.style.animation = 'slideInRight 0.8s ease-out forwards';
+                } else if (entry.target.classList.contains('animate-scale-in')) {
+                    entry.target.style.animation = 'scaleIn 0.6s ease-out forwards';
+                } else if (entry.target.classList.contains('animate-float-in')) {
+                    entry.target.style.animation = 'floatIn 1s ease-out forwards';
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all animated elements
+    document.querySelectorAll('[class*="animate-"]').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Parallax effect for hero section
+    const heroSection = document.querySelector('section[class*="min-h-\[800px\]"]');
+    if (heroSection) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const heroImage = heroSection.querySelector('img');
+            if (heroImage) {
+                heroImage.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        }, { passive: true });
+    }
+    
+    // Enhanced hover effects for facility cards
+    const facilityCards = document.querySelectorAll('.space-y-6.group');
+    facilityCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    // Smooth scroll and animation for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href !== '#cta') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+    
+    // Image reveal animations on page load
+    const images = document.querySelectorAll('img');
+    images.forEach((img, index) => {
+        img.style.opacity = '0';
+        img.style.transition = `opacity 0.8s ease-out ${index * 0.1}s`;
+        // Trigger after a small delay to ensure image loading
+        setTimeout(() => {
+            img.style.opacity = '1';
+        }, 50);
+    });
+    
+    // Dynamic animation for facility icons
+    const facilityIcons = document.querySelectorAll('.space-y-6 .material-symbols-outlined');
+    facilityIcons.forEach((icon, index) => {
+        const card = icon.closest('.space-y-6');
+        if (card) {
+            card.addEventListener('mouseenter', () => {
+                icon.style.animation = 'floatIn 0.6s ease-out';
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
+            });
+            card.addEventListener('mouseleave', () => {
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            });
+        }
+    });
+    
+    // Stagger animation for room cards - Use attribute selector to avoid invalid CSS selector syntax
+    const roomSections = document.querySelectorAll('[class*="flex flex-col"][class*="lg:flex-row"]');
+    roomSections.forEach((section, index) => {
+        const content = section.querySelector('[class*="max-w-md"]');
+        if (content) {
+            content.classList.add('animate-slide-left');
+            content.style.animationDelay = `${index * 0.2}s`;
+        }
+    });
+    
+    // Add visual feedback for buttons
+    document.querySelectorAll('a[class*="bg-wood-brown"]').forEach(button => {
+        button.classList.add('btn-animate');
+    });
+    
+    // Scroll progress indicator (optional enhancement)
+    const scrollBar = document.createElement('div');
+    scrollBar.style.cssText = 'position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #5f3e32, #50652a); z-index: 999; transition: width 0.1s ease-out;';
+    document.body.appendChild(scrollBar);
+    
+    window.addEventListener('scroll', () => {
+        const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        scrollBar.style.width = scrollPercent + '%';
+    }, { passive: true });
+    
+    // Helper function to close modal
+    function closeRoomModal() {
+        const modal = document.getElementById('roomModal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            console.log('Modal closed');
+        }
+    }
+    
+    // Initialize modal event listeners
+    function initModalListeners() {
+        const modal = document.getElementById('roomModal');
+        if (!modal) {
+            console.error('❌ Modal element not found during initialization!');
+            return;
+        }
+        
+        console.log('✓ Initializing modal listeners...');
+        
+        // Close modal when clicking on overlay background
+        modal.addEventListener('click', function(e) {
+            // Check if click is directly on the overlay (not on container)
+            if (e.target === this || e.target === modal) {
+                console.log('✓ Overlay click detected');
+                closeRoomModal();
+            }
+        });
+        
+        // Prevent closing when clicking inside modal container
+        const modalContainer = modal.querySelector('.modal-container');
+        if (modalContainer) {
+            modalContainer.addEventListener('click', function(e) {
+                // Stop propagation so click doesn't bubble to overlay
+                e.stopPropagation();
+            });
+            console.log('✓ Modal container click handler added');
+        }
+        
+        // Also handle escape key to close
+        const escapeHandler = function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                console.log('✓ Escape key pressed');
+                closeRoomModal();
+            }
+        };
+        
+        document.addEventListener('keydown', escapeHandler);
+        console.log('✓ Escape key handler added');
+        console.log('✓ All modal listeners initialized');
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        console.log('Document still loading, waiting for DOMContentLoaded...');
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded fired');
+            initModalListeners();
+        });
+    } else {
+        console.log('Document already loaded, initializing immediately...');
+        initModalListeners();
+    }
+    
+    // FAQ Accordion Functions
+    function toggleFaq(element) {
+        element.classList.toggle('active');
+    }
+
+</script>
+
+</body></html>
