@@ -217,11 +217,11 @@
         }
 
         .testimonial-track {
-            animation: marqueeLoop 42s linear infinite;
+            animation: marqueeLoop 62s linear infinite;
         }
 
         .floating-track {
-            animation: floatLaneLoop 48s linear infinite;
+            animation: floatLaneLoop 72s linear infinite;
         }
 
         .testimonial-lane:hover .testimonial-track,
@@ -246,7 +246,7 @@
         }
 
         .floating-track .testimonial-card {
-            animation: floatingCardBob var(--float-duration, 6s) ease-in-out var(--float-delay, 0s) infinite;
+            animation: floatingCardBob var(--float-duration, 8s) ease-in-out var(--float-delay, 0s) infinite;
         }
 
         .testimonial-quote {
@@ -254,6 +254,19 @@
             font-size: 0.95rem;
             line-height: 1.65;
             font-weight: 300;
+            display: -webkit-box;
+            line-clamp: 5;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .testimonial-quote-highlight {
+            color: #5f3e32;
+            font-family: "Noto Serif", serif;
+            font-style: italic;
+            font-weight: 600;
         }
 
         .testimonial-name {
@@ -2161,40 +2174,54 @@
 
     const testimonialEntriesByLanguage = {
         id: [
-            { name: 'Rina', location: 'Bandung', quote: 'Kamarnya rapi, suasananya teduh, dan stafnya sangat membantu dari check-in sampai check-out.' },
-            { name: 'Andri & Nisa', location: 'Semarang', quote: 'Lokasi dekat tempat wisata, tapi suasananya tetap tenang. Cocok untuk istirahat yang benar-benar berkualitas.' },
-            { name: 'Kevin', location: 'Surabaya', quote: 'Proses menginap sederhana, bersih, dan tidak ribet. Saya suka area pendopo untuk kerja santai pagi hari.' },
-            { name: 'Maya', location: 'Bekasi', quote: 'Interiornya hangat dan terasa personal. Sarapan rumahan jadi salah satu highlight selama di Jogja.' },
-            { name: 'Rahmat', location: 'Malang', quote: 'Pelayanan cepat dan ramah. Laundry gratis sangat membantu untuk trip beberapa hari.' },
-            { name: 'Dina', location: 'Bali', quote: 'Vibenya homey, bukan seperti hotel besar. Tidurnya nyaman dan lingkungan sekitar aman.' },
-            { name: 'Fikri', location: 'Depok', quote: 'Kualitas tidur saya jauh lebih baik di sini. Malam hening, pagi segar, fasilitas sesuai kebutuhan.' },
-            { name: 'Elisa', location: 'Makassar', quote: 'Sangat cocok buat yang ingin eksplor kota lalu kembali ke tempat yang tenang dan terasa akrab.' },
-            { name: 'Rudi', location: 'Bogor', quote: 'Staff komunikatif dan informatif. Rekomendasi kuliner lokal dari host juga sangat tepat.' },
-            { name: 'Santi', location: 'Solo', quote: 'Pencahayaan kamar bagus, ventilasi enak, dan detail kecil di ruangan terasa dipikirkan dengan baik.' },
-            { name: 'Vina & Tyo', location: 'Tangerang', quote: 'Area komunalnya nyaman untuk ngobrol sore. Kami merasa disambut seperti keluarga.' },
-            { name: 'Nadia', location: 'Palembang', quote: 'Akses ke pusat kota mudah. Setelah seharian jalan, pulang ke sini rasanya menenangkan.' },
-            { name: 'Arman', location: 'Medan', quote: 'Value for money sangat baik. Fasilitas utama lengkap dan kondisinya terawat.' },
-            { name: 'Lukman', location: 'Balikpapan', quote: 'Saya suka konsep tenang dan personalnya. Tidak ramai, tidak bising, tetap hangat.' },
-            { name: 'Siska', location: 'Cirebon', quote: 'Tempatnya cocok untuk short stay maupun long stay. Semua kebutuhan dasar terpenuhi dengan baik.' },
-            { name: 'Nando', location: 'Pekanbaru', quote: 'Pengalaman menginap yang konsisten: bersih, ramah, dan nyaman untuk kembali lagi.' }
+            { name: 'Tri', location: 'Indonesia', quote: '“Lebaran jogya” — Tenang nyaman, bersih & dekat marliboro.' },
+            { name: 'Monica', location: 'Indonesia', quote: '“Spektakuler” — Sesuai budget klo buat numpang tidur aja. Cuma susah parkir mobil aja. Pemiliknya baik. Sarapannya enak. Homey banget.' },
+            { name: 'Mukti', location: 'Indonesia', quote: '“Andari Homestay” — Josss guandhoss, murah & strategis..' },
+            { name: 'Farina', location: 'Indonesia', quote: '“Andari homestay sangat nyaman” — Sangat nyaman, bersih, ada air panasnya, dapat sarapan, seperti menginap di rumah kakek dan nenek sendiri.' },
+            { name: 'Kiki', location: 'Indonesia', quote: '“Senang dan nyaman menginap disini” — Menginap 2 malam disini tidur nyenyak dan rasanya seperti dirumah sendiri. Kamar mandi bersih dan hening suasananya. Owner nya enak diajak ngobrol. Penginapan ini bahkan disenangi turis asing. Pokoknya ga nyesel, rekomen bgt, dekat ke alun2, Malioboro, keraton, taman sari. Kalo ke Jogja lagi pasti nginep di Pendopo Andari lagi.' },
+            { name: 'Wahyu', location: 'Indonesia', quote: '“TIDAK ADA PARKIR MOBIL HARUS DI PINGGIR JALAN” — TIDAK ADA PARKIR MOBIL HARUS DI PINGGIR JALAN BESAR KEAMANAN DIPERTANYAKAN.' },
+            { name: 'nabella', location: 'Indonesia', quote: '“HOMESTAY YANG NYAMAN BANGET” — Pertama kali dateng, suasana sangat asri dan tenang. Bisa istirahat tanpa gangguan bising. Ownernya baik dan ramah sekali. Untuk kebersihan dan kenyamanan di Pendopo ini jangan diragukan lagi. Ada juga fasilitas sarapan pagi yang enakkk bgt! Next, bakal balik lagi kesiniiii.' },
+            { name: 'Hasmawaty', location: 'Indonesia', quote: '“Mantap oke” — Menyenangkan.' },
+            { name: 'Hasmawaty', location: 'Indonesia', quote: '“Recomended” — Menyenangkan.' },
+            { name: 'Pitri', location: 'Indonesia', quote: '“Pendopo Andari homestay” — Nyaman banget nginep di sini. Lokasinya strategis, dekat ke titik 0 km Jogja, Malioboro, keraton. Mau nyari makan juga gampang dan dekat minimarket. Pemiliknya ramah banget. Kamarnya bersih, ada AC, dapet sarapan enak. Bisa titip tas sebelum check in dan setelah check out. Walau high season, harganya tetep normal. Kalo ke Jogja lagi, mau nginep di sini lagi.' },
+            { name: 'Eko', location: 'Indonesia', quote: '“recomended” — bagus.' },
+            { name: 'Nur', location: 'Indonesia', quote: '“Spektakuler” — Mas-mas nya ramahhh. Tempatnya tenang ademmm karena ku dateng buat kerjaan. Requestnya jugaa sesuaii dan overalll goodd. Buat yang backpackerr bisaa disini.🙌🏻' },
+            { name: 'Djoto', location: 'Indonesia', quote: '“hommy” — Home stay nyaman, seperti di rumah kakek... mantabs, kekurangannya mobil parkir di jalan.' },
+            { name: 'Debby', location: 'Indonesia', quote: '“TERBAIK” — NYAMAN BANGET.. OWNER HOMESTAY NYA BAIK BANGETTT.. SANGAT MELAYANI DENGAN PENUH KETULUSAN THEBEST.' },
+            { name: 'Dwi', location: 'Indonesia', quote: '“Luar biasa” — Lokasi strategis banget, staff ramah, kebersihan sangat baik, makanan juga enak.' },
+            { name: 'Rivatul', location: 'Indonesia', quote: '“Spektakuler” — Menginap di Pendopo Andari serasa seperti pulang ke rumah sendiri, pemiliknya ramah dan suasana rumahnya asli jawa banget.' },
+            { name: 'WA', location: 'Afrika Selatan', quote: '“Penginapannya bersih” — Penimiknya baik dan rama.' },
+            { name: 'Rizky', location: 'Indonesia', quote: '“To good to be true” — Homey sekali menginap di pendopo andari homestay. Ownernya super baik (thankyou pak doddy & fams). Diperbolehkan checkin lebih awal, AC TV berfungsi dengan baik, toilet juga ok gak nyangka ada bath tub, sarapan enak, lokasi dekat kemana2, belajar pengalaman hidup juga sama pak doddy. Semoga bisa balik lagi! Best home stay ever!' },
+            { name: 'Siti', location: 'Indonesia', quote: '“Seperti di rumah sendiri” — Homestay yg sangat nyamaann, berada di lingkungan keraton Jogja. The real hidden gem! Seperti lagi pulang kampung. Owner super ramah dan baik hati, staff yg helpfull, sangat menyenangkan. Next trip harus nginep di Pendopo Andari Homestay lagii.' },
+            { name: 'DIGNA', location: 'Indonesia', quote: '“Keramahan dan Ketulusan” — Lokasi strategis dekat wisata heritage kraton dan sekitarnya. Walau sederhana tetapi bersih, suasana seperti di rumah eyang. Makan pagi beragam, enak, dan sehat ada buahnya. Sangat terkesan dengan keramahan, ketulusan, dan kebaikan ownernya. Rekomendasi bagi traveler yang ingin suasana seperti di rumah dan menggunakan transportasi umum. Kendala hanya tidak ada ruang parkir.' },
+            { name: 'Natasya', location: 'Indonesia', quote: '“Great for women solo travelers” — Best place to stay with great service and the owner is very kind and genuine. It is also safe for women solo travelers because I feel very safe staying there, very recommended.' },
+            { name: 'Takayuki', location: 'Jepang', quote: '“フレンドリーで過ごしやすい” — コーヒーは無料で飲めるうえに結構うまい！ 何杯も飲んでいました。' },
+            { name: 'Gue', location: 'Indonesia', quote: '“暖暖住宿” — 有對親切和藹的屋主、凌晨出門也一併等待、太難能可貴了。 屋子🈶️ 百年歷史了，遇5級地震（30Jun2023) 也一切安穩👍 果然架構上不錯🤭 有機會定再重遊 😁' }
         ],
         en: [
-            { name: 'Rina', location: 'Bandung', quote: 'The room was neat, the ambiance calm, and the staff were very helpful from check-in to check-out.' },
-            { name: 'Andri & Nisa', location: 'Semarang', quote: 'Close to major attractions yet still peaceful. Perfect for truly quality rest.' },
-            { name: 'Kevin', location: 'Surabaya', quote: 'The stay was simple, clean, and hassle-free. I loved using the pendopo area for light morning work.' },
-            { name: 'Maya', location: 'Bekasi', quote: 'The interior felt warm and personal. The homemade breakfast was one of my highlights in Jogja.' },
-            { name: 'Rahmat', location: 'Malang', quote: 'Fast and friendly service. The complimentary laundry was very helpful for a multi-day trip.' },
-            { name: 'Dina', location: 'Bali', quote: 'Very homey vibes, unlike big hotels. I slept well and the neighborhood felt safe.' },
-            { name: 'Fikri', location: 'Depok', quote: 'I slept much better here. Quiet nights, fresh mornings, and facilities that fit my needs.' },
-            { name: 'Elisa', location: 'Makassar', quote: 'Great for travelers who explore the city and return to a place that feels calm and familiar.' },
-            { name: 'Rudi', location: 'Bogor', quote: 'The staff were communicative and informative. The host’s local food recommendations were spot on.' },
-            { name: 'Santi', location: 'Solo', quote: 'Good room lighting, pleasant airflow, and thoughtful details throughout the space.' },
-            { name: 'Vina & Tyo', location: 'Tangerang', quote: 'The communal area is great for afternoon chats. We felt welcomed like family.' },
-            { name: 'Nadia', location: 'Palembang', quote: 'Easy access to the city center. After a full day out, coming back here felt calming.' },
-            { name: 'Arman', location: 'Medan', quote: 'Excellent value for money. Core facilities are complete and well maintained.' },
-            { name: 'Lukman', location: 'Balikpapan', quote: 'I like the calm and personal concept. Not crowded, not noisy, still warm.' },
-            { name: 'Siska', location: 'Cirebon', quote: 'Suitable for both short and long stays. All basic needs are handled well.' },
-            { name: 'Nando', location: 'Pekanbaru', quote: 'A consistently good stay: clean, friendly, and comfortable enough to return again.' }
+            { name: 'Tri', location: 'Indonesia', quote: '“Eid in Jogja” — Calm, comfortable, clean, and close to Malioboro.' },
+            { name: 'Monica', location: 'Indonesia', quote: '“Spectacular” — Fits the budget if you only need a place to sleep. Car parking is difficult, but the owner is kind. Breakfast is delicious. Very homey.' },
+            { name: 'Mukti', location: 'Indonesia', quote: '“Andari Homestay” — Awesome, affordable, and strategic location.' },
+            { name: 'Farina', location: 'Indonesia', quote: '“Andari Homestay is very comfortable” — Very comfortable and clean, with hot water and breakfast included. It felt like staying at my own grandparents house.' },
+            { name: 'Kiki', location: 'Indonesia', quote: '“Happy and comfortable staying here” — Stayed 2 nights and slept very well, felt like home. The bathroom was clean and the atmosphere was quiet. The owner was great to chat with. Even foreign tourists like this place. Highly recommended and close to Alun-Alun, Malioboro, Keraton, and Taman Sari. I will stay here again on my next trip to Jogja.' },
+            { name: 'Wahyu', location: 'Indonesia', quote: '“NO CAR PARKING, MUST PARK ON THE ROADSIDE” — THERE IS NO CAR PARKING, MUST PARK ON THE MAIN ROAD, SAFETY IS QUESTIONABLE.' },
+            { name: 'nabella', location: 'Indonesia', quote: '“VERY COMFORTABLE HOMESTAY” — First time coming here, the atmosphere was very lush and peaceful. I could rest without noise disturbance. The owner was very kind and friendly. Cleanliness and comfort are beyond doubt. The breakfast is also very tasty. Next time, I will come back again.' },
+            { name: 'Hasmawaty', location: 'Indonesia', quote: '“Great and solid” — Pleasant.' },
+            { name: 'Hasmawaty', location: 'Indonesia', quote: '“Recommended” — Pleasant.' },
+            { name: 'Pitri', location: 'Indonesia', quote: '“Pendopo Andari Homestay” — Very comfortable stay. Strategic location near Jogja 0 KM point, Malioboro, and Keraton. Easy to find food and close to minimarkets. The owner is very friendly. The room is clean, has AC, and good breakfast. You can leave your luggage before check-in and after check-out. Even during high season, the price stayed normal. I want to stay here again when I return to Jogja.' },
+            { name: 'Eko', location: 'Indonesia', quote: '“Recommended” — Good.' },
+            { name: 'Nur', location: 'Indonesia', quote: '“Spectacular” — The staff was very friendly. The place was calm and cool because I came for work. My requests were fulfilled and overall good. Backpackers can stay here too.🙌🏻' },
+            { name: 'Djoto', location: 'Indonesia', quote: '“homey” — Comfortable homestay, like being at grandfathers home... great, the downside is cars must park on the street.' },
+            { name: 'Debby', location: 'Indonesia', quote: '“THE BEST” — SUPER COMFORTABLE.. THE HOMESTAY OWNER IS EXTREMELY KIND.. VERY SINCERE IN SERVICE, THE BEST.' },
+            { name: 'Dwi', location: 'Indonesia', quote: '“Excellent” — Very strategic location, friendly staff, very good cleanliness, and tasty food.' },
+            { name: 'Rivatul', location: 'Indonesia', quote: '“Spectacular” — Staying at Pendopo Andari feels like coming back home. The owner is friendly and the house atmosphere is truly Javanese.' },
+            { name: 'WA', location: 'South Africa', quote: '“The lodging is clean” — The owner is kind and friendly.' },
+            { name: 'Rizky', location: 'Indonesia', quote: '“Too good to be true” — Very homey stay at Pendopo Andari Homestay. The owner is super kind (thank you Pak Doddy & family). Early check-in was allowed, AC and TV worked well, toilet was good and I did not expect a bathtub, breakfast was delicious, location is close to everywhere, and I also learned life lessons from Pak Doddy. Hope to come back again! Best homestay ever!' },
+            { name: 'Siti', location: 'Indonesia', quote: '“Feels like home” — A very comfortable homestay in the Keraton area of Jogja. The real hidden gem! It feels like going back to hometown. Super friendly and kind owner, helpful staff, and a very pleasant stay. For the next trip I must stay at Pendopo Andari Homestay again.' },
+            { name: 'DIGNA', location: 'Indonesia', quote: '“Hospitality and Sincerity” — Strategic location near Keraton heritage attractions. Simple but clean, with an atmosphere like grandparents home. Breakfast is varied, delicious, and healthy with fruit. I was deeply impressed by the owners hospitality, sincerity, and kindness. Recommended for travelers wanting a home-like atmosphere and using public transportation. The only issue is no parking space.' },
+            { name: 'Natasya', location: 'Indonesia', quote: '“Great for women solo travelers” — Best place to stay with great service and the owner is very kind and genuine. It is also safe for women solo travelers because I feel very safe staying there, very recommended.' },
+            { name: 'Takayuki', location: 'Jepang', quote: '“フレンドリーで過ごしやすい” — コーヒーは無料で飲めるうえに結構うまい！ 何杯も飲んでいました。' },
+            { name: 'Gue', location: 'Indonesia', quote: '“暖暖住宿” — 有對親切和藹的屋主、凌晨出門也一併等待、太難能可貴了。 屋子🈶️ 百年歷史了，遇5級地震（30Jun2023) 也一切安穩👍 果然架構上不錯🤭 有機會定再重遊 😁' }
         ]
     };
 
@@ -3104,10 +3131,32 @@
         return testimonialEntriesByLanguage[currentLanguage] || testimonialEntriesByLanguage.id;
     }
 
+    function escapeHtml(text) {
+        return String(text)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function formatTestimonialQuote(rawQuote) {
+        const quoteText = String(rawQuote || '').trim();
+        const highlightedMatch = quoteText.match(/^(["“”'‘’「」『』«»‹›][^"“”'‘’「」『』«»‹›]+["“”'‘’」』»›])/);
+
+        if (!highlightedMatch) {
+            return escapeHtml(quoteText);
+        }
+
+        const highlightedPart = escapeHtml(highlightedMatch[1]);
+        const remainingText = escapeHtml(quoteText.slice(highlightedMatch[1].length));
+        return `<span class="testimonial-quote-highlight">${highlightedPart}</span>${remainingText}`;
+    }
+
     function createTestimonialCard(entry, index) {
         return `
             <article class="testimonial-card" tabindex="0">
-                <p class="testimonial-quote">"${entry.quote}"</p>
+                <p class="testimonial-quote">${formatTestimonialQuote(entry.quote)}</p>
                 <p class="testimonial-name mt-3">${entry.name}</p>
                 <p class="testimonial-meta">${entry.location}</p>
             </article>
@@ -3142,7 +3191,7 @@
 
         floatingTrack.querySelectorAll('.testimonial-photo-card').forEach((card, index) => {
             card.style.setProperty('--float-delay', `${(index % 8) * 0.35}s`);
-            card.style.setProperty('--float-duration', `${5.4 + (index % 4) * 0.55}s`);
+            card.style.setProperty('--float-duration', `${8.4 + (index % 4) * 0.85}s`);
         });
     }
     
