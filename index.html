@@ -58,6 +58,10 @@
         @layer base {
             html {
                 scroll-behavior: smooth;
+                overflow-x: hidden;
+            }
+            body {
+                overflow-x: hidden;
             }
         }
         .material-symbols-outlined {
@@ -66,7 +70,16 @@
         .editorial-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
+        
+        [class*="col-span-"] {
+            min-width: 0;
+            width: 100%;
+        }
+        
         .photo-reveal {
             clip-path: inset(0 0 0 0);
             transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
@@ -664,7 +677,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 12px;
         }
 
         .booking-modal-overlay.active {
@@ -674,7 +687,8 @@
         }
 
         .booking-modal-container {
-            width: min(720px, 100%);
+            width: min(90vw, 720px);
+            max-width: calc(100% - 24px);
             background: #ffffff;
             border: 1px solid rgba(95, 62, 50, 0.16);
             box-shadow: 0 24px 40px rgba(0, 0, 0, 0.2);
@@ -690,14 +704,21 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 16px;
-            padding: 28px 28px 18px;
+            gap: 12px;
+            padding: 20px;
             border-bottom: 1px solid rgba(95, 62, 50, 0.12);
+        }
+        
+        @media (min-width: 768px) {
+            .booking-modal-header {
+                gap: 16px;
+                padding: 28px 28px 18px;
+            }
         }
 
         .booking-modal-close {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border: 1px solid #5f3e32;
             background: #ffffff;
             color: #5f3e32;
@@ -705,7 +726,15 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            flex-shrink: 0;
             transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .booking-modal-close {
+                width: 40px;
+                height: 40px;
+            }
         }
 
         .booking-modal-close:hover {
@@ -714,10 +743,23 @@
         }
 
         .booking-modal-grid {
-            padding: 22px 28px 30px;
+            padding: 16px 20px 20px;
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        @media (min-width: 480px) {
+            .booking-modal-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .booking-modal-grid {
+                padding: 22px 28px 30px;
+                gap: 12px;
+            }
         }
 
         .booking-option-card {
@@ -728,14 +770,22 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            min-height: 74px;
-            font-size: 11px;
+            gap: 8px;
+            min-height: 64px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             font-weight: 600;
             transition: border-color 0.2s ease, transform 0.2s ease,
                 box-shadow 0.2s ease, color 0.2s ease;
+        }
+        
+        @media (min-width: 480px) {
+            .booking-option-card {
+                min-height: 74px;
+                font-size: 11px;
+                gap: 10px;
+            }
         }
 
         .booking-option-card:hover {
@@ -751,7 +801,7 @@
             object-fit: contain;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 640px) {
             .modal-container {
                 width: 95vw !important;
                 height: min(90vh, 720px) !important;
@@ -759,55 +809,46 @@
             }
 
             .floating-wa-button {
-                right: 16px;
-                bottom: 16px;
-                width: 54px;
-                height: 54px;
-            }
-
-            .booking-modal-header {
-                padding: 20px 18px 14px;
-            }
-
-            .booking-modal-grid {
-                padding: 16px 18px 20px;
-                grid-template-columns: 1fr;
+                right: 12px;
+                bottom: 12px;
+                width: 48px;
+                height: 48px;
             }
 
             .modal-header {
-                padding: 20px 18px 14px;
+                padding: 16px 14px 10px;
             }
 
             .modal-stage {
-                grid-template-columns: 44px minmax(0, 1fr) 44px;
+                grid-template-columns: 40px minmax(0, 1fr) 40px;
                 gap: 8px;
-                padding: 14px 12px 0;
+                padding: 12px 10px 0;
             }
 
             .modal-nav {
-                width: 44px;
-                height: 44px;
+                width: 40px;
+                height: 40px;
             }
 
             .modal-main-frame,
             .modal-main-image {
-                max-height: min(34vh, 250px);
+                max-height: min(30vh, 220px);
             }
 
             .modal-meta {
-                padding: 12px 18px 8px;
+                padding: 10px 14px 6px;
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 4px;
+                gap: 2px;
             }
 
             .modal-gallery {
-                gap: 8px;
-                padding: 8px 14px 12px;
+                gap: 6px;
+                padding: 6px 10px 10px;
             }
 
             .gallery-item {
-                flex-basis: 90px;
+                flex-basis: 70px;
             }
         }
         
@@ -835,6 +876,19 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
             z-index: 1 !important;
             position: relative !important;
+            height: 300px !important;
+        }
+        
+        @media (min-width: 768px) {
+            #locationMap {
+                height: 400px !important;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            #locationMap {
+                height: 600px !important;
+            }
         }
 
         .leaflet-container {
@@ -945,15 +999,15 @@
     <body
         class="bg-bone-white text-on-surface font-body antialiased selection:bg-primary-container selection:text-white">
         <header
-            class="fixed top-0 z-50 w-full bg-bone-white/80 backdrop-blur-sm border-b border-wood-brown/10">
+            class="fixed top-0 z-50 w-full bg-bone-white/80 backdrop-blur-sm border-b border-wood-brown/10 overflow-x-hidden">
             <div
-                class="flex justify-between items-center w-full px-8 lg:px-16 py-6 mx-auto">
+                class="flex justify-between items-center w-full px-4 sm:px-8 lg:px-16 py-4 sm:py-6 mx-auto">
                 <div
-                    class="text-3xl font-headline italic text-wood-brown tracking-tight"
+                    class="text-2xl sm:text-3xl font-headline italic text-wood-brown tracking-tight"
                     style>
                     Pendopo Andari
                 </div>
-                <nav class="hidden lg:flex space-x-12">
+                <nav class="hidden lg:flex space-x-8 xl:space-x-12">
                     <a
                         class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors"
                         href="#story" style>The Story</a>
@@ -974,33 +1028,33 @@
                         href="#location" style>Address</a>
                 </nav>
                 <a
-                    class="bg-wood-brown text-bone-white px-8 py-3 text-xs uppercase tracking-[0.2em] hover:bg-leaf-green transition-colors"
+                    class="bg-wood-brown text-bone-white px-4 sm:px-8 py-2 sm:py-3 text-xs uppercase tracking-[0.2em] hover:bg-leaf-green transition-colors whitespace-nowrap"
                     href="#cta" style>
                     Inquire
                 </a>
             </div>
         </header>
         <section
-            class="relative overflow-hidden bg-bone-white pt-32 lg:pt-36 pb-16 lg:pb-24"
+            class="relative overflow-hidden bg-bone-white pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-24 px-8 lg:px-16"
             data-hero-stage>
             <div
                 class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-surface-variant/50 to-transparent"></div>
             <div
-                class="max-w-[1500px] mx-auto px-8 lg:px-12 xl:px-16 relative z-10">
+                class="max-w-7xl mx-auto relative z-10">
                 <div
-                    class="editorial-grid gap-10 lg:gap-20 xl:gap-28 items-center lg:-ml-8 xl:-ml-12">
+                    class="editorial-grid gap-6 sm:gap-10 lg:gap-20 xl:gap-28 items-center lg:-ml-8 xl:-ml-12">
                     <div
                         class="col-span-12 lg:col-span-6 xl:col-span-5 relative z-20 lg:pr-10 xl:pr-16 animate-slide-left opacity-0">
                         <span
                             class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-6 block opacity-80 hero-tagline">A
                             Private Heritage Sanctuary</span>
                         <h1
-                            class="font-headline text-6xl md:text-8xl lg:text-[6.2rem] xl:text-[6.8rem] text-wood-brown leading-[0.88] -ml-1 max-w-[620px] hero-title">
+                            class="font-headline text-4xl sm:text-5xl md:text-7xl lg:text-[6.2rem] xl:text-[6.8rem] text-wood-brown leading-[0.88] -ml-1 max-w-[620px] hero-title">
                             Ketenangan <br />
                             <span class="italic font-normal">Personal.</span>
                         </h1>
                         <p
-                            class="font-headline text-xl md:text-2xl text-on-surface/80 mt-8 max-w-xl font-light italic hero-subtitle">
+                            class="font-headline text-base sm:text-lg md:text-2xl text-on-surface/80 mt-8 max-w-xl font-light italic hero-subtitle">
                             In the heart of Yogyakarta, we prioritize quality
                             over volume. Seven rooms, infinite warmth.
                         </p>
@@ -1078,12 +1132,12 @@
                     </div>
                 </div>
             </section>
-            <section class="py-32 lg:py-48 px-8 lg:px-16" id="story">
+            <section class="py-16 sm:py-24 md:py-32 lg:py-48 px-8 lg:px-16" id="story">
                 <div
-                    class="max-w-7xl mx-auto editorial-grid gap-y-24 items-center">
+                    class="max-w-7xl mx-auto px-0 lg:px-8 xl:px-10 editorial-grid gap-y-24 items-center">
                     <div class="col-span-12 lg:col-span-7 relative z-10">
                         <h2
-                            class="font-headline text-5xl md:text-7xl text-wood-brown leading-tight mb-12 animate-slide-left opacity-0"
+                            class="font-headline text-4xl sm:text-5xl md:text-7xl text-wood-brown leading-tight mb-12 animate-slide-left opacity-0"
                             style>
                             Bukan Sekadar Penginapan, <br />
                             <span class="italic text-leaf-green" style>Ini Rumah
@@ -1135,14 +1189,14 @@
                         style>— Pak Dodi &amp; Ibu Andari</p>
                 </div>
             </div>
-            <section class="py-24 lg:py-32 px-8 lg:px-16 bg-bone-white" id="host">
-                <div class="max-w-7xl mx-auto editorial-grid gap-y-16 items-center">
+            <section class="py-16 sm:py-24 md:py-32 lg:py-32 px-8 lg:px-16 bg-bone-white" id="host">
+                <div class="max-w-7xl mx-auto px-0 lg:px-8 xl:px-10 editorial-grid gap-y-16 items-center">
                     <div class="col-span-12 lg:col-span-5 animate-fade-in opacity-0">
-                        <div class="relative overflow-hidden shadow-2xl border border-wood-brown/10 aspect-[3/4]">
+                        <div class="relative overflow-hidden shadow-2xl border border-wood-brown/10 h-[420px] sm:h-[520px] lg:h-[620px]">
                             <img alt="Pak Dodi - Host Pendopo Andari"
                                 class="w-full h-full object-cover"
                                 src="./assets/pakdodi.jpeg"
-                                style="object-position: center 40%;" />
+                                style="object-position: center 30%;" />
                         </div>
                     </div>
                     <div class="col-span-12 lg:col-span-7 animate-slide-left opacity-0 lg:pl-10">
@@ -1181,9 +1235,9 @@
                     </div>
                 </div>
             </section>
-            <section class="bg-bone-white" id="rooms">
+            <section class="bg-bone-white px-8 lg:px-16" id="rooms">
                 <div
-                    class="max-w-[1500px] mx-auto px-6 lg:px-10 xl:px-14 py-16 lg:py-24">
+                    class="max-w-7xl mx-auto py-16 lg:py-24">
                     <div
                         class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 lg:mb-20">
                         <div>
@@ -1191,7 +1245,7 @@
                                 class="text-xs uppercase tracking-[0.35em] text-leaf-green font-semibold mb-5">A
                                 quieter selection</p>
                             <h2
-                                class="font-headline text-6xl md:text-7xl text-wood-brown leading-tight">
+                                class="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-wood-brown leading-tight">
                                 Our <br />
                                 <span
                                     class="italic text-leaf-green">Sanctuaries</span>
@@ -1420,13 +1474,13 @@
                     </div>
                 </div>
             </section>
-            <section class="py-32 bg-surface-container-low px-8 lg:px-16"
+            <section class="py-16 sm:py-24 md:py-32 bg-surface-container-low px-8 lg:px-16"
                 id="facilities">
                 <div class="max-w-7xl mx-auto">
                     <div
                         class="flex flex-col lg:flex-row justify-between items-baseline mb-24 gap-8">
                         <h2
-                            class="font-headline text-5xl md:text-7xl text-wood-brown"
+                            class="font-headline text-4xl sm:text-5xl md:text-7xl text-wood-brown"
                             style>Daily Rituals</h2>
                         <p
                             class="max-w-xs text-on-surface/60 font-light text-sm tracking-widest uppercase"
@@ -1644,12 +1698,12 @@
                     </div>
                 </div>
             </section>
-            <section class="py-32 px-8 lg:px-16 overflow-hidden bg-bone-white"
+            <section class="py-16 sm:py-24 md:py-32 px-8 lg:px-16 overflow-hidden bg-bone-white"
                 id="testimonials">
                 <div class="max-w-7xl mx-auto editorial-grid">
                     <div class="col-span-12 lg:col-span-4 mb-16 lg:mb-0">
                         <h2
-                            class="font-headline text-5xl text-wood-brown mb-8 leading-tight"
+                            class="font-headline text-4xl sm:text-5xl text-wood-brown mb-8 leading-tight"
                             style>Stories From <br /><span class="italic"
                                 style>Our Guests</span></h2>
                         <div class="w-24 h-px bg-leaf-green mb-8"></div>
@@ -1675,12 +1729,12 @@
                 </div>
             </div>
         </section>
-        <section class="bg-wood-brown text-bone-white py-32 px-8 lg:px-16"
+        <section class="bg-wood-brown text-bone-white py-16 sm:py-24 md:py-32 px-8 lg:px-16"
             id="location">
-            <div class="max-w-7xl mx-auto editorial-grid gap-16 items-center">
+            <div class="max-w-7xl mx-auto editorial-grid gap-8 lg:gap-16 items-center" style="width: 100%; padding: 0;">
                 <div
                     class="col-span-12 lg:col-span-5 order-2 lg:order-1 animate-slide-left opacity-0">
-                    <h2 class="font-headline text-5xl mb-12" style>The
+                    <h2 class="font-headline text-4xl sm:text-5xl mb-12" style>The
                         Neighborhood</h2>
                     <div class="space-y-12">
                         <div>
@@ -1703,7 +1757,7 @@
                                     data-attraction="Keraton Yogyakarta" style>
                                     <span class="walking-distance-name"
                                         style>Keraton Yogyakarta</span>
-                                    <span class="italic text-leaf-green"
+                                    <span class="italic text-bone-white"
                                         style>0.68 km</span>
                                 </li>
                                 <li
@@ -1711,7 +1765,7 @@
                                     data-attraction="Benteng Vredeburg" style>
                                     <span class="walking-distance-name"
                                         style>Benteng Vredeburg & Nol KM</span>
-                                    <span class="italic text-leaf-green"
+                                    <span class="italic text-bone-white"
                                         style>0.51 km</span>
                                 </li>
                                 <li
@@ -1719,7 +1773,7 @@
                                     data-attraction="Jalan Malioboro" style>
                                     <span class="walking-distance-name"
                                         style>Jalan Malioboro</span>
-                                    <span class="italic text-leaf-green"
+                                    <span class="italic text-bone-white"
                                         style>1.81 km</span>
                                 </li>
                                 <li
@@ -1727,7 +1781,7 @@
                                     data-attraction="Taman Sari" style>
                                     <span class="walking-distance-name"
                                         style>Taman Sari</span>
-                                    <span class="italic text-leaf-green"
+                                    <span class="italic text-bone-white"
                                         style>1.55 km</span>
                                 </li>
                             </ul>
@@ -1735,24 +1789,23 @@
                     </div>
                 </div>
                 <div
-                    class="col-span-12 lg:col-span-7 order-1 lg:order-2 h-[600px] rounded overflow-hidden">
-                    <div id="locationMap" class="w-full h-full"
-                        style="background: #f5f5f5; height: 600px; min-height: 600px;"></div>
+                    class="col-span-12 lg:col-span-7 order-1 lg:order-2 rounded overflow-hidden w-full" style="max-width: 100%; min-width: 0;">
+                    <div id="locationMap" class="w-full h-full" style="background: #f5f5f5;"></div>
                 </div>
             </div>
         </section>
-        <section class="py-48 px-8 bg-bone-white text-center" id="cta">
+        <section class="py-16 sm:py-24 md:py-32 lg:py-48 px-8 bg-bone-white text-center" id="cta">
             <div class="max-w-3xl mx-auto animate-fade-in opacity-0">
                 <span
                     class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-8 block"
                     style>Experience Pendopo Andari</span>
                 <h2
-                    class="font-headline text-6xl md:text-8xl text-wood-brown mb-16 leading-tight"
+                    class="font-headline text-4xl sm:text-5xl md:text-7xl text-wood-brown mb-16 leading-tight"
                     style>Ready to be <br /><span class="italic" style>Our
                         Guest?</span></h2>
                 <div class="flex flex-col items-center space-y-8">
                     <button
-                        class="bg-wood-brown text-bone-white px-12 py-5 text-sm uppercase tracking-[0.2em] font-medium hover:bg-leaf-green transition-all shadow-xl inline-flex items-center gap-3 btn-animate"
+                        class="bg-wood-brown text-bone-white px-6 sm:px-12 py-4 sm:py-5 text-xs sm:text-sm uppercase tracking-[0.2em] font-medium hover:bg-leaf-green transition-all shadow-xl inline-flex items-center gap-2 sm:gap-3 btn-animate"
                         onclick="openBookingModal()" type="button" style>
                         <span
                             class="material-symbols-outlined text-base">calendar_month</span>
@@ -1771,7 +1824,7 @@
                 <div class="booking-modal-header">
                     <div>
                         <p class="modal-kicker">Reservation Channels</p>
-                        <h3 class="font-headline text-4xl text-wood-brown"
+                        <h3 class="font-headline text-2xl sm:text-4xl text-wood-brown"
                             id="bookingModalTitle">Book Your Stay</h3>
                     </div>
                     <button aria-label="Close booking modal"
@@ -1852,10 +1905,10 @@
         </div>
 
         <!-- FAQ Section -->
-        <section class="py-32 lg:py-48 px-8 lg:px-16 bg-bone-white" id="faq">
+        <section class="py-16 sm:py-24 md:py-32 lg:py-48 px-8 lg:px-16 bg-bone-white" id="faq">
             <div class="max-w-4xl mx-auto">
                 <h2
-                    class="font-headline text-5xl md:text-7xl text-wood-brown mb-16 leading-tight animate-slide-left opacity-0">
+                    class="font-headline text-4xl sm:text-5xl md:text-7xl text-wood-brown mb-16 leading-tight animate-slide-left opacity-0">
                     Pertanyaan yang <br />
                     <span class="italic text-leaf-green" style>Sering
                         Ditanyakan</span>
@@ -2063,7 +2116,7 @@
             </div>
         </section>
         <footer
-            class="bg-white py-24 px-8 lg:px-16 border-t border-wood-brown/5">
+            class="bg-white py-16 sm:py-24 px-8 lg:px-16 border-t border-wood-brown/5">
             <div class="max-w-7xl mx-auto editorial-grid gap-y-12">
                 <div class="col-span-12 lg:col-span-6">
                     <div
