@@ -1027,11 +1027,18 @@
                         class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors"
                         href="#location" style>Address</a>
                 </nav>
-                <a
-                    class="bg-wood-brown text-bone-white px-4 sm:px-8 py-2 sm:py-3 text-xs uppercase tracking-[0.2em] hover:bg-leaf-green transition-colors whitespace-nowrap"
-                    href="#cta" style>
-                    Inquire
-                </a>
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <div class="inline-flex border border-wood-brown/20 overflow-hidden" id="languageToggle">
+                        <button class="px-2 sm:px-3 py-2 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-semibold text-wood-brown bg-bone-white/80" id="languageBtnId" type="button">ID</button>
+                        <button class="px-2 sm:px-3 py-2 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-semibold text-wood-brown/60 bg-transparent" id="languageBtnEn" type="button">EN</button>
+                    </div>
+                    <a
+                        class="bg-wood-brown text-bone-white px-4 sm:px-8 py-2 sm:py-3 text-xs uppercase tracking-[0.2em] hover:bg-leaf-green transition-colors whitespace-nowrap"
+                        href="#cta" id="headerInquireLink" style>
+                        <span id="headerInquireShort" class="inline md:hidden">Inquire</span>
+                        <span id="headerInquireFull" class="hidden md:inline">Inquire</span>
+                    </a>
+                </div>
             </div>
         </header>
         <section
@@ -1112,10 +1119,10 @@
                             </div>
                             <div
                                 class="absolute -bottom-6 -left-6 bg-bone-white/95 border border-wood-brown/10 p-5 shadow-xl max-w-xs hidden lg:block">
-                                <p
+                                <p id="heroEditorialKicker"
                                     class="text-[10px] uppercase tracking-[0.35em] text-leaf-green mb-2">Editorial
                                     stay</p>
-                                <p
+                                <p id="heroEditorialText"
                                     class="font-headline text-xl italic text-wood-brown leading-relaxed">A
                                     calm house with a lived-in warmth, designed
                                     for guests who prefer atmosphere over
@@ -1123,7 +1130,7 @@
                             </div>
                             <div
                                 class="absolute top-6 right-6 bg-wood-brown text-bone-white px-4 py-3 shadow-lg hidden md:block">
-                                <p
+                                <p id="heroSinceLabel"
                                     class="text-[10px] uppercase tracking-[0.35em] opacity-60">Since</p>
                                 <p
                                     class="font-headline text-2xl italic">2024</p>
@@ -1136,7 +1143,7 @@
                 <div
                     class="max-w-7xl mx-auto px-0 lg:px-8 xl:px-10 editorial-grid gap-y-24 items-center">
                     <div class="col-span-12 lg:col-span-7 relative z-10">
-                        <h2
+                        <h2 id="storyTitle"
                             class="font-headline text-4xl sm:text-5xl md:text-7xl text-wood-brown leading-tight mb-12 animate-slide-left opacity-0"
                             style>
                             Bukan Sekadar Penginapan, <br />
@@ -1145,16 +1152,16 @@
                         </h2>
                         <div
                             class="max-w-xl space-y-8 text-lg font-light leading-relaxed text-on-surface/80 animate-slide-left opacity-0">
-                            <p class style>Pendopo Andari lahir dari dedikasi
+                            <p id="storyBody1" class style>Pendopo Andari lahir dari dedikasi
                                 masa pensiun Bapak Dodi dan Ibu Andari. Kami
                                 percaya bahwa perjalanan yang bermakna dimulai
                                 dari tempat Anda beristirahat.</p>
-                            <p
+                            <p id="storyQuote"
                                 class="font-headline italic text-2xl text-wood-brown border-l-2 border-leaf-green pl-8 py-4"
                                 style>
                                 "Filosofi kami sederhana: Kualitas di atas kuantitas. Dengan hanya tujuh kamar, perhatian kami tak terbagi."
                             </p>
-                            <p class style>Setiap sudut dirancang dengan
+                            <p id="storyBody2" class style>Setiap sudut dirancang dengan
                                 sentuhan personal, interaksi yang hangat, dan
                                 pelayanan dari hati yang layaknya keluarga
                                 sendiri. Di sini, Anda bukan sekadar nomor
@@ -1167,7 +1174,7 @@
                                 class="w-full h-full object-cover"
                                 src="./assets/ruang_tamu_piano.jpg" style />
                         </div>
-                        <p
+                        <p id="storyCaption"
                             class="mt-6 text-xs uppercase tracking-widest text-wood-brown/60 font-medium"
                             style>The Living Sanctuary — Est. 2024</p>
                     </div>
@@ -1179,12 +1186,12 @@
                     <span
                         class="material-symbols-outlined text-5xl mb-8 opacity-40"
                         style>filter_vintage</span>
-                    <h3
+                    <h3 id="storyBlockQuote"
                         class="font-headline text-4xl italic font-light leading-relaxed"
                         style>
                         "Kami mengundang Anda untuk melambat, bernapas, dan merasapi keheningan Yogyakarta yang sesungguhnya."
                     </h3>
-                    <p
+                    <p id="storyQuoteBy"
                         class="mt-8 text-xs uppercase tracking-[0.4em] opacity-60"
                         style>— Pak Dodi &amp; Ibu Andari</p>
                 </div>
@@ -1200,30 +1207,30 @@
                         </div>
                     </div>
                     <div class="col-span-12 lg:col-span-7 animate-slide-left opacity-0 lg:pl-10">
-                        <p
+                        <p id="hostKicker"
                             class="text-xs uppercase tracking-[0.35em] text-leaf-green font-semibold mb-5"
                             style>Meet Your Host</p>
-                        <h2
+                        <h2 id="hostTitle"
                             class="font-headline text-5xl md:text-6xl text-wood-brown leading-tight mb-8"
                             style>Berkenalan dengan <br /><span
                                 class="italic text-leaf-green">Pak Dodi</span></h2>
                         <div
                             class="space-y-6 text-base md:text-lg font-light leading-relaxed text-on-surface/80 max-w-2xl">
-                            <p style>Pak Dodi adalah host yang menjaga ritme tinggal di Pendopo Andari tetap hangat, tenang, dan personal. Bersama Ibu Andari, beliau merancang pengalaman menginap agar tamu merasa seperti pulang ke rumah sendiri.</p>
-                            <p style>Mulai dari rekomendasi area sekitar Keraton, bantuan check-in/check-out, hingga kebutuhan harian selama menginap, komunikasi dilakukan langsung dan responsif agar setiap tamu merasa diperhatikan.</p>
+                            <p id="hostBody1" style>Pak Dodi adalah host yang menjaga ritme tinggal di Pendopo Andari tetap hangat, tenang, dan personal. Bersama Ibu Andari, beliau merancang pengalaman menginap agar tamu merasa seperti pulang ke rumah sendiri.</p>
+                            <p id="hostBody2" style>Mulai dari rekomendasi area sekitar Keraton, bantuan check-in/check-out, hingga kebutuhan harian selama menginap, komunikasi dilakukan langsung dan responsif agar setiap tamu merasa diperhatikan.</p>
                         </div>
                         <div class="flex flex-wrap gap-3 mt-8">
-                            <div
+                            <div id="hostBadge1"
                                 class="px-4 py-3 border border-wood-brown/15 text-xs uppercase tracking-[0.22em] text-wood-brown/80 font-semibold">Host
                                 On-site</div>
-                            <div
+                            <div id="hostBadge2"
                                 class="px-4 py-3 border border-wood-brown/15 text-xs uppercase tracking-[0.22em] text-wood-brown/80 font-semibold">Respons
                                 Cepat</div>
-                            <div
+                            <div id="hostBadge3"
                                 class="px-4 py-3 border border-wood-brown/15 text-xs uppercase tracking-[0.22em] text-wood-brown/80 font-semibold">Rekomendasi
                                 Lokal</div>
                         </div>
-                        <a
+                        <a id="hostWhatsappLink"
                             class="mt-10 bg-wood-brown text-bone-white px-7 py-4 text-xs uppercase tracking-[0.24em] font-medium hover:bg-leaf-green transition-colors inline-flex items-center gap-3"
                             href="https://wa.me/6281268090284?text=Halo%20Pak%20Dodi%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih."
                             rel="noopener noreferrer" target="_blank" style>
@@ -1241,17 +1248,17 @@
                     <div
                         class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 lg:mb-20">
                         <div>
-                            <p
+                            <p id="roomsKicker"
                                 class="text-xs uppercase tracking-[0.35em] text-leaf-green font-semibold mb-5">A
                                 quieter selection</p>
-                            <h2
+                            <h2 id="roomsTitle"
                                 class="font-headline text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-wood-brown leading-tight">
                                 Our <br />
                                 <span
                                     class="italic text-leaf-green">Sanctuaries</span>
                             </h2>
                         </div>
-                        <p
+                        <p id="roomsIntro"
                             class="max-w-xl text-sm md:text-base leading-relaxed text-on-surface/65 font-light">
                             Tiga pilihan kamar disusun dengan hierarki visual
                             yang lebih hidup: satu featured room, dua supporting
@@ -1479,10 +1486,10 @@
                 <div class="max-w-7xl mx-auto">
                     <div
                         class="flex flex-col lg:flex-row justify-between items-baseline mb-24 gap-8">
-                        <h2
+                        <h2 id="facilitiesTitle"
                             class="font-headline text-4xl sm:text-5xl md:text-7xl text-wood-brown"
                             style>Daily Rituals</h2>
-                        <p
+                        <p id="facilitiesIntro"
                             class="max-w-xs text-on-surface/60 font-light text-sm tracking-widest uppercase"
                             style>Enhancing your stay with authentic Javanese
                             hospitality.</p>
@@ -1702,12 +1709,12 @@
                 id="testimonials">
                 <div class="max-w-7xl mx-auto editorial-grid">
                     <div class="col-span-12 lg:col-span-4 mb-16 lg:mb-0">
-                        <h2
+                        <h2 id="testimonialsTitle"
                             class="font-headline text-4xl sm:text-5xl text-wood-brown mb-8 leading-tight"
                             style>Stories From <br /><span class="italic"
                                 style>Our Guests</span></h2>
                         <div class="w-24 h-px bg-leaf-green mb-8"></div>
-                        <p
+                        <p id="testimonialsLabel"
                             class="text-xs uppercase tracking-[0.35em] text-wood-brown/60 font-semibold">Real
                             Hospitality Feel</p>
                     </div>
@@ -1734,11 +1741,11 @@
             <div class="max-w-7xl mx-auto editorial-grid gap-8 lg:gap-16 items-center" style="width: 100%; padding: 0;">
                 <div
                     class="col-span-12 lg:col-span-5 order-2 lg:order-1 animate-slide-left opacity-0">
-                    <h2 class="font-headline text-4xl sm:text-5xl mb-12" style>The
+                    <h2 id="locationTitle" class="font-headline text-4xl sm:text-5xl mb-12" style>The
                         Neighborhood</h2>
                     <div class="space-y-12">
                         <div>
-                            <span
+                            <span id="locationAddressLabel"
                                 class="text-xs uppercase tracking-[0.4em] opacity-60 block mb-4"
                                 style>Address</span>
                             <p class="font-headline text-xl italic font-light"
@@ -1746,10 +1753,10 @@
                                 <br />Gondomanan, Kota Yogyakarta 55121</p>
                         </div>
                         <div>
-                            <span
+                            <span id="locationWalkingLabel"
                                 class="text-xs uppercase tracking-[0.4em] opacity-60 block mb-2"
                                 style>Walking Distances</span>
-                            <p class="text-xs opacity-40 italic mb-4" style>Klik
+                            <p id="locationMapHint" class="text-xs opacity-40 italic mb-4" style>Klik
                                 untuk melihat jarak pada peta</p>
                             <ul class="space-y-4 font-light text-lg">
                                 <li
@@ -1796,10 +1803,10 @@
         </section>
         <section class="py-16 sm:py-24 md:py-32 lg:py-48 px-8 bg-bone-white text-center" id="cta">
             <div class="max-w-3xl mx-auto animate-fade-in opacity-0">
-                <span
+                <span id="ctaKicker"
                     class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-8 block"
                     style>Experience Pendopo Andari</span>
-                <h2
+                <h2 id="ctaTitle"
                     class="font-headline text-4xl sm:text-5xl md:text-7xl text-wood-brown mb-16 leading-tight"
                     style>Ready to be <br /><span class="italic" style>Our
                         Guest?</span></h2>
@@ -1811,7 +1818,7 @@
                             class="material-symbols-outlined text-base">calendar_month</span>
                         Book Now
                     </button>
-                    <p
+                    <p id="ctaSub"
                         class="text-[10px] uppercase tracking-[0.28em] text-wood-brown/55 font-semibold"
                         style>Pilih channel pemesanan favorit Anda</p>
                 </div>
@@ -1834,7 +1841,7 @@
                             class="material-symbols-outlined">close</span></button>
                 </div>
                 <div class="booking-modal-grid">
-                    <a class="booking-option-card"
+                    <a class="booking-option-card" id="bookingWhatsappLink"
                         href="https://wa.me/6281268090284?text=Halo%20Pak%20Dodi%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih."
                         onclick="closeBookingModal()" rel="noopener noreferrer"
                         target="_blank"><img alt="WhatsApp"
@@ -1858,7 +1865,7 @@
             </div>
         </div>
 
-        <a aria-label="Chat WhatsApp" class="floating-wa-button"
+        <a aria-label="Chat WhatsApp" class="floating-wa-button" id="floatingWhatsappLink"
             href="https://wa.me/6281268090284?text=Halo%20Pak%20Dodi%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih." rel="noopener noreferrer"
             target="_blank">
             <img alt="WhatsApp" src="./assets/whatsapp.png" />
@@ -2122,7 +2129,7 @@
                     <div
                         class="text-3xl font-headline italic text-wood-brown mb-6"
                         style>Pendopo Andari</div>
-                    <p
+                    <p id="footerDesc"
                         class="max-w-xs text-sm font-light text-on-surface/60 leading-relaxed"
                         style>
                         A private home experience in Yogyakarta. <br />
@@ -2135,7 +2142,7 @@
                     <p
                         class="text-[10px] uppercase tracking-[0.2em] text-on-surface/40 mb-2"
                         style>© 2024 Pendopo Andari Yogyakarta</p>
-                    <p
+                    <p id="footerTagline"
                         class="text-[10px] uppercase tracking-[0.2em] text-on-surface/40 italic"
                         style>A Modern Keraton Experience — Quality Over
                         Volume</p>
@@ -2144,14 +2151,639 @@
         </footer>
 
         <script>
+    const LANGUAGE_STORAGE_KEY = 'pendopo-language';
+    let currentLanguage = localStorage.getItem(LANGUAGE_STORAGE_KEY) || 'id';
+
+    const roomTitlesByLanguage = {
+        id: { deluxe: 'Deluxe Room', superior: 'Superior Room', double: 'Standard Room' },
+        en: { deluxe: 'Deluxe Room', superior: 'Superior Room', double: 'Standard Room' }
+    };
+
+    const testimonialEntriesByLanguage = {
+        id: [
+            { name: 'Rina', location: 'Bandung', quote: 'Kamarnya rapi, suasananya teduh, dan stafnya sangat membantu dari check-in sampai check-out.' },
+            { name: 'Andri & Nisa', location: 'Semarang', quote: 'Lokasi dekat tempat wisata, tapi suasananya tetap tenang. Cocok untuk istirahat yang benar-benar berkualitas.' },
+            { name: 'Kevin', location: 'Surabaya', quote: 'Proses menginap sederhana, bersih, dan tidak ribet. Saya suka area pendopo untuk kerja santai pagi hari.' },
+            { name: 'Maya', location: 'Bekasi', quote: 'Interiornya hangat dan terasa personal. Sarapan rumahan jadi salah satu highlight selama di Jogja.' },
+            { name: 'Rahmat', location: 'Malang', quote: 'Pelayanan cepat dan ramah. Laundry gratis sangat membantu untuk trip beberapa hari.' },
+            { name: 'Dina', location: 'Bali', quote: 'Vibenya homey, bukan seperti hotel besar. Tidurnya nyaman dan lingkungan sekitar aman.' },
+            { name: 'Fikri', location: 'Depok', quote: 'Kualitas tidur saya jauh lebih baik di sini. Malam hening, pagi segar, fasilitas sesuai kebutuhan.' },
+            { name: 'Elisa', location: 'Makassar', quote: 'Sangat cocok buat yang ingin eksplor kota lalu kembali ke tempat yang tenang dan terasa akrab.' },
+            { name: 'Rudi', location: 'Bogor', quote: 'Staff komunikatif dan informatif. Rekomendasi kuliner lokal dari host juga sangat tepat.' },
+            { name: 'Santi', location: 'Solo', quote: 'Pencahayaan kamar bagus, ventilasi enak, dan detail kecil di ruangan terasa dipikirkan dengan baik.' },
+            { name: 'Vina & Tyo', location: 'Tangerang', quote: 'Area komunalnya nyaman untuk ngobrol sore. Kami merasa disambut seperti keluarga.' },
+            { name: 'Nadia', location: 'Palembang', quote: 'Akses ke pusat kota mudah. Setelah seharian jalan, pulang ke sini rasanya menenangkan.' },
+            { name: 'Arman', location: 'Medan', quote: 'Value for money sangat baik. Fasilitas utama lengkap dan kondisinya terawat.' },
+            { name: 'Lukman', location: 'Balikpapan', quote: 'Saya suka konsep tenang dan personalnya. Tidak ramai, tidak bising, tetap hangat.' },
+            { name: 'Siska', location: 'Cirebon', quote: 'Tempatnya cocok untuk short stay maupun long stay. Semua kebutuhan dasar terpenuhi dengan baik.' },
+            { name: 'Nando', location: 'Pekanbaru', quote: 'Pengalaman menginap yang konsisten: bersih, ramah, dan nyaman untuk kembali lagi.' }
+        ],
+        en: [
+            { name: 'Rina', location: 'Bandung', quote: 'The room was neat, the ambiance calm, and the staff were very helpful from check-in to check-out.' },
+            { name: 'Andri & Nisa', location: 'Semarang', quote: 'Close to major attractions yet still peaceful. Perfect for truly quality rest.' },
+            { name: 'Kevin', location: 'Surabaya', quote: 'The stay was simple, clean, and hassle-free. I loved using the pendopo area for light morning work.' },
+            { name: 'Maya', location: 'Bekasi', quote: 'The interior felt warm and personal. The homemade breakfast was one of my highlights in Jogja.' },
+            { name: 'Rahmat', location: 'Malang', quote: 'Fast and friendly service. The complimentary laundry was very helpful for a multi-day trip.' },
+            { name: 'Dina', location: 'Bali', quote: 'Very homey vibes, unlike big hotels. I slept well and the neighborhood felt safe.' },
+            { name: 'Fikri', location: 'Depok', quote: 'I slept much better here. Quiet nights, fresh mornings, and facilities that fit my needs.' },
+            { name: 'Elisa', location: 'Makassar', quote: 'Great for travelers who explore the city and return to a place that feels calm and familiar.' },
+            { name: 'Rudi', location: 'Bogor', quote: 'The staff were communicative and informative. The host’s local food recommendations were spot on.' },
+            { name: 'Santi', location: 'Solo', quote: 'Good room lighting, pleasant airflow, and thoughtful details throughout the space.' },
+            { name: 'Vina & Tyo', location: 'Tangerang', quote: 'The communal area is great for afternoon chats. We felt welcomed like family.' },
+            { name: 'Nadia', location: 'Palembang', quote: 'Easy access to the city center. After a full day out, coming back here felt calming.' },
+            { name: 'Arman', location: 'Medan', quote: 'Excellent value for money. Core facilities are complete and well maintained.' },
+            { name: 'Lukman', location: 'Balikpapan', quote: 'I like the calm and personal concept. Not crowded, not noisy, still warm.' },
+            { name: 'Siska', location: 'Cirebon', quote: 'Suitable for both short and long stays. All basic needs are handled well.' },
+            { name: 'Nando', location: 'Pekanbaru', quote: 'A consistently good stay: clean, friendly, and comfortable enough to return again.' }
+        ]
+    };
+
+    const faqEntriesByLanguage = {
+        id: [
+            { q: 'Apakah Pendopo Andari Homestay menawarkan layanan laundry?', a: 'Ya. Pendopo Andari Homestay menawarkan layanan laundry yang siap membantu Anda kapan pun Anda membutuhkan pakaian favorit Anda bersih dan segar sepanjang liburan Anda. Silakan menghubungi properti untuk informasi lebih lanjut.' },
+            { q: 'Tempat wisata menarik apa saja yang ada di sekitar Pendopo Andari Homestay yang dapat ditempuh dengan berjalan kaki?', a: 'Saat menginap di Pendopo Andari Homestay, mulai liburan Anda dengan menjelajahi tempat-tempat wisata menarik di dekat properti dengan berjalan kaki, seperti Roket, Gereja Santo Fransiskus Xaverius Yogyakarta, dan Parabola Berbisik.' },
+            { q: 'Taman umum apa saja yang ada di sekitar Pendopo Andari Homestay?', a: 'Saat menginap di Pendopo Andari Homestay, nikmati jalan-jalan pagi atau sore di taman terdekat seperti Roket, Parabola Berbisik, dan Peraga Observatorium.' },
+            { q: 'Berapa lama tamu biasanya menginap di Pendopo Andari Homestay?', a: 'Tamu terverifikasi yang telah menginap di Pendopo Andari Homestay rata-rata menginap selama 1 malam malam di properti ini.' },
+            { q: 'Dalam bahasa apa saja anggota staf Pendopo Andari Homestay dapat berkomunikasi?', a: 'Pendopo Andari Homestay dapat berbicara dalam 2 bahasa yang mencakup Bahasa Inggris untuk tamu yang lebih memilih bahasa ini. Silakan merujuk ke bagian Fasilitas dan kelengkapan di kategori Bahasa yang digunakan untuk mengetahui bahasa lain yang didukung di properti ini.' },
+            { q: 'Apa yang paling disukai tamu tentang Pendopo Andari Homestay?', a: 'Tamu terverifikasi yang menginap di Pendopo Andari Homestay telah memberikan peringkat 9.211 untuk properti ini karena service yang luar biasa sebagai sorotan utama selama mereka menginap.' },
+            { q: 'Bagaimana hasil konsensus dari ulasan tamu yang terverifikasi terkait kopi di Pendopo Andari Homestay?', a: '69.0% dari tamu terverifikasi kami memberikan komentar dan penilaian positif terkait kopi yang ditawarkan di properti ini. Anda dapat melihat ulasan dan komentar pelanggan lebih lanjut untuk Pendopo Andari Homestay di kolom ulasan.' },
+            { q: 'Bagaimana hasil konsensus dari ulasan tamu yang terverifikasi terkait layanan untuk hewan peliharaan di Pendopo Andari Homestay?', a: '100.0% dari tamu terverifikasi kami memberikan komentar dan penilaian positif terkait layanan untuk hewan peliharaan yang ditawarkan di properti ini. Anda dapat melihat ulasan dan komentar pelanggan lebih lanjut untuk Pendopo Andari Homestay di kolom ulasan.' },
+            { q: 'Berapa penilaian rata-rata yang diberikan oleh wisatawan keluarga dengan anak kecil terverifikasi untuk Pendopo Andari Homestay?', a: 'Wisatawan keluarga dengan anak kecil yang pernah menginap sebelumnya di properti ini memberikan penilaian rata-rata sebesar 8.5 kepada Pendopo Andari Homestay. Anda dapat melihat ulasan dan komentar pelanggan yang lebih lanjut dengan mengaktifkan filter jenis wisatawan tertentu yang terverifikasi di kolom ulasan.' },
+            { q: 'Berapa penilaian rata-rata yang diberikan oleh wisatawan keluarga dengan anak usia remaja terverifikasi untuk Pendopo Andari Homestay?', a: 'Wisatawan keluarga dengan anak usia remaja yang pernah menginap sebelumnya di properti ini memberikan penilaian rata-rata sebesar 9.0 kepada Pendopo Andari Homestay. Anda dapat melihat ulasan dan komentar pelanggan yang lebih lanjut dengan mengaktifkan filter jenis wisatawan tertentu yang terverifikasi di kolom ulasan.' },
+            { q: 'Berapa penilaian rata-rata yang diberikan oleh wisatawan rombongan terverifikasi untuk Pendopo Andari Homestay?', a: 'Wisatawan rombongan yang pernah menginap sebelumnya di properti ini memberikan penilaian rata-rata sebesar 8.6 kepada Pendopo Andari Homestay. Anda dapat melihat ulasan dan komentar pelanggan yang lebih lanjut dengan mengaktifkan filter jenis wisatawan tertentu yang terverifikasi di kolom ulasan.' },
+            { q: 'Pukul berapa saya dapat melakukan check-in dan check-out di Pendopo Andari Homestay?', a: 'Waktu check-in dimulai pukul 12:00 PM dan waktu check-out adalah hingga pukul 12:00 PM. Anda dapat mengajukan check-in lebih awal atau check-out lebih lama saat memesan, namun tergantung pada ketersediaan. Tamu yang melakukan check-in atau check-out sebelum atau setelah periode waktu yang telah ditentukan dapat dibebankan biaya tambahan.' }
+        ],
+        en: [
+            { q: 'Does Pendopo Andari Homestay provide laundry service?', a: 'Yes. Pendopo Andari Homestay offers laundry service to help keep your clothes clean and fresh throughout your stay. Please contact the property for more details.' },
+            { q: 'What nearby attractions can be reached on foot from Pendopo Andari Homestay?', a: 'While staying at Pendopo Andari Homestay, you can start your trip by exploring nearby attractions on foot, such as Roket, St. Francis Xavier Church Yogyakarta, and Parabola Berbisik.' },
+            { q: 'What public parks are near Pendopo Andari Homestay?', a: 'During your stay, enjoy a morning or evening walk in nearby parks such as Roket, Parabola Berbisik, and Peraga Observatorium.' },
+            { q: 'How long do guests usually stay at Pendopo Andari Homestay?', a: 'Verified guests who stayed at Pendopo Andari Homestay typically stayed for 1 night on average.' },
+            { q: 'What languages can the staff at Pendopo Andari Homestay speak?', a: 'Pendopo Andari Homestay staff can communicate in 2 languages, including English for guests who prefer it. Please refer to the Facilities section under Languages spoken for more details.' },
+            { q: 'What do guests like most about Pendopo Andari Homestay?', a: 'Verified guests gave Pendopo Andari Homestay a 9.211 rating, with excellent service highlighted as a key strength during their stay.' },
+            { q: 'What is the guest consensus regarding coffee at Pendopo Andari Homestay?', a: '69.0% of verified guests gave positive comments and ratings regarding the coffee offered at this property. You can read more guest reviews in the review section.' },
+            { q: 'What is the guest consensus regarding pet services at Pendopo Andari Homestay?', a: '100.0% of verified guests gave positive comments and ratings regarding pet-related services at this property. More guest reviews are available in the review section.' },
+            { q: 'What is the average rating from verified families with young children for Pendopo Andari Homestay?', a: 'Verified families with young children who stayed here gave Pendopo Andari Homestay an average rating of 8.5. You can view more reviews by applying traveler-type filters in the review section.' },
+            { q: 'What is the average rating from verified families with teenagers for Pendopo Andari Homestay?', a: 'Verified families with teenagers who stayed here gave Pendopo Andari Homestay an average rating of 9.0. You can view more reviews by applying traveler-type filters in the review section.' },
+            { q: 'What is the average rating from verified group travelers for Pendopo Andari Homestay?', a: 'Verified group travelers who stayed here gave Pendopo Andari Homestay an average rating of 8.6. You can view more reviews by applying traveler-type filters in the review section.' },
+            { q: 'What time are check-in and check-out at Pendopo Andari Homestay?', a: 'Check-in starts at 12:00 PM and check-out is until 12:00 PM. Early check-in or late check-out can be requested at booking and are subject to availability. Additional charges may apply outside standard times.' }
+        ]
+    };
+
+    const i18n = {
+        id: {
+            nav: ['Cerita', 'Host', 'Kamar', 'Ritual', 'FAQ', 'Alamat'],
+            inquire: 'Tanya Ketersediaan',
+            inquireShort: 'Tanya',
+            heroTagline: 'Sebuah Rumah Warisan yang Privat',
+            heroTitle: 'Ketenangan <br /><span class="italic font-normal">Personal.</span>',
+            heroSubtitle: 'Di jantung Yogyakarta, kami mengutamakan kualitas di atas kuantitas. Tujuh kamar, kehangatan tak terbatas.',
+            heroChips: ['Tujuh kamar', 'Retret tenang', 'Keakraban keluarga'],
+            heroButtons: ['Jelajahi Cerita', 'Pesan Menginap'],
+            heroEditorialKicker: 'Editorial stay',
+            heroEditorialText: 'Rumah tenang dengan kehangatan yang terasa hidup, untuk tamu yang menyukai atmosfer dibanding keramaian.',
+            sinceLabel: 'Sejak',
+            storyTitle: 'Bukan Sekadar Penginapan, <br /><span class="italic text-leaf-green">Ini Rumah Anda</span>',
+            storyBody1: 'Pendopo Andari lahir dari dedikasi masa pensiun Bapak Dodi dan Ibu Andari. Kami percaya bahwa perjalanan yang bermakna dimulai dari tempat Anda beristirahat.',
+            storyQuote: '"Filosofi kami sederhana: Kualitas di atas kuantitas. Dengan hanya tujuh kamar, perhatian kami tak terbagi."',
+            storyBody2: 'Setiap sudut dirancang dengan sentuhan personal, interaksi yang hangat, dan pelayanan dari hati yang layaknya keluarga sendiri. Di sini, Anda bukan sekadar nomor kamar, melainkan tamu di rumah kami.',
+            storyCaption: 'The Living Sanctuary — Est. 2024',
+            quoteBlock: '"Kami mengundang Anda untuk melambat, bernapas, dan merasapi keheningan Yogyakarta yang sesungguhnya."',
+            quoteBy: '— Pak Dodi & Ibu Andari',
+            hostKicker: 'Temui Host Anda',
+            hostTitle: 'Berkenalan dengan <br /><span class="italic text-leaf-green">Pak Dodi</span>',
+            hostBody1: 'Pak Dodi adalah host yang menjaga ritme tinggal di Pendopo Andari tetap hangat, tenang, dan personal. Bersama Ibu Andari, beliau merancang pengalaman menginap agar tamu merasa seperti pulang ke rumah sendiri.',
+            hostBody2: 'Mulai dari rekomendasi area sekitar Keraton, bantuan check-in/check-out, hingga kebutuhan harian selama menginap, komunikasi dilakukan langsung dan responsif agar setiap tamu merasa diperhatikan.',
+            hostBadges: ['Host On-site', 'Respons Cepat', 'Rekomendasi Lokal'],
+            hostButton: 'Chat Pak Dodi',
+            roomsKicker: 'Pilihan yang lebih tenang',
+            roomsTitle: 'Kamar <br /><span class="italic text-leaf-green">Pilihan Kami</span>',
+            roomsIntro: 'Tiga pilihan kamar disusun dengan hierarki visual yang lebih hidup: satu kamar utama, dua kamar pendukung, dan ruang kosong yang cukup agar tiap tipe terasa berbeda.',
+            roomsCards: [
+                { top: '01 / Esensial', sub: 'Nyaman ringkas', title: 'Kamar Standard', desc: 'Pilihan cerdas dengan fasilitas lengkap. Nyaman dan efisien.', price: 'Rp 150.000 / malam', features: ['Twin/Double', 'Jendela Pemandangan', 'Kamar Mandi Pribadi', 'Wi-Fi Cepat'] },
+                { top: '02 / Intim', sub: 'Skala romantis', title: 'Kamar Superior', desc: 'Keseimbangan sempurna antara kenyamanan modern dan nuansa tradisional.', price: 'Rp 150.000 / malam', features: ['Tempat Tidur Queen', 'Area Meja Kerja', 'Kamar Mandi Dalam', 'Smart TV'] },
+                { top: '03 / Unggulan', sub: 'Terbaik untuk menginap lama', title: 'Kamar Deluxe', desc: 'Kamar terluas kami dengan pemandangan langsung ke taman dalam. Menampilkan furnitur jati antik dan area duduk pribadi.', price: 'Rp 150.000 / malam', features: ['Tempat Tidur King', 'Teras Pribadi', 'Bathtub Dalam', 'Smart AC'] }
+            ],
+            viewGallery: 'Lihat Galeri',
+            facilitiesTitle: 'Ritual Harian',
+            facilitiesIntro: 'Menyempurnakan pengalaman menginap Anda dengan keramahan khas Jawa.',
+            ritualCards: [
+                {
+                    kicker: '01 / Ritual Utama',
+                    time: 'Terbaik di 07:00–09:00',
+                    title: 'Sarapan Autentik',
+                    desc: 'Sarapan rumahan khas Yogyakarta yang dimasak segar setiap pagi oleh Ibu Andari, dengan menu yang hangat dan personal seperti di rumah sendiri.',
+                    button: 'Detail Ritual',
+                    details: [
+                        'Pilihan menu lokal berganti sesuai bahan segar harian.',
+                        'Disajikan di area pendopo dengan suasana pagi yang tenang.',
+                        'Bisa disesuaikan ringan untuk tamu yang berangkat lebih awal.'
+                    ]
+                },
+                {
+                    kicker: '02 / Praktis Nyaman',
+                    title: 'Laundry Gratis',
+                    desc: 'Layanan cuci pakaian gratis membantu Anda tetap nyaman, terutama untuk perjalanan beberapa hari.',
+                    button: 'Detail Layanan',
+                    detail: 'Drop-off fleksibel sepanjang hari dan pengembalian menyesuaikan ritme aktivitas tamu, agar itinerary tetap ringan tanpa beban cucian.'
+                },
+                {
+                    kicker: '03 / Dapur Terbuka',
+                    title: 'Dapur Bersama',
+                    desc: 'Dapur terbuka 24 jam dengan teh, kopi, dan camilan lokal yang bebas dinikmati kapan saja.',
+                    button: 'Detail Layanan',
+                    detail: 'Peralatan dasar tersedia untuk pemanasan makanan ringan dan ritual teh/kopi malam hari dengan suasana rumah yang santai.'
+                },
+                {
+                    kicker: '04 / Slow Hour',
+                    title: 'Area Pendopo',
+                    desc: 'Ruang komunal berarsitektur Jawa untuk bersantai, membaca, atau berbincang di sore hari.',
+                    button: 'Detail Layanan',
+                    detail: 'Cocok untuk mengobrol santai, membaca, atau bekerja ringan, dengan atmosfer tenang yang menjaga ritme tinggal tetap pelan dan nyaman.'
+                }
+            ],
+            testimonialsTitle: 'Cerita Dari <br /><span class="italic">Para Tamu</span>',
+            testimonialsLabel: 'Nuansa keramahan nyata',
+            locationTitle: 'Sekitar Properti',
+            address: 'Alamat',
+            walkingDistances: 'Jarak Jalan Kaki',
+            mapHint: 'Klik untuk melihat jarak pada peta',
+            attractionNames: ['Keraton Yogyakarta', 'Benteng Vredeburg & Nol KM', 'Jalan Malioboro', 'Taman Sari'],
+            ctaKicker: 'Rasakan Pendopo Andari',
+            ctaTitle: 'Siap menjadi <br /><span class="italic">Tamu Kami?</span>',
+            ctaButton: 'Pesan Sekarang',
+            ctaSub: 'Pilih channel pemesanan favorit Anda',
+            bookingKicker: 'Channel Reservasi',
+            bookingTitle: 'Pesan Penginapan Anda',
+            roomCollection: 'Koleksi Kamar',
+            roomGallery: 'Galeri Kamar',
+            galleryPreview: 'Pratinjau Galeri',
+            frameLabel: 'Frame',
+            curatedPhotos: 'foto pilihan',
+            showImage: 'Lihat gambar',
+            guestPhoto: 'Foto tamu',
+            faqTitle: 'Pertanyaan yang <br /><span class="italic text-leaf-green">Sering Ditanyakan</span>',
+            faqShowAll: 'Lihat semua FAQ',
+            faqShowLess: 'Tampilkan lebih sedikit',
+            footerDescription: 'Pengalaman menginap privat di Yogyakarta. <br />Mengutamakan keindahan kesederhanaan dan kemewahan perhatian personal.',
+            footerTagline: 'A Modern Keraton Experience — Quality Over Volume',
+            mapDistancePrefix: 'Jarak',
+            mapClickHint: 'Klik untuk lihat pada peta',
+            walkUnitMin: 'menit jalan',
+            walkUnitHour: 'j',
+            walkUnitMinuteShort: 'm jalan'
+        },
+        en: {
+            nav: ['The Story', 'Host', 'Sanctuaries', 'Rituals', 'FAQ', 'Address'],
+            inquire: 'Inquire',
+            inquireShort: 'Ask',
+            heroTagline: 'A Private Heritage Sanctuary',
+            heroTitle: 'Personal <br /><span class="italic font-normal">Serenity.</span>',
+            heroSubtitle: 'In the heart of Yogyakarta, we prioritize quality over volume. Seven rooms, infinite warmth.',
+            heroChips: ['Seven rooms', 'Quiet retreat', 'Family-run warmth'],
+            heroButtons: ['Explore Story', 'Book Stay'],
+            heroEditorialKicker: 'Editorial stay',
+            heroEditorialText: 'A calm house with a lived-in warmth, designed for guests who prefer atmosphere over volume.',
+            sinceLabel: 'Since',
+            storyTitle: 'Not Just a Stay, <br /><span class="italic text-leaf-green">A Home for You</span>',
+            storyBody1: 'Pendopo Andari was born from the retirement dream of Mr. Dodi and Mrs. Andari. We believe meaningful journeys begin with where you rest.',
+            storyQuote: '"Our philosophy is simple: quality over quantity. With only seven rooms, our attention is never divided."',
+            storyBody2: 'Every corner is shaped with personal touches, warm interaction, and heartfelt service like family. Here, you are never just a room number—you are a guest in our home.',
+            storyCaption: 'The Living Sanctuary — Est. 2024',
+            quoteBlock: '"We invite you to slow down, breathe, and feel the true quiet side of Yogyakarta."',
+            quoteBy: '— Mr. Dodi & Mrs. Andari',
+            hostKicker: 'Meet Your Host',
+            hostTitle: 'Meet <br /><span class="italic text-leaf-green">Mr. Dodi</span>',
+            hostBody1: 'Mr. Dodi keeps every stay at Pendopo Andari warm, calm, and personal. Together with Mrs. Andari, he designs each guest experience to feel like coming home.',
+            hostBody2: 'From local recommendations around the palace area to check-in/check-out assistance and daily needs, communication is direct and responsive so every guest feels cared for.',
+            hostBadges: ['Host On-site', 'Quick Response', 'Local Tips'],
+            hostButton: 'Chat with Mr. Dodi',
+            roomsKicker: 'A quieter selection',
+            roomsTitle: 'Our <br /><span class="italic text-leaf-green">Sanctuaries</span>',
+            roomsIntro: 'Three room options are arranged with a lively visual hierarchy: one featured room, two supporting rooms, and enough breathing space so each type feels distinct.',
+            roomsCards: [
+                { top: '01 / Essential', sub: 'Compact comfort', title: 'Standard Room', desc: 'A smart choice with complete essentials. Comfortable and efficient.', price: 'IDR 150,000 / night', features: ['Twin/Double', 'Window View', 'Private Bath', 'High Speed Wi-Fi'] },
+                { top: '02 / Intimate', sub: 'Romantic scale', title: 'Superior Room', desc: 'A perfect balance of modern comfort and traditional atmosphere.', price: 'IDR 150,000 / night', features: ['Queen-size Bed', 'Desk Area', 'En-suite Bath', 'Smart TV'] },
+                { top: '03 / Featured', sub: 'Best for longer stays', title: 'Deluxe Room', desc: 'Our largest room with direct views to the inner garden, featuring antique teak furniture and a private sitting area.', price: 'IDR 150,000 / night', features: ['King-size Bed', 'Private Terrace', 'En-suite Bathtub', 'Smart AC'] }
+            ],
+            viewGallery: 'View Gallery',
+            facilitiesTitle: 'Daily Rituals',
+            facilitiesIntro: 'Enhancing your stay with authentic Javanese hospitality.',
+            ritualCards: [
+                {
+                    kicker: '01 / Signature Ritual',
+                    time: 'Best at 07:00–09:00',
+                    title: 'Authentic Breakfast',
+                    desc: 'A homemade Yogyakarta-style breakfast prepared fresh every morning by Mrs. Andari, served warm and personal just like home.',
+                    button: 'Ritual Details',
+                    details: [
+                        'Local menu options rotate based on fresh daily ingredients.',
+                        'Served in the pendopo area with a calm morning atmosphere.',
+                        'Can be lightly adjusted for guests leaving earlier in the day.'
+                    ]
+                },
+                {
+                    kicker: '02 / Practical Ease',
+                    title: 'Free Laundry',
+                    desc: 'Complimentary laundry service helps you stay comfortable, especially during multi-day trips.',
+                    button: 'Service Details',
+                    detail: 'Flexible drop-off throughout the day with return timing adjusted to your activity rhythm, keeping your itinerary light and easy.'
+                },
+                {
+                    kicker: '03 / Open Pantry',
+                    title: 'Shared Kitchen',
+                    desc: 'An open kitchen available 24 hours with tea, coffee, and local snacks to enjoy anytime.',
+                    button: 'Service Details',
+                    detail: 'Basic utensils are provided for warming light meals and enjoying evening tea/coffee in a relaxed home atmosphere.'
+                },
+                {
+                    kicker: '04 / Slow Hour',
+                    title: 'Pendopo Area',
+                    desc: 'A Javanese-style communal space for relaxing, reading, or having a late-afternoon conversation.',
+                    button: 'Service Details',
+                    detail: 'Perfect for casual chats, reading, or light work, with a calm atmosphere that keeps your stay slow and comfortable.'
+                }
+            ],
+            testimonialsTitle: 'Stories From <br /><span class="italic">Our Guests</span>',
+            testimonialsLabel: 'Real Hospitality Feel',
+            locationTitle: 'The Neighborhood',
+            address: 'Address',
+            walkingDistances: 'Walking Distances',
+            mapHint: 'Click to see distance on map',
+            attractionNames: ['Keraton Yogyakarta', 'Vredeburg Fort & Zero Point', 'Malioboro Street', 'Taman Sari'],
+            ctaKicker: 'Experience Pendopo Andari',
+            ctaTitle: 'Ready to be <br /><span class="italic">Our Guest?</span>',
+            ctaButton: 'Book Now',
+            ctaSub: 'Choose your preferred booking channel',
+            bookingKicker: 'Reservation Channels',
+            bookingTitle: 'Book Your Stay',
+            roomCollection: 'Room Collection',
+            roomGallery: 'Room Gallery',
+            galleryPreview: 'Gallery Preview',
+            frameLabel: 'Frame',
+            curatedPhotos: 'curated photos',
+            showImage: 'Show image',
+            guestPhoto: 'Guest photo',
+            faqTitle: 'Frequently <br /><span class="italic text-leaf-green">Asked Questions</span>',
+            faqShowAll: 'View all FAQ',
+            faqShowLess: 'Show less',
+            footerDescription: 'A private home experience in Yogyakarta. <br />Emphasizing the beauty of simplicity and the luxury of personal attention.',
+            footerTagline: 'A Modern Keraton Experience — Quality Over Volume',
+            mapDistancePrefix: 'Distance',
+            mapClickHint: 'Click to view on map',
+            walkUnitMin: 'min walk',
+            walkUnitHour: 'h',
+            walkUnitMinuteShort: 'm walk'
+        }
+    };
+
     // Global map data store
     let mapData = {
         map: null,
         attractions: [],
         activeAttraction: null,
         distanceLine: null,
-        initialized: false
+        initialized: false,
+        pendopoMarker: null
     };
+
+    function t(key) {
+        const keys = key.split('.');
+        let value = i18n[currentLanguage];
+        for (const path of keys) {
+            value = value?.[path];
+        }
+        return value;
+    }
+
+    function setText(selector, value) {
+        const element = document.querySelector(selector);
+        if (element && typeof value === 'string') {
+            element.textContent = value;
+        }
+    }
+
+    function setHTML(selector, value) {
+        const element = document.querySelector(selector);
+        if (element && typeof value === 'string') {
+            element.innerHTML = value;
+        }
+    }
+
+    function setInlineLabel(element, value) {
+        if (!element) {
+            return;
+        }
+        const textNode = Array.from(element.childNodes).find((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0);
+        if (textNode) {
+            textNode.textContent = ` ${value}`;
+        }
+    }
+
+    function getWhatsappHref() {
+        const messages = {
+            id: `Halo Pak Dodi, saya ingin pesan kamar di Pendopo Andari Homestay.\n\nFormat pemesanan:\nNama:\nNomor HP:\nTanggal Check-in:\nTanggal Check-out:\nJumlah Tamu:\nTipe Kamar (Deluxe/Superior/Double):\nJumlah Kamar:\nCatatan Tambahan:\n\nMohon info ketersediaan dan harga. Terima kasih.`,
+            en: `Hello Mr. Dodi, I would like to book a room at Pendopo Andari Homestay.\n\nBooking details:\nName:\nPhone Number:\nCheck-in Date:\nCheck-out Date:\nNumber of Guests:\nRoom Type (Deluxe/Superior/Double):\nNumber of Rooms:\nAdditional Notes:\n\nPlease share availability and rates. Thank you.`
+        };
+        return `https://wa.me/6281268090284?text=${encodeURIComponent(messages[currentLanguage])}`;
+    }
+
+    function updateLanguageToggleUI() {
+        const idBtn = document.getElementById('languageBtnId');
+        const enBtn = document.getElementById('languageBtnEn');
+        if (!idBtn || !enBtn) {
+            return;
+        }
+
+        if (currentLanguage === 'id') {
+            idBtn.classList.remove('text-wood-brown/60', 'bg-transparent');
+            idBtn.classList.add('text-wood-brown', 'bg-bone-white/80');
+            enBtn.classList.remove('text-wood-brown', 'bg-bone-white/80');
+            enBtn.classList.add('text-wood-brown/60', 'bg-transparent');
+            return;
+        }
+
+        enBtn.classList.remove('text-wood-brown/60', 'bg-transparent');
+        enBtn.classList.add('text-wood-brown', 'bg-bone-white/80');
+        idBtn.classList.remove('text-wood-brown', 'bg-bone-white/80');
+        idBtn.classList.add('text-wood-brown/60', 'bg-transparent');
+    }
+
+    function setupLanguageToggle() {
+        const idBtn = document.getElementById('languageBtnId');
+        const enBtn = document.getElementById('languageBtnEn');
+        if (!idBtn || !enBtn) {
+            return;
+        }
+
+        idBtn.addEventListener('click', () => setLanguage('id'));
+        enBtn.addEventListener('click', () => setLanguage('en'));
+        updateLanguageToggleUI();
+    }
+
+    function setLanguage(language) {
+        if (!['id', 'en'].includes(language) || language === currentLanguage) {
+            return;
+        }
+        currentLanguage = language;
+        localStorage.setItem(LANGUAGE_STORAGE_KEY, currentLanguage);
+        applyTranslations();
+    }
+
+    function applyTranslations() {
+        document.documentElement.lang = currentLanguage;
+
+        const navLinks = document.querySelectorAll('header nav a');
+        const navLabels = t('nav');
+        navLinks.forEach((link, index) => {
+            if (navLabels[index]) {
+                link.textContent = navLabels[index];
+            }
+        });
+
+        setText('#headerInquireShort', t('inquireShort'));
+        setText('#headerInquireFull', t('inquire'));
+        setText('.hero-tagline', t('heroTagline'));
+        setHTML('.hero-title', t('heroTitle'));
+        setText('.hero-subtitle', t('heroSubtitle'));
+
+        const heroChips = document.querySelectorAll('[data-hero-stage] .flex.flex-wrap.gap-3.mt-10 > div');
+        heroChips.forEach((chip, index) => {
+            if (t('heroChips')[index]) {
+                chip.textContent = t('heroChips')[index];
+            }
+        });
+
+        const heroButtons = document.querySelectorAll('[data-hero-stage] .flex.flex-wrap.gap-4.mt-12 a');
+        heroButtons.forEach((button, index) => {
+            if (t('heroButtons')[index]) {
+                button.textContent = t('heroButtons')[index];
+            }
+        });
+
+        setText('#heroEditorialKicker', t('heroEditorialKicker'));
+        setText('#heroEditorialText', t('heroEditorialText'));
+        setText('#heroSinceLabel', t('sinceLabel'));
+
+        setHTML('#storyTitle', t('storyTitle'));
+        setText('#storyBody1', t('storyBody1'));
+        setText('#storyQuote', t('storyQuote'));
+        setText('#storyBody2', t('storyBody2'));
+        setText('#storyCaption', t('storyCaption'));
+        setText('#storyBlockQuote', t('quoteBlock'));
+        setText('#storyQuoteBy', t('quoteBy'));
+
+        setText('#hostKicker', t('hostKicker'));
+        setHTML('#hostTitle', t('hostTitle'));
+        setText('#hostBody1', t('hostBody1'));
+        setText('#hostBody2', t('hostBody2'));
+        setText('#hostBadge1', t('hostBadges')[0]);
+        setText('#hostBadge2', t('hostBadges')[1]);
+        setText('#hostBadge3', t('hostBadges')[2]);
+        const hostButton = document.getElementById('hostWhatsappLink');
+        setInlineLabel(hostButton, t('hostButton'));
+
+        setText('#roomsKicker', t('roomsKicker'));
+        setHTML('#roomsTitle', t('roomsTitle'));
+        setText('#roomsIntro', t('roomsIntro'));
+
+        const roomCards = document.querySelectorAll('#rooms .room-clickable');
+        roomCards.forEach((card, index) => {
+            const content = t('roomsCards')[index];
+            if (!content) {
+                return;
+            }
+
+            const headingLabels = card.querySelectorAll('.flex.items-center.justify-between span');
+            if (headingLabels[0]) headingLabels[0].textContent = content.top;
+            if (headingLabels[1]) headingLabels[1].textContent = content.sub;
+
+            const title = card.querySelector('h3');
+            if (title) {
+                title.textContent = content.title;
+            }
+
+            const description = card.querySelector('h3 + p');
+            if (description) {
+                description.textContent = content.desc;
+            }
+
+            const price = card.querySelector('.border-b p.text-sm.uppercase');
+            if (price) {
+                price.textContent = content.price;
+            }
+
+            const featureItems = card.querySelectorAll('ul li');
+            featureItems.forEach((item, itemIndex) => {
+                const icon = item.querySelector('span.material-symbols-outlined');
+                if (!icon || !content.features[itemIndex]) {
+                    return;
+                }
+                item.innerHTML = '';
+                item.appendChild(icon);
+                item.append(document.createTextNode(` ${content.features[itemIndex]}`));
+            });
+
+            const button = card.querySelector('button');
+            if (button) {
+                button.textContent = t('viewGallery');
+            }
+        });
+
+        setText('#facilitiesTitle', t('facilitiesTitle'));
+        setText('#facilitiesIntro', t('facilitiesIntro'));
+
+        const ritualCards = document.querySelectorAll('#facilities [data-ritual-card]');
+        const ritualContent = t('ritualCards');
+        ritualCards.forEach((card, index) => {
+            const content = ritualContent[index];
+            if (!content) {
+                return;
+            }
+
+            const kicker = card.querySelector('p.uppercase');
+            if (kicker) kicker.textContent = content.kicker;
+
+            const title = card.querySelector('h4');
+            if (title) title.textContent = content.title;
+
+            const description = card.querySelector('h4 + p, .mt-5.text-sm');
+            if (description) description.textContent = content.desc;
+
+            const timeLabel = card.querySelector('.inline-flex.items-center.gap-2 span:last-child');
+            if (timeLabel && content.time) timeLabel.textContent = content.time;
+
+            const detailButtonLabel = card.querySelector('button span:first-child');
+            if (detailButtonLabel) detailButtonLabel.textContent = content.button;
+
+            const detailList = card.querySelectorAll('.ritual-detail li span:last-child');
+            if (detailList.length && content.details) {
+                detailList.forEach((detailNode, detailIndex) => {
+                    if (content.details[detailIndex]) {
+                        detailNode.textContent = content.details[detailIndex];
+                    }
+                });
+            }
+
+            const detailParagraph = card.querySelector('.ritual-detail p');
+            if (detailParagraph && content.detail) {
+                detailParagraph.textContent = content.detail;
+            }
+        });
+
+        setHTML('#testimonialsTitle', t('testimonialsTitle'));
+        setText('#testimonialsLabel', t('testimonialsLabel'));
+
+        setText('#locationTitle', t('locationTitle'));
+        setText('#locationAddressLabel', t('address'));
+        setText('#locationWalkingLabel', t('walkingDistances'));
+        setText('#locationMapHint', t('mapHint'));
+
+        const attractionNames = t('attractionNames');
+        document.querySelectorAll('#location .walking-distance-name').forEach((node, index) => {
+            if (attractionNames[index]) {
+                node.textContent = attractionNames[index];
+            }
+        });
+
+        setText('#ctaKicker', t('ctaKicker'));
+        setHTML('#ctaTitle', t('ctaTitle'));
+        const ctaButton = document.querySelector('#cta button');
+        setInlineLabel(ctaButton, t('ctaButton'));
+        setText('#ctaSub', t('ctaSub'));
+
+        setText('#bookingModal .modal-kicker', t('bookingKicker'));
+        setText('#bookingModalTitle', t('bookingTitle'));
+
+        setText('#modalKicker', t('roomCollection'));
+        const modalTitle = document.getElementById('modalTitle');
+        if (modalTitle && !activeRoomType) {
+            modalTitle.textContent = t('roomGallery');
+        }
+        setText('#modalCaption', t('galleryPreview'));
+
+        setHTML('#faq h2', t('faqTitle'));
+
+        setHTML('#footerDesc', t('footerDescription'));
+        setText('#footerTagline', t('footerTagline'));
+
+        updateFaqContent();
+        updateWhatsappLinks();
+        updateLanguageToggleUI();
+        refreshMapLanguage();
+        renderInfiniteTestimonials();
+        if (activeRoomType) {
+            openRoomModal(activeRoomType);
+        }
+    }
+
+    function updateWhatsappLinks() {
+        const href = getWhatsappHref();
+        ['hostWhatsappLink', 'bookingWhatsappLink', 'floatingWhatsappLink'].forEach((id) => {
+            const anchor = document.getElementById(id);
+            if (anchor) {
+                anchor.href = href;
+            }
+        });
+    }
+
+    function updateFaqContent() {
+        const faqList = document.getElementById('faqList');
+        if (!faqList) {
+            return;
+        }
+
+        const entries = faqEntriesByLanguage[currentLanguage] || [];
+        const faqItems = faqList.querySelectorAll('.faq-item');
+        faqItems.forEach((item, index) => {
+            const question = item.querySelector('.faq-question .flex-1');
+            const answer = item.querySelector('.faq-answer');
+            const entry = entries[index];
+            if (!entry) {
+                return;
+            }
+            if (question) question.textContent = entry.q;
+            if (answer) answer.textContent = entry.a;
+        });
+
+        const toggleButton = document.getElementById('faqToggleButton');
+        if (!toggleButton || toggleButton.hidden) {
+            return;
+        }
+
+        const faqCount = faqItems.length;
+        const isExpanded = toggleButton.dataset.expanded === 'true';
+        toggleButton.textContent = isExpanded
+            ? t('faqShowLess')
+            : `${t('faqShowAll')} (${faqCount})`;
+    }
+
+    function refreshMapLanguage() {
+        if (!mapData.map || !mapData.initialized) {
+            return;
+        }
+
+        if (mapData.pendopoMarker) {
+            mapData.pendopoMarker.bindPopup(`<div style="text-align: center; padding: 10px;"><h3 style="margin: 5px 0; color: #5f3e32; font-weight: bold;">Pendopo Andari Homestay</h3><p style="margin: 3px 0; color: #666; font-size: 12px;">Jl. Ibu Ruswo GM 2/232</p><p style="margin: 3px 0; color: #666; font-size: 12px;">Yogyakarta 55121</p></div>`, { maxWidth: 250 });
+        }
+
+        mapData.attractions.forEach((place) => {
+            if (!place.marker) {
+                return;
+            }
+            const distanceKm = calculateDistance(-7.8028947018100805, 110.36836481534104, place.coords[0], place.coords[1]);
+            const placeName = currentLanguage === 'id' ? place.nameId : place.nameEn;
+            place.marker.bindPopup(
+                `<div style="text-align: center; padding: 12px; cursor: pointer;" class="attraction-popup">
+                    <strong style="color: #5f3e32; display: block; margin-bottom: 8px; font-size: 14px;">${placeName}</strong>
+                    <div style="background: #50652a; color: white; padding: 8px 12px; border-radius: 4px; margin-bottom: 6px; cursor: pointer; font-weight: 500; font-size: 13px; user-select: none;" class="distance-clickable">
+                        ${t('mapDistancePrefix')} ${distanceKm.toFixed(2)} km
+                    </div>
+                    <span style="color: #50652a; font-size: 10px; display: block; margin-top: 6px; font-style: italic;">${t('mapClickHint')}</span>
+                </div>`,
+                { maxWidth: 240 }
+            );
+        });
+    }
 
     // Utility function to calculate distance between two coordinates (Haversine formula)
     function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -2170,11 +2802,11 @@
         const walkingSpeedKmPerHour = 1.4;
         const minutes = Math.round((distanceKm / walkingSpeedKmPerHour) * 60);
         if (minutes < 60) {
-            return `${minutes} min walk`;
+            return `${minutes} ${t('walkUnitMin')}`;
         }
         const hours = Math.floor(minutes / 60);
         const mins = minutes % 60;
-        return `${hours}h ${mins}m walk`;
+        return `${hours}${t('walkUnitHour')} ${mins}${t('walkUnitMinuteShort')}`;
     }
 
     // Leaflet Map Initialization with enhanced interactivity
@@ -2230,14 +2862,15 @@
             
             // Nearby attractions data
             const attractions = [
-                { coords: [-7.7974, 110.3656], name: 'Keraton Yogyakarta', initialDistance: '5 min walk' },
-                { coords: [-7.8009, 110.3642], name: 'Benteng Vredeburg', initialDistance: '5 min walk' },
-                { coords: [-7.7874, 110.3733], name: 'Jalan Malioboro', initialDistance: '10 min walk' },
-                { coords: [-7.7981, 110.3552], name: 'Taman Sari', initialDistance: '15 min walk' }
+                { key: 'Keraton Yogyakarta', nameId: 'Keraton Yogyakarta', nameEn: 'Keraton Yogyakarta', coords: [-7.7974, 110.3656] },
+                { key: 'Benteng Vredeburg', nameId: 'Benteng Vredeburg & Nol KM', nameEn: 'Vredeburg Fort & Zero Point', coords: [-7.8009, 110.3642] },
+                { key: 'Jalan Malioboro', nameId: 'Jalan Malioboro', nameEn: 'Malioboro Street', coords: [-7.7874, 110.3733] },
+                { key: 'Taman Sari', nameId: 'Taman Sari', nameEn: 'Taman Sari', coords: [-7.7981, 110.3552] }
             ];
 
             mapData.map = map;
             mapData.attractions = attractions;
+            mapData.pendopoMarker = pendopoMarker;
 
             // Create attraction markers with interactivity
             attractions.forEach((place, index) => {
@@ -2301,19 +2934,21 @@
                         easeLinearity: 0.5
                     });
 
-                    mapData.activeAttraction = { marker, coords: place.coords, name: place.name };
+                    mapData.activeAttraction = { marker, coords: place.coords, key: place.key };
                     
                     // Update list item active state
-                    updateListItemActiveState(place.name);
+                    updateListItemActiveState(place.key);
                 };
+
+                const placeName = currentLanguage === 'id' ? place.nameId : place.nameEn;
 
                 marker.bindPopup(
                     `<div style="text-align: center; padding: 12px; cursor: pointer;" class="attraction-popup">
-                        <strong style="color: #5f3e32; display: block; margin-bottom: 8px; font-size: 14px;">${place.name}</strong>
+                        <strong style="color: #5f3e32; display: block; margin-bottom: 8px; font-size: 14px;">${placeName}</strong>
                         <div style="background: #50652a; color: white; padding: 8px 12px; border-radius: 4px; margin-bottom: 6px; cursor: pointer; font-weight: 500; font-size: 13px; user-select: none;" class="distance-clickable">
-                            Jarak ${distanceKm.toFixed(2)} km
+                            ${t('mapDistancePrefix')} ${distanceKm.toFixed(2)} km
                         </div>
-                        <span style="color: #50652a; font-size: 10px; display: block; margin-top: 6px; font-style: italic;">Klik untuk lihat pada peta</span>
+                        <span style="color: #50652a; font-size: 10px; display: block; margin-top: 6px; font-style: italic;">${t('mapClickHint')}</span>
                     </div>`,
                     { maxWidth: 240 }
                 );
@@ -2372,7 +3007,7 @@
             return;
         }
 
-        const attraction = mapData.attractions.find(a => a.name === attractionName);
+        const attraction = mapData.attractions.find(a => a.key === attractionName);
         if (!attraction) {
             console.warn('Attraction not found:', attractionName);
             return;
@@ -2452,11 +3087,9 @@
         ]
     };
     
-    const roomTitles = {
-        'deluxe': 'Deluxe Room',
-        'superior': 'Superior Room',
-        'double': 'Standard Room'
-    };
+    function getRoomTitle(roomType) {
+        return roomTitlesByLanguage[currentLanguage]?.[roomType] || roomTitlesByLanguage.id[roomType] || '';
+    }
 
     let activeRoomType = null;
     let currentModalImages = [];
@@ -2467,24 +3100,9 @@
         './assets/foto_pengunjung_2.jpg'
     ];
 
-    const testimonialEntries = [
-        { name: 'Rina', location: 'Bandung', quote: 'Kamarnya rapi, suasananya teduh, dan stafnya sangat membantu dari check-in sampai check-out.' },
-        { name: 'Andri & Nisa', location: 'Semarang', quote: 'Lokasi dekat tempat wisata, tapi suasananya tetap tenang. Cocok untuk istirahat yang benar-benar berkualitas.' },
-        { name: 'Kevin', location: 'Surabaya', quote: 'Proses menginap sederhana, bersih, dan tidak ribet. Saya suka area pendopo untuk kerja santai pagi hari.' },
-        { name: 'Maya', location: 'Bekasi', quote: 'Interiornya hangat dan terasa personal. Sarapan rumahan jadi salah satu highlight selama di Jogja.' },
-        { name: 'Rahmat', location: 'Malang', quote: 'Pelayanan cepat dan ramah. Laundry gratis sangat membantu untuk trip beberapa hari.' },
-        { name: 'Dina', location: 'Bali', quote: 'Vibenya homey, bukan seperti hotel besar. Tidurnya nyaman dan lingkungan sekitar aman.' },
-        { name: 'Fikri', location: 'Depok', quote: 'Kualitas tidur saya jauh lebih baik di sini. Malam hening, pagi segar, fasilitas sesuai kebutuhan.' },
-        { name: 'Elisa', location: 'Makassar', quote: 'Sangat cocok buat yang ingin eksplor kota lalu kembali ke tempat yang tenang dan terasa akrab.' },
-        { name: 'Rudi', location: 'Bogor', quote: 'Staff komunikatif dan informatif. Rekomendasi kuliner lokal dari host juga sangat tepat.' },
-        { name: 'Santi', location: 'Solo', quote: 'Pencahayaan kamar bagus, ventilasi enak, dan detail kecil di ruangan terasa dipikirkan dengan baik.' },
-        { name: 'Vina & Tyo', location: 'Tangerang', quote: 'Area komunalnya nyaman untuk ngobrol sore. Kami merasa disambut seperti keluarga.' },
-        { name: 'Nadia', location: 'Palembang', quote: 'Akses ke pusat kota mudah. Setelah seharian jalan, pulang ke sini rasanya menenangkan.' },
-        { name: 'Arman', location: 'Medan', quote: 'Value for money sangat baik. Fasilitas utama lengkap dan kondisinya terawat.' },
-        { name: 'Lukman', location: 'Balikpapan', quote: 'Saya suka konsep tenang dan personalnya. Tidak ramai, tidak bising, tetap hangat.' },
-        { name: 'Siska', location: 'Cirebon', quote: 'Tempatnya cocok untuk short stay maupun long stay. Semua kebutuhan dasar terpenuhi dengan baik.' },
-        { name: 'Nando', location: 'Pekanbaru', quote: 'Pengalaman menginap yang konsisten: bersih, ramah, dan nyaman untuk kembali lagi.' }
-    ];
+    function getActiveTestimonials() {
+        return testimonialEntriesByLanguage[currentLanguage] || testimonialEntriesByLanguage.id;
+    }
 
     function createTestimonialCard(entry, index) {
         return `
@@ -2497,11 +3115,12 @@
     }
 
     function createPhotoCard(index) {
+        const activeTestimonials = getActiveTestimonials();
         const photo = visitorPhotos[index % visitorPhotos.length];
-        const entry = testimonialEntries[index % testimonialEntries.length];
+        const entry = activeTestimonials[index % activeTestimonials.length];
         return `
             <article class="testimonial-photo-card" tabindex="0">
-                <img src="${photo}" alt="Guest photo ${index + 1} - ${entry.name}" loading="lazy" />
+                <img src="${photo}" alt="${t('guestPhoto')} ${index + 1} - ${entry.name}" loading="lazy" />
             </article>
         `;
     }
@@ -2514,8 +3133,9 @@
             return;
         }
 
-        const commentCards = testimonialEntries.map((entry, index) => createTestimonialCard(entry, index)).join('');
-        const photoCards = testimonialEntries.map((_, index) => createPhotoCard(index)).join('');
+        const activeTestimonials = getActiveTestimonials();
+        const commentCards = activeTestimonials.map((entry, index) => createTestimonialCard(entry, index)).join('');
+        const photoCards = activeTestimonials.map((_, index) => createPhotoCard(index)).join('');
 
         marqueeTrack.innerHTML = commentCards + commentCards;
         floatingTrack.innerHTML = photoCards + photoCards;
@@ -2537,7 +3157,7 @@
 
         const fileName = currentModalImages[currentModalIndex];
         const nextSrc = './assets/' + fileName;
-        const nextAlt = `${roomTitles[activeRoomType]} - Image ${currentModalIndex + 1}`;
+        const nextAlt = `${getRoomTitle(activeRoomType)} - ${t('showImage')} ${currentModalIndex + 1}`;
 
         const preloadImage = new Image();
         let transitionHandled = false;
@@ -2564,7 +3184,7 @@
         }
 
         if (caption) {
-            caption.textContent = `${roomTitles[activeRoomType]} • Frame ${currentModalIndex + 1}`;
+            caption.textContent = `${getRoomTitle(activeRoomType)} • ${t('frameLabel')} ${currentModalIndex + 1}`;
         }
 
         if (counter) {
@@ -2587,7 +3207,7 @@
             const item = document.createElement('button');
             item.type = 'button';
             item.className = 'gallery-item';
-            item.setAttribute('aria-label', `Show image ${index + 1}`);
+            item.setAttribute('aria-label', `${t('showImage')} ${index + 1}`);
             item.addEventListener('click', () => {
                 currentModalIndex = index;
                 renderModalMainImage();
@@ -2595,7 +3215,7 @@
 
             const img = document.createElement('img');
             img.src = './assets/' + image;
-            img.alt = `${roomTitles[activeRoomType]} thumbnail ${index + 1}`;
+            img.alt = `${getRoomTitle(activeRoomType)} thumbnail ${index + 1}`;
             img.loading = 'lazy';
 
             item.appendChild(img);
@@ -2671,11 +3291,11 @@
         currentModalIndex = 0;
 
         if (title) {
-            title.textContent = `${roomTitles[roomType]} Gallery`;
+            title.textContent = getRoomTitle(roomType);
         }
 
         if (kicker) {
-            kicker.textContent = `${roomImages[roomType].length} curated photos`;
+            kicker.textContent = `${roomImages[roomType].length} ${t('curatedPhotos')}`;
         }
 
         renderModalThumbnails();
@@ -2886,15 +3506,19 @@
         console.log('Document still loading, waiting for DOMContentLoaded...');
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOMContentLoaded fired');
+            setupLanguageToggle();
             initModalListeners();
             initBookingModalListeners();
             initFaqVisibility();
+            applyTranslations();
         });
     } else {
         console.log('Document already loaded, initializing immediately...');
+        setupLanguageToggle();
         initModalListeners();
         initBookingModalListeners();
         initFaqVisibility();
+        applyTranslations();
     }
     
     // FAQ Accordion Functions
@@ -2921,7 +3545,7 @@
         if (hasExtraItems) {
             toggleButton.dataset.expanded = 'false';
             toggleButton.setAttribute('aria-expanded', 'false');
-            toggleButton.textContent = `Lihat semua FAQ (${faqItems.length})`;
+            toggleButton.textContent = `${t('faqShowAll')} (${faqItems.length})`;
         }
     }
 
@@ -2944,7 +3568,7 @@
             });
             button.dataset.expanded = 'false';
             button.setAttribute('aria-expanded', 'false');
-            button.textContent = `Lihat semua FAQ (${faqItems.length})`;
+            button.textContent = `${t('faqShowAll')} (${faqItems.length})`;
             button.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             return;
         }
@@ -2954,7 +3578,7 @@
         });
         button.dataset.expanded = 'true';
         button.setAttribute('aria-expanded', 'true');
-        button.textContent = 'Tampilkan lebih sedikit';
+        button.textContent = t('faqShowLess');
     }
 
     function toggleRitualDetail(button) {
