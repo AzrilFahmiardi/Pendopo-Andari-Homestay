@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 
 <html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Pendopo Andari - Editorial Javanese Heritage</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script id="tailwind-config">
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Pendopo Andari - Editorial Javanese Heritage</title>
+        <script
+            src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -45,7 +54,7 @@
             }
         }
     </script>
-<style type="text/tailwindcss">
+        <style type="text/tailwindcss">
         @layer base {
             html {
                 scroll-behavior: smooth;
@@ -120,22 +129,158 @@
         .room-image-showcase {
             overflow: hidden;
             position: relative;
+            transform: translateZ(0);
         }
         
         .room-image-showcase img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.33, 0.66, 0.66, 1);
+            transform: translate3d(0, 0, 0) scale(1);
+            transform-origin: center center;
+            will-change: transform;
+            backface-visibility: hidden;
+            transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
         
         .room-image-showcase:hover img {
-            transform: scale(1.08);
+            transform: translate3d(0, 0, 0) scale(1.03);
         }
         
         /* Enhanced card effects */
         .card-hover { transition: all 0.4s cubic-bezier(0.33, 0.66, 0.66, 1); }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(95, 62, 50, 0.15); }
+        .room-clickable { transition: box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        /* Infinite testimonials */
+        @keyframes marqueeLoop {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        @keyframes floatLaneLoop {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes floatingCardBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .testimonial-lane {
+            position: relative;
+            overflow: hidden;
+            padding: 6px 0;
+        }
+
+        .testimonial-lane::before,
+        .testimonial-lane::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 48px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .testimonial-lane::before {
+            left: 0;
+            background: linear-gradient(to right, #fcf9f3, rgba(252, 249, 243, 0));
+        }
+
+        .testimonial-lane::after {
+            right: 0;
+            background: linear-gradient(to left, #fcf9f3, rgba(252, 249, 243, 0));
+        }
+
+        .testimonial-track,
+        .floating-track {
+            width: max-content;
+            display: flex;
+            gap: 24px;
+            will-change: transform;
+        }
+
+        .testimonial-track {
+            animation: marqueeLoop 42s linear infinite;
+        }
+
+        .floating-track {
+            animation: floatLaneLoop 48s linear infinite;
+        }
+
+        .testimonial-lane:hover .testimonial-track,
+        .testimonial-lane:hover .floating-track,
+        .testimonial-lane:focus-within .testimonial-track,
+        .testimonial-lane:focus-within .floating-track {
+            animation-play-state: paused;
+        }
+
+        .testimonial-card {
+            width: min(350px, calc(100vw - 5rem));
+            background: #ffffff;
+            border: 1px solid #d4c3bd;
+            padding: 20px 22px;
+            display: block;
+            transition: box-shadow 0.35s ease, transform 0.35s ease;
+        }
+
+        .testimonial-card:hover {
+            box-shadow: 0 12px 20px rgba(95, 62, 50, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .floating-track .testimonial-card {
+            animation: floatingCardBob var(--float-duration, 6s) ease-in-out var(--float-delay, 0s) infinite;
+        }
+
+        .testimonial-quote {
+            color: rgba(28, 28, 24, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.65;
+            font-weight: 300;
+        }
+
+        .testimonial-name {
+            color: #5f3e32;
+            font-family: "Noto Serif", serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.2;
+        }
+
+        .testimonial-meta {
+            color: #50652a;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        .testimonial-photo-card {
+            width: min(220px, calc(100vw - 5rem));
+            flex: 0 0 auto;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border: 1px solid #d4c3bd;
+            background: #ffffff;
+            transition: box-shadow 0.35s ease, transform 0.35s ease;
+        }
+
+        .testimonial-photo-card:hover {
+            box-shadow: 0 12px 20px rgba(95, 62, 50, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .testimonial-photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
         
         /* Hero animations */
         .hero-title { animation: slideInUp 1s ease-out 0.2s forwards; opacity: 0; }
@@ -186,10 +331,12 @@
             position: relative !important;
             background: white !important;
             width: 90vw !important;
-            max-width: 1200px !important;
-            max-height: 85vh !important;
+            max-width: 1260px !important;
+            height: min(88vh, 860px) !important;
             border-radius: 0 !important;
-            overflow-y: auto !important;
+            overflow: hidden !important;
+            display: grid !important;
+            grid-template-rows: auto auto auto minmax(98px, 142px) !important;
             transform: scale(0.95) !important;
             transition: transform 0.3s ease-out !important;
             pointer-events: auto !important;
@@ -201,9 +348,7 @@
         }
         
         .modal-close {
-            position: absolute !important;
-            top: 24px !important;
-            right: 24px !important;
+            position: static !important;
             background: white !important;
             border: 2px solid #5f3e32 !important;
             width: 40px !important;
@@ -224,19 +369,130 @@
             background: #5f3e32 !important;
             color: white !important;
         }
+
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 28px 28px 18px;
+            border-bottom: 1px solid rgba(95, 62, 50, 0.12);
+        }
+
+        .modal-kicker {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.28em;
+            color: #50652a;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .modal-stage {
+            display: grid;
+            grid-template-columns: 56px minmax(0, 1fr) 56px;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 22px 0;
+        }
+
+        .modal-main-frame {
+            position: relative;
+            width: 100%;
+            max-height: clamp(220px, 42vh, 500px);
+            background: linear-gradient(160deg, rgba(245, 243, 240, 0.95), rgba(234, 227, 221, 0.88));
+            border: 1px solid rgba(95, 62, 50, 0.12);
+            overflow: hidden;
+        }
+
+        .modal-main-image {
+            width: 100%;
+            height: 100%;
+            max-height: clamp(220px, 42vh, 500px);
+            object-fit: cover;
+            display: block;
+            opacity: 1;
+            transition: opacity 0.28s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .modal-main-image.is-switching {
+            opacity: 0.22;
+        }
+
+        .modal-main-frame:hover .modal-main-image {
+            transform: scale(1.015);
+        }
+
+        .modal-nav {
+            width: 56px;
+            height: 56px;
+            border: 1px solid rgba(95, 62, 50, 0.2);
+            background: rgba(255, 255, 255, 0.92);
+            color: #5f3e32;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.28s ease;
+        }
+
+        .modal-nav:hover {
+            background: #5f3e32;
+            color: #fcf9f3;
+            transform: translateY(-1px);
+        }
+
+        .modal-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 28px 10px;
+        }
+
+        .modal-caption {
+            font-size: 13px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: rgba(95, 62, 50, 0.8);
+            font-weight: 600;
+        }
+
+        .modal-counter {
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(80, 101, 42, 0.88);
+            font-weight: 600;
+            white-space: nowrap;
+        }
         
         .modal-gallery {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
-            gap: 16px !important;
-            padding: 48px 24px !important;
+            display: flex !important;
+            gap: 10px !important;
+            padding: 12px 28px 18px !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            align-items: center !important;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(95, 62, 50, 0.35) rgba(95, 62, 50, 0.08);
         }
         
         .gallery-item {
+            flex: 0 0 116px;
             overflow: hidden !important;
             cursor: pointer !important;
             transition: all 0.3s ease !important;
             aspect-ratio: 4/3 !important;
+            border: 1px solid rgba(95, 62, 50, 0.16) !important;
+            background: #f5f3f0 !important;
+            opacity: 0.72;
+        }
+
+        .gallery-item.active {
+            opacity: 1;
+            border-color: rgba(80, 101, 42, 0.85) !important;
+            box-shadow: 0 0 0 1px rgba(80, 101, 42, 0.35) inset;
         }
         
         .gallery-item img {
@@ -247,7 +503,7 @@
         }
         
         .gallery-item:hover img {
-            transform: scale(1.1) !important;
+            transform: scale(1.08) !important;
         }
         
         /* Accordion Styles */
@@ -299,8 +555,9 @@
         /* Room card click effect */
         .room-clickable {
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
             user-select: none;
+            transform: translateZ(0);
         }
         
         .room-clickable:hover {
@@ -310,20 +567,155 @@
         .room-clickable:hover h3 {
             color: #50652a;
         }
+
+        .ritual-card {
+            border: 1px solid rgba(95, 62, 50, 0.14);
+            background: #ffffff;
+            box-shadow: 0 10px 18px rgba(95, 62, 50, 0.08);
+            transition: box-shadow 0.35s ease, transform 0.35s ease;
+        }
+
+        .ritual-card:hover {
+            box-shadow: 0 16px 28px rgba(95, 62, 50, 0.14);
+            transform: translateY(-2px);
+        }
+
+        .ritual-media {
+            overflow: hidden;
+        }
+
+        .ritual-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .ritual-card:hover .ritual-media img {
+            transform: scale(1.03);
+        }
+
+        .ritual-detail {
+            max-height: 0;
+            overflow: hidden;
+            margin-top: 0;
+            transition: max-height 0.35s ease, margin-top 0.35s ease;
+        }
+
+        .ritual-card.active .ritual-detail {
+            max-height: 240px;
+            margin-top: 14px;
+        }
+
+        .ritual-featured.active .ritual-detail {
+            max-height: 280px;
+        }
+
+        .ritual-toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .ritual-card.active .ritual-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .floating-wa-button {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 58px;
+            height: 58px;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #25D366;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.35);
+            z-index: 60;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .floating-wa-button:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 14px 26px rgba(37, 211, 102, 0.42);
+        }
+
+        .floating-wa-button img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .cta-wa-icon {
+            filter: brightness(0) invert(1);
+        }
         
         @media (max-width: 768px) {
+            .modal-container {
+                width: 95vw !important;
+                height: min(90vh, 720px) !important;
+                grid-template-rows: auto auto auto minmax(88px, 118px) !important;
+            }
+
+            .floating-wa-button {
+                right: 16px;
+                bottom: 16px;
+                width: 54px;
+                height: 54px;
+            }
+
+            .modal-header {
+                padding: 20px 18px 14px;
+            }
+
+            .modal-stage {
+                grid-template-columns: 44px minmax(0, 1fr) 44px;
+                gap: 8px;
+                padding: 14px 12px 0;
+            }
+
+            .modal-nav {
+                width: 44px;
+                height: 44px;
+            }
+
+            .modal-main-frame,
+            .modal-main-image {
+                max-height: min(34vh, 250px);
+            }
+
+            .modal-meta {
+                padding: 12px 18px 8px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
             .modal-gallery {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 12px;
-                padding: 32px 16px;
+                gap: 8px;
+                padding: 8px 14px 12px;
+            }
+
+            .gallery-item {
+                flex-basis: 90px;
             }
         }
         
         @media (prefers-reduced-motion: reduce) {
             .modal-overlay, .modal-container, .gallery-item img, 
-            .faq-icon, .faq-answer, .faq-question {
+            .faq-icon, .faq-answer, .faq-question,
+            .testimonial-track, .floating-track, .floating-track .testimonial-card,
+            .ritual-media img, .ritual-detail, .ritual-toggle-icon, .ritual-card {
                 animation: none !important;
                 transition: none !important;
+            }
+
+            .testimonial-track,
+            .floating-track {
+                width: 100%;
+                flex-wrap: wrap;
             }
         }
         
@@ -440,411 +832,1089 @@
         }
         
     </style>
-</head>
-<body class="bg-bone-white text-on-surface font-body antialiased selection:bg-primary-container selection:text-white">
-<header class="fixed top-0 z-50 w-full bg-bone-white/80 backdrop-blur-sm border-b border-wood-brown/10">
-<div class="flex justify-between items-center w-full px-8 lg:px-16 py-6 mx-auto">
-<div class="text-3xl font-headline italic text-wood-brown tracking-tight" style="">
-            Pendopo Andari
-        </div>
-<nav class="hidden lg:flex space-x-12">
-<a class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors" href="#story" style="">The Story</a>
-<a class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors" href="#rooms" style="">Sanctuaries</a>
-<a class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors" href="#facilities" style="">Rituals</a>
-<a class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors" href="#faq" style="">FAQ</a>
-<a class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors" href="#location" style="">Address</a>
-</nav>
-<a class="bg-wood-brown text-bone-white px-8 py-3 text-xs uppercase tracking-[0.2em] hover:bg-leaf-green transition-colors" href="#cta" style="">
-            Inquire
+    </head>
+    <body
+        class="bg-bone-white text-on-surface font-body antialiased selection:bg-primary-container selection:text-white">
+        <header
+            class="fixed top-0 z-50 w-full bg-bone-white/80 backdrop-blur-sm border-b border-wood-brown/10">
+            <div
+                class="flex justify-between items-center w-full px-8 lg:px-16 py-6 mx-auto">
+                <div
+                    class="text-3xl font-headline italic text-wood-brown tracking-tight"
+                    style>
+                    Pendopo Andari
+                </div>
+                <nav class="hidden lg:flex space-x-12">
+                    <a
+                        class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors"
+                        href="#story" style>The Story</a>
+                    <a
+                        class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors"
+                        href="#rooms" style>Sanctuaries</a>
+                    <a
+                        class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors"
+                        href="#facilities" style>Rituals</a>
+                    <a
+                        class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors"
+                        href="#faq" style>FAQ</a>
+                    <a
+                        class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors"
+                        href="#location" style>Address</a>
+                </nav>
+                <a
+                    class="bg-wood-brown text-bone-white px-8 py-3 text-xs uppercase tracking-[0.2em] hover:bg-leaf-green transition-colors"
+                    href="#cta" style>
+                    Inquire
+                </a>
+            </div>
+        </header>
+        <section
+            class="relative overflow-hidden bg-bone-white pt-32 lg:pt-36 pb-16 lg:pb-24"
+            data-hero-stage>
+            <div
+                class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-surface-variant/50 to-transparent"></div>
+            <div
+                class="max-w-[1500px] mx-auto px-8 lg:px-12 xl:px-16 relative z-10">
+                <div
+                    class="editorial-grid gap-10 lg:gap-20 xl:gap-28 items-center lg:-ml-8 xl:-ml-12">
+                    <div
+                        class="col-span-12 lg:col-span-6 xl:col-span-5 relative z-20 lg:pr-10 xl:pr-16 animate-slide-left opacity-0">
+                        <span
+                            class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-6 block opacity-80 hero-tagline">A
+                            Private Heritage Sanctuary</span>
+                        <h1
+                            class="font-headline text-6xl md:text-8xl lg:text-[6.2rem] xl:text-[6.8rem] text-wood-brown leading-[0.88] -ml-1 max-w-[620px] hero-title">
+                            Ketenangan <br />
+                            <span class="italic font-normal">Personal.</span>
+                        </h1>
+                        <p
+                            class="font-headline text-xl md:text-2xl text-on-surface/80 mt-8 max-w-xl font-light italic hero-subtitle">
+                            In the heart of Yogyakarta, we prioritize quality
+                            over volume. Seven rooms, infinite warmth.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mt-10">
+                            <div
+                                class="px-4 py-3 border border-wood-brown/10 bg-white/70 backdrop-blur-sm text-xs uppercase tracking-[0.25em] text-wood-brown/80 font-semibold">Seven
+                                rooms</div>
+                            <div
+                                class="px-4 py-3 border border-wood-brown/10 bg-white/70 backdrop-blur-sm text-xs uppercase tracking-[0.25em] text-wood-brown/80 font-semibold">Quiet
+                                retreat</div>
+                            <div
+                                class="px-4 py-3 border border-wood-brown/10 bg-white/70 backdrop-blur-sm text-xs uppercase tracking-[0.25em] text-wood-brown/80 font-semibold">Family-run
+                                warmth</div>
+                        </div>
+                        <div class="flex flex-wrap gap-4 mt-12">
+                            <a
+                                class="bg-wood-brown text-bone-white px-6 py-4 text-xs uppercase tracking-[0.25em] font-medium hover:bg-leaf-green transition-colors"
+                                href="#story">Explore Story</a>
+                            <a
+                                class="border border-wood-brown/20 text-wood-brown px-6 py-4 text-xs uppercase tracking-[0.25em] font-medium hover:bg-wood-brown hover:text-bone-white transition-colors"
+                                href="#cta">Book Stay</a>
+                        </div>
+                    </div>
+                    <div
+                        class="col-span-12 lg:col-span-6 xl:col-span-7 relative z-10 lg:pl-8 xl:pl-12 animate-fade-in opacity-0">
+                        <div class="relative">
+                            <div class="grid grid-cols-12 gap-4 items-start">
+                                <div
+                                    class="col-span-12 md:col-span-8 aspect-[4/5] overflow-hidden shadow-2xl border border-wood-brown/10">
+                                    <img alt="Pendopo Andari facade"
+                                        class="w-full h-full object-cover"
+                                        data-hero-parallax
+                                        src="./assets/tampak_depan2.jpg"
+                                        style />
+                                </div>
+                                <div
+                                    class="col-span-12 md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-4 md:pt-8">
+                                    <div
+                                        class="aspect-[3/4] overflow-hidden shadow-xl border border-wood-brown/10">
+                                        <img alt="Warm living room"
+                                            class="w-full h-full object-cover"
+                                            data-hero-parallax
+                                            src="./assets/ruang_tamu_piano.jpg"
+                                            style />
+                                    </div>
+                                    <div
+                                        class="aspect-[4/3] overflow-hidden shadow-xl border border-wood-brown/10">
+                                        <img alt="Facade detail"
+                                            class="w-full h-full object-cover"
+                                            data-hero-parallax
+                                            src="./assets/tampak_depan3.jpg"
+                                            style />
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute -bottom-6 -left-6 bg-bone-white/95 border border-wood-brown/10 p-5 shadow-xl max-w-xs hidden lg:block">
+                                <p
+                                    class="text-[10px] uppercase tracking-[0.35em] text-leaf-green mb-2">Editorial
+                                    stay</p>
+                                <p
+                                    class="font-headline text-xl italic text-wood-brown leading-relaxed">A
+                                    calm house with a lived-in warmth, designed
+                                    for guests who prefer atmosphere over
+                                    volume.</p>
+                            </div>
+                            <div
+                                class="absolute top-6 right-6 bg-wood-brown text-bone-white px-4 py-3 shadow-lg hidden md:block">
+                                <p
+                                    class="text-[10px] uppercase tracking-[0.35em] opacity-60">Since</p>
+                                <p
+                                    class="font-headline text-2xl italic">2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-32 lg:py-48 px-8 lg:px-16" id="story">
+                <div
+                    class="max-w-7xl mx-auto editorial-grid gap-y-24 items-center">
+                    <div class="col-span-12 lg:col-span-7 relative z-10">
+                        <h2
+                            class="font-headline text-5xl md:text-7xl text-wood-brown leading-tight mb-12 animate-slide-left opacity-0"
+                            style>
+                            Bukan Sekadar Penginapan, <br />
+                            <span class="italic text-leaf-green" style>Ini Rumah
+                                Anda</span>
+                        </h2>
+                        <div
+                            class="max-w-xl space-y-8 text-lg font-light leading-relaxed text-on-surface/80 animate-slide-left opacity-0">
+                            <p class style>Pendopo Andari lahir dari dedikasi
+                                masa pensiun Bapak Dodi dan Ibu Andari. Kami
+                                percaya bahwa perjalanan yang bermakna dimulai
+                                dari tempat Anda beristirahat.</p>
+                            <p
+                                class="font-headline italic text-2xl text-wood-brown border-l-2 border-leaf-green pl-8 py-4"
+                                style>
+                                "Filosofi kami sederhana: Kualitas di atas kuantitas. Dengan hanya tujuh kamar, perhatian kami tak terbagi."
+                            </p>
+                            <p class style>Setiap sudut dirancang dengan
+                                sentuhan personal, interaksi yang hangat, dan
+                                pelayanan dari hati yang layaknya keluarga
+                                sendiri. Di sini, Anda bukan sekadar nomor
+                                kamar, melainkan tamu di rumah kami.</p>
+                        </div>
+                    </div>
+                    <div class="col-span-12 lg:col-span-4 lg:col-start-9">
+                        <div class="aspect-[3/4] overflow-hidden shadow-2xl">
+                            <img alt="Javanese heritage details"
+                                class="w-full h-full object-cover"
+                                src="./assets/ruang_tamu_piano.jpg" style />
+                        </div>
+                        <p
+                            class="mt-6 text-xs uppercase tracking-widest text-wood-brown/60 font-medium"
+                            style>The Living Sanctuary — Est. 2024</p>
+                    </div>
+                </div>
+            </section>
+            <div
+                class="w-full bg-wood-brown py-32 text-bone-white text-center px-8">
+                <div class="max-w-4xl mx-auto">
+                    <span
+                        class="material-symbols-outlined text-5xl mb-8 opacity-40"
+                        style>filter_vintage</span>
+                    <h3
+                        class="font-headline text-4xl italic font-light leading-relaxed"
+                        style>
+                        "Kami mengundang Anda untuk melambat, bernapas, dan merasapi keheningan Yogyakarta yang sesungguhnya."
+                    </h3>
+                    <p
+                        class="mt-8 text-xs uppercase tracking-[0.4em] opacity-60"
+                        style>— Pak Dodi &amp; Ibu Andari</p>
+                </div>
+            </div>
+            <section class="bg-bone-white" id="rooms">
+                <div
+                    class="max-w-[1500px] mx-auto px-6 lg:px-10 xl:px-14 py-16 lg:py-24">
+                    <div
+                        class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 lg:mb-20">
+                        <div>
+                            <p
+                                class="text-xs uppercase tracking-[0.35em] text-leaf-green font-semibold mb-5">A
+                                quieter selection</p>
+                            <h2
+                                class="font-headline text-6xl md:text-7xl text-wood-brown leading-tight">
+                                Our <br />
+                                <span
+                                    class="italic text-leaf-green">Sanctuaries</span>
+                            </h2>
+                        </div>
+                        <p
+                            class="max-w-xl text-sm md:text-base leading-relaxed text-on-surface/65 font-light">
+                            Tiga pilihan kamar disusun dengan hierarki visual
+                            yang lebih hidup: satu featured room, dua supporting
+                            rooms, dan ruang kosong yang cukup agar tiap tipe
+                            terasa berbeda.
+                        </p>
+                    </div>
+
+                    <div
+                        class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-7 items-stretch">
+                        <!-- Standard Room (top-left) -->
+                        <div
+                            class="lg:col-span-6 bg-white shadow-lg border border-wood-brown/10 overflow-hidden room-clickable group h-full"
+                            onclick="openRoomModal('double'); return false;"
+                            role="button" tabindex="0">
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-2 items-stretch h-full">
+                                <div
+                                    class="md:col-span-1 room-image-showcase h-56 sm:h-64 md:h-full md:min-h-[340px]">
+                                    <img alt="Standard Room"
+                                        class="w-full h-full object-cover"
+                                        src="./assets/kamar_double_1.jpg" />
+                                </div>
+                                <div
+                                    class="md:col-span-1 p-7 md:p-8 flex flex-col justify-between gap-6">
+                                    <div>
+                                        <div
+                                            class="flex items-center justify-between gap-4 mb-4">
+                                            <span
+                                                class="text-xs uppercase tracking-[0.4em] text-leaf-green font-semibold">01
+                                                / Essential</span>
+                                            <span
+                                                class="text-[10px] uppercase tracking-[0.3em] text-wood-brown/50">Compact
+                                                comfort</span>
+                                        </div>
+                                        <h3
+                                            class="font-headline text-3xl md:text-4xl text-wood-brown mb-4 leading-tight">Standard
+                                            Room</h3>
+                                        <p
+                                            class="text-sm font-light text-on-surface/70 leading-relaxed mb-5">
+                                            Pilihan cerdas dengan fasilitas
+                                            lengkap. Nyaman dan efisien.
+                                        </p>
+                                        <div
+                                            class="mb-5 pb-5 border-b border-wood-brown/15">
+                                            <p
+                                                class="text-sm uppercase tracking-widest text-leaf-green font-semibold">Rp
+                                                150.000 / malam</p>
+                                        </div>
+                                        <ul
+                                            class="grid grid-cols-2 gap-3 text-xs tracking-wide text-wood-brown">
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">bed</span>
+                                                Twin/Double</li>
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">window</span>
+                                                Window View</li>
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">shower</span>
+                                                Private Bath</li>
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">wifi</span>
+                                                High Speed Wi-Fi</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <button
+                                            class="w-full bg-wood-brown text-bone-white py-3 rounded hover:bg-leaf-green transition-colors font-semibold uppercase tracking-widest text-xs"
+                                            onclick="openRoomModal('double'); return false;">View
+                                            Gallery</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Superior Room (top-right) -->
+                        <div
+                            class="lg:col-span-6 bg-bone-white shadow-lg border border-wood-brown/10 overflow-hidden room-clickable group h-full"
+                            onclick="openRoomModal('superior'); return false;"
+                            role="button" tabindex="0">
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-2 items-stretch h-full">
+                                <div
+                                    class="md:col-span-1 room-image-showcase h-56 sm:h-64 md:h-full md:min-h-[340px]">
+                                    <img alt="Superior Room"
+                                        class="w-full h-full object-cover"
+                                        src="./assets/kamar_superior_1.webp" />
+                                </div>
+                                <div
+                                    class="md:col-span-1 p-7 md:p-8 flex flex-col justify-between gap-6">
+                                    <div>
+                                        <div
+                                            class="flex items-center justify-between gap-4 mb-4">
+                                            <span
+                                                class="text-xs uppercase tracking-[0.4em] text-leaf-green font-semibold">02
+                                                / Intimate</span>
+                                            <span
+                                                class="text-[10px] uppercase tracking-[0.3em] text-wood-brown/50">Romantic
+                                                scale</span>
+                                        </div>
+                                        <h3
+                                            class="font-headline text-3xl md:text-4xl text-wood-brown mb-4 leading-tight">Superior
+                                            Room</h3>
+                                        <p
+                                            class="text-sm font-light text-on-surface/70 leading-relaxed mb-5">
+                                            Keseimbangan sempurna antara
+                                            kenyamanan modern dan nuansa
+                                            tradisional.
+                                        </p>
+                                        <div
+                                            class="mb-5 pb-5 border-b border-wood-brown/15">
+                                            <p
+                                                class="text-sm uppercase tracking-widest text-leaf-green font-semibold">Rp
+                                                150.000 / malam</p>
+                                        </div>
+                                        <ul
+                                            class="grid grid-cols-2 gap-3 text-xs tracking-wide text-wood-brown">
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">king_bed</span>
+                                                Queen-size Bed</li>
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">laptop_mac</span>
+                                                Desk Area</li>
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">shower</span>
+                                                En-suite Bath</li>
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">tv</span>
+                                                Smart TV</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <button
+                                            class="w-full bg-wood-brown text-bone-white py-3 rounded hover:bg-leaf-green transition-colors font-semibold uppercase tracking-widest text-xs"
+                                            onclick="openRoomModal('superior'); return false;">View
+                                            Gallery</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Featured Deluxe Room (bottom full-width) -->
+                        <div
+                            class="lg:col-span-12 bg-white shadow-xl border border-wood-brown/10 overflow-hidden room-clickable group"
+                            onclick="openRoomModal('deluxe'); return false;"
+                            role="button" tabindex="0">
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-2 items-stretch h-full">
+                                <div
+                                    class="room-image-showcase h-72 sm:h-80 md:h-full md:min-h-[420px] lg:min-h-[460px]">
+                                    <img alt="Deluxe Room"
+                                        class="w-full h-full object-cover"
+                                        src="./assets/kamar_deluxe_1.jpg" />
+                                </div>
+                                <div
+                                    class="p-8 md:p-9 lg:p-10 flex flex-col justify-between gap-8">
+                                    <div>
+                                        <div
+                                            class="flex items-center justify-between gap-4 mb-6">
+                                            <span
+                                                class="text-xs uppercase tracking-[0.4em] text-leaf-gritueen font-semibold">03
+                                                / Featured</span>
+                                            <span
+                                                class="text-[10px] uppercase tracking-[0.3em] text-wood-brown/50">Best
+                                                for longer stays</span>
+                                        </div>
+                                        <h3
+                                            class="font-headline text-4xl md:text-5xl text-wood-brown mb-5 leading-tight">Deluxe
+                                            Room</h3>
+                                        <p
+                                            class="text-sm md:text-base font-light text-on-surface/70 leading-relaxed mb-6 max-w-md">
+                                            Kamar terluas kami dengan
+                                            pemandangan langsung ke taman dalam.
+                                            Menampilkan furnitur jati antik dan
+                                            area duduk pribadi.
+                                        </p>
+                                        <div
+                                            class="mb-6 pb-6 border-b border-wood-brown/15">
+                                            <p
+                                                class="text-sm uppercase tracking-widest text-leaf-green font-semibold">Rp
+                                                150.000 / malam</p>
+                                        </div>
+                                        <ul
+                                            class="grid grid-cols-2 gap-3 text-xs tracking-wide text-wood-brown">
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">king_bed</span>
+                                                King-size Bed</li>
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">deck</span>
+                                                Private Terrace</li>
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">bathtub</span>
+                                                En-suite Bathtub</li>
+                                            <li
+                                                class="flex items-center gap-2"><span
+                                                    class="material-symbols-outlined text-base">ac_unit</span>
+                                                Smart AC</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <button
+                                            class="w-full bg-wood-brown text-bone-white py-3 rounded hover:bg-leaf-green transition-colors font-semibold uppercase tracking-widest text-xs"
+                                            onclick="openRoomModal('deluxe'); return false;">View
+                                            Gallery</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-32 bg-surface-container-low px-8 lg:px-16"
+                id="facilities">
+                <div class="max-w-7xl mx-auto">
+                    <div
+                        class="flex flex-col lg:flex-row justify-between items-baseline mb-24 gap-8">
+                        <h2
+                            class="font-headline text-5xl md:text-7xl text-wood-brown"
+                            style>Daily Rituals</h2>
+                        <p
+                            class="max-w-xs text-on-surface/60 font-light text-sm tracking-widest uppercase"
+                            style>Enhancing your stay with authentic Javanese
+                            hospitality.</p>
+                    </div>
+                    <div
+                        class="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-8">
+                        <article
+                            class="ritual-card ritual-featured lg:col-span-7 overflow-hidden stagger-item animate-scale-in opacity-0"
+                            data-ritual-card>
+                            <div class="grid md:grid-cols-2 h-full">
+                                <div
+                                    class="ritual-media h-72 md:h-full md:min-h-[380px]">
+                                    <img alt="Authentic breakfast"
+                                        src="./assets/sarapan.jpg" />
+                                </div>
+                                <div
+                                    class="p-7 md:p-8 lg:p-9 flex flex-col justify-between">
+                                    <div>
+                                        <p
+                                            class="text-[10px] uppercase tracking-[0.35em] text-leaf-green font-semibold mb-4">01
+                                            / Signature Ritual</p>
+                                        <div
+                                            class="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-wood-brown/70 mb-5">
+                                            <span
+                                                class="material-symbols-outlined text-sm"
+                                                data-ritual-icon>schedule</span>
+                                            <span>Best at 07:00–09:00</span>
+                                        </div>
+                                        <h4
+                                            class="font-headline text-3xl lg:text-4xl text-wood-brown italic leading-tight mb-4">Authentic
+                                            Breakfast</h4>
+                                        <p
+                                            class="text-sm font-light leading-relaxed text-on-surface/75">Sarapan
+                                            rumahan khas Yogyakarta yang dimasak
+                                            segar setiap pagi oleh Ibu Andari,
+                                            dengan menu yang hangat dan personal
+                                            seperti di rumah sendiri.</p>
+                                    </div>
+                                    <div
+                                        class="pt-6 border-t border-wood-brown/10">
+                                        <button aria-expanded="false"
+                                            class="w-full text-left flex items-center justify-between text-[11px] uppercase tracking-[0.26em] text-wood-brown font-semibold"
+                                            onclick="toggleRitualDetail(this)"
+                                            type="button">
+                                            <span>Detail Ritual</span>
+                                            <span
+                                                class="material-symbols-outlined ritual-toggle-icon text-lg">expand_more</span>
+                                        </button>
+                                        <div class="ritual-detail">
+                                            <ul
+                                                class="space-y-2 text-sm text-on-surface/75 font-light leading-relaxed">
+                                                <li
+                                                    class="flex items-start gap-2"><span
+                                                        class="material-symbols-outlined text-base text-leaf-green">done</span><span>Pilihan
+                                                        menu lokal berganti
+                                                        sesuai bahan segar
+                                                        harian.</span></li>
+                                                <li
+                                                    class="flex items-start gap-2"><span
+                                                        class="material-symbols-outlined text-base text-leaf-green">done</span><span>Disajikan
+                                                        di area pendopo dengan
+                                                        suasana pagi yang
+                                                        tenang.</span></li>
+                                                <li
+                                                    class="flex items-start gap-2"><span
+                                                        class="material-symbols-outlined text-base text-leaf-green">done</span><span>Bisa
+                                                        disesuaikan ringan untuk
+                                                        tamu yang berangkat
+                                                        lebih awal.</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="lg:col-span-5 grid grid-cols-1 gap-6">
+                            <article
+                                class="ritual-card p-6 stagger-item animate-scale-in opacity-0"
+                                data-ritual-card>
+                                <div class="flex gap-4">
+                                    <div
+                                        class="ritual-media w-20 h-20 shrink-0 border border-wood-brown/10">
+                                        <img alt="Laundry service"
+                                            src="./assets/ruang_tamu.jpg" />
+                                    </div>
+                                    <div class="flex-1">
+                                        <div
+                                            class="flex items-center justify-between gap-3 mb-2">
+                                            <p
+                                                class="text-[10px] uppercase tracking-[0.3em] text-leaf-green font-semibold">02
+                                                / Practical Ease</p>
+                                            <span
+                                                class="material-symbols-outlined text-xl text-wood-brown/75"
+                                                data-ritual-icon>local_laundry_service</span>
+                                        </div>
+                                        <h4
+                                            class="font-headline text-2xl text-wood-brown italic leading-tight">Free
+                                            Laundry</h4>
+                                    </div>
+                                </div>
+                                <p
+                                    class="mt-5 text-sm font-light leading-relaxed text-on-surface/75">Layanan
+                                    cuci pakaian gratis membantu Anda tetap
+                                    nyaman, terutama untuk perjalanan beberapa
+                                    hari.</p>
+                                <button aria-expanded="false"
+                                    class="w-full mt-5 text-left flex items-center justify-between text-[11px] uppercase tracking-[0.24em] text-wood-brown font-semibold"
+                                    onclick="toggleRitualDetail(this)"
+                                    type="button">
+                                    <span>Detail Layanan</span>
+                                    <span
+                                        class="material-symbols-outlined ritual-toggle-icon text-lg">expand_more</span>
+                                </button>
+                                <div class="ritual-detail">
+                                    <p
+                                        class="text-sm text-on-surface/75 font-light leading-relaxed">Drop-off
+                                        fleksibel sepanjang hari dan
+                                        pengembalian menyesuaikan ritme
+                                        aktivitas tamu, agar itinerary tetap
+                                        ringan tanpa beban cucian.</p>
+                                </div>
+                            </article>
+                            <article
+                                class="ritual-card p-6 stagger-item animate-scale-in opacity-0"
+                                data-ritual-card>
+                                <div class="flex gap-4">
+                                    <div
+                                        class="ritual-media w-20 h-20 shrink-0 border border-wood-brown/10">
+                                        <img alt="Shared kitchen"
+                                            src="./assets/dapur_bersama.jpg" />
+                                    </div>
+                                    <div class="flex-1">
+                                        <div
+                                            class="flex items-center justify-between gap-3 mb-2">
+                                            <p
+                                                class="text-[10px] uppercase tracking-[0.3em] text-leaf-green font-semibold">03
+                                                / Open Pantry</p>
+                                            <span
+                                                class="material-symbols-outlined text-xl text-wood-brown/75"
+                                                data-ritual-icon>kitchen</span>
+                                        </div>
+                                        <h4
+                                            class="font-headline text-2xl text-wood-brown italic leading-tight">Shared
+                                            Kitchen</h4>
+                                    </div>
+                                </div>
+                                <p
+                                    class="mt-5 text-sm font-light leading-relaxed text-on-surface/75">Dapur
+                                    terbuka 24 jam dengan teh, kopi, dan camilan
+                                    lokal yang bebas dinikmati kapan saja.</p>
+                                <button aria-expanded="false"
+                                    class="w-full mt-5 text-left flex items-center justify-between text-[11px] uppercase tracking-[0.24em] text-wood-brown font-semibold"
+                                    onclick="toggleRitualDetail(this)"
+                                    type="button">
+                                    <span>Detail Layanan</span>
+                                    <span
+                                        class="material-symbols-outlined ritual-toggle-icon text-lg">expand_more</span>
+                                </button>
+                                <div class="ritual-detail">
+                                    <p
+                                        class="text-sm text-on-surface/75 font-light leading-relaxed">Peralatan
+                                        dasar tersedia untuk pemanasan makanan
+                                        ringan dan ritual teh/kopi malam hari
+                                        dengan suasana rumah yang santai.</p>
+                                </div>
+                            </article>
+                            <article
+                                class="ritual-card p-6 stagger-item animate-scale-in opacity-0"
+                                data-ritual-card>
+                                <div class="flex gap-4">
+                                    <div
+                                        class="ritual-media w-20 h-20 shrink-0 border border-wood-brown/10">
+                                        <img alt="Pendopo area"
+                                            src="./assets/ruang_tamu_piano.jpg" />
+                                    </div>
+                                    <div class="flex-1">
+                                        <div
+                                            class="flex items-center justify-between gap-3 mb-2">
+                                            <p
+                                                class="text-[10px] uppercase tracking-[0.3em] text-leaf-green font-semibold">04
+                                                / Slow Hour</p>
+                                            <span
+                                                class="material-symbols-outlined text-xl text-wood-brown/75"
+                                                data-ritual-icon>deck</span>
+                                        </div>
+                                        <h4
+                                            class="font-headline text-2xl text-wood-brown italic leading-tight">Area
+                                            Pendopo</h4>
+                                    </div>
+                                </div>
+                                <p
+                                    class="mt-5 text-sm font-light leading-relaxed text-on-surface/75">Ruang
+                                    komunal berarsitektur Jawa untuk bersantai,
+                                    membaca, atau berbincang di sore hari.</p>
+                                <button aria-expanded="false"
+                                    class="w-full mt-5 text-left flex items-center justify-between text-[11px] uppercase tracking-[0.24em] text-wood-brown font-semibold"
+                                    onclick="toggleRitualDetail(this)"
+                                    type="button">
+                                    <span>Detail Layanan</span>
+                                    <span
+                                        class="material-symbols-outlined ritual-toggle-icon text-lg">expand_more</span>
+                                </button>
+                                <div class="ritual-detail">
+                                    <p
+                                        class="text-sm text-on-surface/75 font-light leading-relaxed">Cocok
+                                        untuk mengobrol santai, membaca, atau
+                                        bekerja ringan, dengan atmosfer tenang
+                                        yang menjaga ritme tinggal tetap pelan
+                                        dan nyaman.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-32 px-8 lg:px-16 overflow-hidden bg-bone-white"
+                id="testimonials">
+                <div class="max-w-7xl mx-auto editorial-grid">
+                    <div class="col-span-12 lg:col-span-4 mb-16 lg:mb-0">
+                        <h2
+                            class="font-headline text-5xl text-wood-brown mb-8 leading-tight"
+                            style>Stories From <br /><span class="italic"
+                                style>Our Guests</span></h2>
+                        <div class="w-24 h-px bg-leaf-green mb-8"></div>
+                        <p
+                            class="text-xs uppercase tracking-[0.35em] text-wood-brown/60 font-semibold">Real
+                            Hospitality Feel</p>
+                    </div>
+                    <div
+                        class="col-span-12 lg:col-span-8 space-y-8 animate-fade-in opacity-0">
+                        <div class="testimonial-lane"
+                            aria-label="Infinite marquee testimonials"
+                            id="testimonialLaneMarquee">
+                            <div class="testimonial-track"
+                                id="testimonialTrackComments"></div>
+                        </div>
+                        <div class="testimonial-lane"
+                            aria-label="Infinite floating testimonials"
+                            id="testimonialLaneFloating">
+                            <div class="floating-track"
+                                id="testimonialTrackPhotos"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-wood-brown text-bone-white py-32 px-8 lg:px-16"
+            id="location">
+            <div class="max-w-7xl mx-auto editorial-grid gap-16 items-center">
+                <div
+                    class="col-span-12 lg:col-span-5 order-2 lg:order-1 animate-slide-left opacity-0">
+                    <h2 class="font-headline text-5xl mb-12" style>The
+                        Neighborhood</h2>
+                    <div class="space-y-12">
+                        <div>
+                            <span
+                                class="text-xs uppercase tracking-[0.4em] opacity-60 block mb-4"
+                                style>Address</span>
+                            <p class="font-headline text-xl italic font-light"
+                                style>Jl. Ibu Ruswo GM 2/232, Prawirodirjan,
+                                <br />Gondomanan, Kota Yogyakarta 55121</p>
+                        </div>
+                        <div>
+                            <span
+                                class="text-xs uppercase tracking-[0.4em] opacity-60 block mb-2"
+                                style>Walking Distances</span>
+                            <p class="text-xs opacity-40 italic mb-4" style>Klik
+                                untuk melihat jarak pada peta</p>
+                            <ul class="space-y-4 font-light text-lg">
+                                <li
+                                    class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item"
+                                    data-attraction="Keraton Yogyakarta" style>
+                                    <span class="walking-distance-name"
+                                        style>Keraton Yogyakarta</span>
+                                    <span class="italic text-leaf-green"
+                                        style>0.68 km</span>
+                                </li>
+                                <li
+                                    class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item"
+                                    data-attraction="Benteng Vredeburg" style>
+                                    <span class="walking-distance-name"
+                                        style>Benteng Vredeburg & Nol KM</span>
+                                    <span class="italic text-leaf-green"
+                                        style>0.51 km</span>
+                                </li>
+                                <li
+                                    class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item"
+                                    data-attraction="Jalan Malioboro" style>
+                                    <span class="walking-distance-name"
+                                        style>Jalan Malioboro</span>
+                                    <span class="italic text-leaf-green"
+                                        style>1.81 km</span>
+                                </li>
+                                <li
+                                    class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item"
+                                    data-attraction="Taman Sari" style>
+                                    <span class="walking-distance-name"
+                                        style>Taman Sari</span>
+                                    <span class="italic text-leaf-green"
+                                        style>1.55 km</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="col-span-12 lg:col-span-7 order-1 lg:order-2 h-[600px] rounded overflow-hidden">
+                    <div id="locationMap" class="w-full h-full"
+                        style="background: #f5f5f5; height: 600px; min-height: 600px;"></div>
+                </div>
+            </div>
+        </section>
+        <section class="py-48 px-8 bg-bone-white text-center" id="cta">
+            <div class="max-w-3xl mx-auto animate-fade-in opacity-0">
+                <span
+                    class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-8 block"
+                    style>Experience Pendopo Andari</span>
+                <h2
+                    class="font-headline text-6xl md:text-8xl text-wood-brown mb-16 leading-tight"
+                    style>Ready to be <br /><span class="italic" style>Our
+                        Guest?</span></h2>
+                <div class="flex flex-col items-center space-y-8">
+                    <a
+                        class="bg-wood-brown text-bone-white px-12 py-5 text-sm uppercase tracking-[0.2em] font-medium hover:bg-leaf-green transition-all shadow-xl inline-flex items-center gap-3"
+                        href="https://wa.me/6281268090284"
+                        rel="noopener noreferrer" target="_blank" style>
+                        <img alt="WhatsApp"
+                            class="w-5 h-5 object-contain cta-wa-icon"
+                            src="./assets/whatsapp.png" />
+                        Tanya Pak Dodi WhatsApp
+                    </a>
+                    <div
+                        class="flex flex-wrap items-center justify-center gap-6 text-xs uppercase tracking-widest text-wood-brown/60 font-semibold pt-8">
+                        <a
+                            class="hover:text-wood-brown transition-colors inline-flex items-center gap-2"
+                            href="https://www.booking.com/hotel/id/pendopo-andari-homestay.id.html?aid=311984&label=pendopo-andari-homestay-U2%2AbG11iLxpfs0a_wDeCDgS590478339044%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-355404399543%3Alp9056704%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YbSsBl3MCvHsD8UKUHIRFxY&sid=83d5ce4a5cb12ff22d2605740a49954c&dest_id=-2703546&dest_type=city&dist=0&group_adults=2&hapos=1&hpos=1&no_rooms=1&req_adults=2&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1776766698&srpvid=faf34871ce7f0564&type=total&ucfs=1&"
+                            rel="noopener noreferrer" target="_blank" style><img
+                                alt="Booking.com"
+                                class="h-4 w-auto object-contain"
+                                src="./assets/bookingcom.webp" />Booking.com</a>
+                        <a
+                            class="hover:text-wood-brown transition-colors inline-flex items-center gap-2"
+                            href="https://www.agoda.com/id-id/pendopo-andari-homestay/hotel/yogyakarta-id.html?countryId=192&finalPriceView=1&isShowMobileAppPrice=false&cid=1922865&numberOfBedrooms=&familyMode=false&adults=1&children=0&rooms=1&maxRooms=0&checkIn=2026-04-30&isCalendarCallout=false&childAges=&numberOfGuest=0&missingChildAges=false&travellerType=-1&showReviewSubmissionEntry=false&currencyCode=IDR&isFreeOccSearch=false&tag=b28de321-04de-4480-9086-2b1fd8b42315&los=1&searchrequestid=b33a775e-e350-4a9b-a74c-d845d1512db7&ds=BZf6uxSDppAh31Pt"
+                            rel="noopener noreferrer" target="_blank" style><img
+                                alt="Agoda" class="h-4 w-auto object-contain"
+                                src="./assets/agoda.svg" />Agoda</a>
+                        <a
+                            class="hover:text-wood-brown transition-colors inline-flex items-center gap-2"
+                            href="https://www.tiket.com/id-id/hotel/indonesia/pendopo-andari-homestay-206001560510005545"
+                            rel="noopener noreferrer" target="_blank" style><img
+                                alt="Tiket.com"
+                                class="h-4 w-auto object-contain"
+                                src="./assets/tiketcom.webp" />Tiket.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <a aria-label="Chat WhatsApp" class="floating-wa-button"
+            href="https://wa.me/6281268090284" rel="noopener noreferrer"
+            target="_blank">
+            <img alt="WhatsApp" src="./assets/whatsapp.png" />
         </a>
-</div>
-</header>
-<section class="relative h-screen min-h-[800px] flex items-end overflow-hidden">
-<div class="absolute inset-0 z-0 scale-105">
-<img alt="Atmospheric view of Javanese architecture" class="w-full h-full object-cover brightness-75" src="./assets/tampak_depan1.jpg" style=""/>
-<div class="absolute inset-0 bg-gradient-to-t from-wood-brown/60 to-transparent"></div>
-</div>
-<div class="relative z-10 w-full px-8 lg:px-16 pb-24 max-w-7xl mx-auto">
-<div class="max-w-4xl">
-<span class="text-bone-white text-xs uppercase tracking-[0.4em] mb-6 block opacity-80 hero-tagline" style="">A Private Heritage Sanctuary</span>
-<h1 class="font-headline text-6xl md:text-8xl lg:text-[10rem] text-bone-white leading-[0.85] -ml-1 hero-title" style="">
-                Ketenangan <br/>
-<span class="italic font-normal" style="">Personal.</span>
-</h1>
-<p class="font-headline text-xl md:text-2xl text-bone-white/90 mt-12 max-w-xl font-light italic hero-subtitle" style="">
-                In the heart of Yogyakarta, we prioritize quality over volume. Seven rooms, infinite warmth.
-            </p>
-</div>
-</div>
-</section>
-<section class="py-32 lg:py-48 px-8 lg:px-16" id="story">
-<div class="max-w-7xl mx-auto editorial-grid gap-y-24">
-<div class="col-span-12 lg:col-span-7 relative z-10">
-<h2 class="font-headline text-5xl md:text-7xl text-wood-brown leading-tight mb-12 animate-slide-left opacity-0" style="">
-                Bukan Sekadar Penginapan, <br/>
-<span class="italic text-leaf-green" style="">Ini Rumah Anda</span>
-</h2>
-<div class="max-w-xl space-y-8 text-lg font-light leading-relaxed text-on-surface/80 animate-slide-left opacity-0">
-<p class="" style="">Pendopo Andari lahir dari dedikasi masa pensiun Bapak Dodi dan Ibu Andari. Kami percaya bahwa perjalanan yang bermakna dimulai dari tempat Anda beristirahat.</p>
-<p class="font-headline italic text-2xl text-wood-brown border-l-2 border-leaf-green pl-8 py-4" style="">
-                    "Filosofi kami sederhana: Kualitas di atas kuantitas. Dengan hanya tujuh kamar, perhatian kami tak terbagi."
-                </p>
-<p class="" style="">Setiap sudut dirancang dengan sentuhan personal, interaksi yang hangat, dan pelayanan dari hati yang layaknya keluarga sendiri. Di sini, Anda bukan sekadar nomor kamar, melainkan tamu di rumah kami.</p>
-</div>
-</div>
-<div class="col-span-12 lg:col-span-4 lg:col-start-9 lg:-mt-24">
-<div class="aspect-[3/4] overflow-hidden shadow-2xl">
-<img alt="Javanese heritage details" class="w-full h-full object-cover" src="./assets/ruang_tamu_piano.jpg" style=""/>
-</div>
-<p class="mt-6 text-xs uppercase tracking-widest text-wood-brown/60 font-medium" style="">The Living Sanctuary — Est. 2024</p>
-</div>
-</div>
-</section>
-<div class="w-full bg-wood-brown py-32 text-bone-white text-center px-8">
-<div class="max-w-4xl mx-auto">
-<span class="material-symbols-outlined text-5xl mb-8 opacity-40" style="">filter_vintage</span>
-<h3 class="font-headline text-4xl italic font-light leading-relaxed" style="">
-            "Kami mengundang Anda untuk melambat, bernapas, dan merasapi keheningan Yogyakarta yang sesungguhnya."
-        </h3>
-<p class="mt-8 text-xs uppercase tracking-[0.4em] opacity-60" style="">— Pak Dodi &amp; Ibu Andari</p>
-</div>
-</div>
-<section class="bg-bone-white" id="rooms">
-    <div class="max-w-7xl mx-auto px-8 lg:px-16 py-16">
-        <h2 class="font-headline text-6xl md:text-7xl text-wood-brown mb-20 text-center">
-            Our <br/>
-            <span class="italic text-leaf-green">Sanctuaries</span>
-        </h2>
-        
-        <!-- Room Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Deluxe Room Card -->
-            <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                <div class="h-64 overflow-hidden">
-                    <img alt="Deluxe Room" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="./assets/kamar_deluxe_1.jpg" />
-                </div>
-                <div class="p-8">
-                    <span class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-3 block">01 / Sanctuary</span>
-                    <h3 class="font-headline text-3xl text-wood-brown mb-4">Deluxe Room</h3>
-                    <p class="text-sm font-light text-on-surface/70 leading-relaxed mb-6">
-                        Kamar terluas kami dengan pemandangan langsung ke taman dalam. Menampilkan furnitur jati antik dan area duduk pribadi.
-                    </p>
-                    <div class="mb-6 pb-6 border-b border-wood-brown/20">
-                        <p class="text-sm uppercase tracking-widest text-leaf-green font-semibold">Rp 150.000 / malam</p>
+
+        <!-- Room Gallery Modal -->
+        <div id="roomModal" class="modal-overlay">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <div>
+                        <p class="modal-kicker" id="modalKicker">Room
+                            Collection</p>
+                        <h2 class="font-headline text-4xl text-wood-brown"
+                            id="modalTitle">Room Gallery</h2>
                     </div>
-                    <ul class="grid grid-cols-2 gap-3 text-xs tracking-wide text-wood-brown mb-8">
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">king_bed</span> King-size Bed</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">deck</span> Private Terrace</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">bathtub</span> En-suite Bathtub</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">ac_unit</span> Smart AC</li>
-                    </ul>
-                    <button class="w-full bg-wood-brown text-bone-white py-3 rounded hover:bg-leaf-green transition-colors font-semibold uppercase tracking-widest text-xs" onclick="openRoomModal('deluxe'); return false;">View Gallery</button>
+                    <button class="modal-close" onclick="closeRoomModal()"
+                        aria-label="Close room gallery">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <div class="modal-stage">
+                    <button class="modal-nav" id="modalPrev"
+                        onclick="prevModalImage()" aria-label="Previous image">
+                        <span
+                            class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <div class="modal-main-frame">
+                        <img id="modalMainImage" class="modal-main-image" src
+                            alt="Room preview" />
+                    </div>
+                    <button class="modal-nav" id="modalNext"
+                        onclick="nextModalImage()" aria-label="Next image">
+                        <span
+                            class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+                <div class="modal-meta">
+                    <p class="modal-caption" id="modalCaption">Gallery
+                        Preview</p>
+                    <p class="modal-counter" id="modalCounter">1 / 1</p>
+                </div>
+                <div class="modal-gallery" id="modalGallery"></div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <section class="py-32 lg:py-48 px-8 lg:px-16 bg-bone-white" id="faq">
+            <div class="max-w-4xl mx-auto">
+                <h2
+                    class="font-headline text-5xl md:text-7xl text-wood-brown mb-16 leading-tight animate-slide-left opacity-0">
+                    Pertanyaan yang <br />
+                    <span class="italic text-leaf-green" style>Sering
+                        Ditanyakan</span>
+                </h2>
+                <div class="space-y-4" id="faqList">
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Apakah Pendopo Andari Homestay
+                                menawarkan layanan laundry?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">Ya. Pendopo Andari Homestay
+                            menawarkan layanan laundry yang siap membantu Anda
+                            kapan pun Anda membutuhkan pakaian favorit Anda
+                            bersih dan segar sepanjang liburan Anda. Silakan
+                            menghubungi properti untuk informasi lebih
+                            lanjut.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Tempat wisata menarik apa saja
+                                yang ada di sekitar Pendopo Andari Homestay yang
+                                dapat ditempuh dengan berjalan kaki?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">Saat menginap di Pendopo Andari
+                            Homestay, mulai liburan Anda dengan menjelajahi
+                            tempat-tempat wisata menarik di dekat properti
+                            dengan berjalan kaki, seperti Roket, Gereja Santo
+                            Fransiskus Xaverius Yogyakarta, dan Parabola
+                            Berbisik.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Taman umum apa saja yang ada di
+                                sekitar Pendopo Andari Homestay?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">Saat menginap di Pendopo Andari
+                            Homestay, nikmati jalan-jalan pagi atau sore di
+                            taman terdekat seperti Roket, Parabola Berbisik, dan
+                            Peraga Observatorium.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Berapa lama tamu biasanya
+                                menginap di Pendopo Andari Homestay?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">Tamu terverifikasi yang telah
+                            menginap di Pendopo Andari Homestay rata-rata
+                            menginap selama 1 malam malam di properti ini.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Dalam bahasa apa saja anggota
+                                staf Pendopo Andari Homestay dapat
+                                berkomunikasi?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">Pendopo Andari Homestay dapat
+                            berbicara dalam 2 bahasa yang mencakup Bahasa
+                            Inggris untuk tamu yang lebih memilih bahasa ini.
+                            Silakan merujuk ke bagian Fasilitas dan kelengkapan
+                            di kategori Bahasa yang digunakan untuk mengetahui
+                            bahasa lain yang didukung di properti ini.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Apa yang paling disukai tamu
+                                tentang Pendopo Andari Homestay?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">Tamu terverifikasi yang menginap
+                            di Pendopo Andari Homestay telah memberikan
+                            peringkat 9.211 untuk properti ini karena service
+                            yang luar biasa sebagai sorotan utama selama mereka
+                            menginap.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Bagaimana hasil konsensus dari
+                                ulasan tamu yang terverifikasi terkait kopi di
+                                Pendopo Andari Homestay?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">69.0% dari tamu terverifikasi
+                            kami memberikan komentar dan penilaian positif
+                            terkait kopi yang ditawarkan di properti ini. Anda
+                            dapat melihat ulasan dan komentar pelanggan lebih
+                            lanjut untuk Pendopo Andari Homestay di kolom
+                            ulasan.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Bagaimana hasil konsensus dari
+                                ulasan tamu yang terverifikasi terkait layanan
+                                untuk hewan peliharaan di Pendopo Andari
+                                Homestay?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">100.0% dari tamu terverifikasi
+                            kami memberikan komentar dan penilaian positif
+                            terkait layanan untuk hewan peliharaan yang
+                            ditawarkan di properti ini. Anda dapat melihat
+                            ulasan dan komentar pelanggan lebih lanjut untuk
+                            Pendopo Andari Homestay di kolom ulasan.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Berapa penilaian rata-rata yang
+                                diberikan oleh wisatawan keluarga dengan anak
+                                kecil terverifikasi untuk Pendopo Andari
+                                Homestay?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">Wisatawan keluarga dengan anak
+                            kecil yang pernah menginap sebelumnya di properti
+                            ini memberikan penilaian rata-rata sebesar 8.5
+                            kepada Pendopo Andari Homestay. Anda dapat melihat
+                            ulasan dan komentar pelanggan yang lebih lanjut
+                            dengan mengaktifkan filter jenis wisatawan tertentu
+                            yang terverifikasi di kolom ulasan.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Berapa penilaian rata-rata yang
+                                diberikan oleh wisatawan keluarga dengan anak
+                                usia remaja terverifikasi untuk Pendopo Andari
+                                Homestay?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">Wisatawan keluarga dengan anak
+                            usia remaja yang pernah menginap sebelumnya di
+                            properti ini memberikan penilaian rata-rata sebesar
+                            9.0 kepada Pendopo Andari Homestay. Anda dapat
+                            melihat ulasan dan komentar pelanggan yang lebih
+                            lanjut dengan mengaktifkan filter jenis wisatawan
+                            tertentu yang terverifikasi di kolom ulasan.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Berapa penilaian rata-rata yang
+                                diberikan oleh wisatawan rombongan terverifikasi
+                                untuk Pendopo Andari Homestay?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">Wisatawan rombongan yang pernah
+                            menginap sebelumnya di properti ini memberikan
+                            penilaian rata-rata sebesar 8.6 kepada Pendopo
+                            Andari Homestay. Anda dapat melihat ulasan dan
+                            komentar pelanggan yang lebih lanjut dengan
+                            mengaktifkan filter jenis wisatawan tertentu yang
+                            terverifikasi di kolom ulasan.</div>
+                    </div>
+
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">
+                            <div class="flex-1">Pukul berapa saya dapat
+                                melakukan check-in dan check-out di Pendopo
+                                Andari Homestay?</div>
+                            <span
+                                class="material-symbols-outlined faq-icon">expand_more</span>
+                        </div>
+                        <div class="faq-answer">Waktu check-in dimulai pukul
+                            12:00 PM dan waktu check-out adalah hingga pukul
+                            12:00 PM. Anda dapat mengajukan check-in lebih awal
+                            atau check-out lebih lama saat memesan, namun
+                            tergantung pada ketersediaan. Tamu yang melakukan
+                            check-in atau check-out sebelum atau setelah periode
+                            waktu yang telah ditentukan dapat dibebankan biaya
+                            tambahan.</div>
+                    </div>
+
+                </div>
+                <div class="mt-10 flex justify-center">
+                    <button id="faqToggleButton" aria-expanded="false"
+                        class="border border-wood-brown/20 text-wood-brown px-6 py-3 text-xs uppercase tracking-[0.24em] font-semibold hover:bg-wood-brown hover:text-bone-white transition-colors"
+                        onclick="toggleFaqList(this)" type="button">
+                        Lihat semua FAQ
+                    </button>
                 </div>
             </div>
-            
-            <!-- Superior Room Card -->
-            <div class="bg-bone-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                <div class="h-64 overflow-hidden">
-                    <img alt="Superior Room" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="./assets/kamar_superior_1.webp" />
-                </div>
-                <div class="p-8">
-                    <span class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-3 block">02 / Intimate</span>
-                    <h3 class="font-headline text-3xl text-wood-brown mb-4">Superior Room</h3>
-                    <p class="text-sm font-light text-on-surface/70 leading-relaxed mb-6">
-                        Keseimbangan sempurna antara kenyamanan modern dan nuansa tradisional. Ideal untuk pasangan yang mencari suasana romantis.
+        </section>
+        <footer
+            class="bg-white py-24 px-8 lg:px-16 border-t border-wood-brown/5">
+            <div class="max-w-7xl mx-auto editorial-grid gap-y-12">
+                <div class="col-span-12 lg:col-span-6">
+                    <div
+                        class="text-3xl font-headline italic text-wood-brown mb-6"
+                        style>Pendopo Andari</div>
+                    <p
+                        class="max-w-xs text-sm font-light text-on-surface/60 leading-relaxed"
+                        style>
+                        A private home experience in Yogyakarta. <br />
+                        Emphasizing the beauty of simplicity and the luxury of
+                        personal attention.
                     </p>
-                    <div class="mb-6 pb-6 border-b border-wood-brown/20">
-                        <p class="text-sm uppercase tracking-widest text-leaf-green font-semibold">Rp 150.000 / malam</p>
-                    </div>
-                    <ul class="grid grid-cols-2 gap-3 text-xs tracking-wide text-wood-brown mb-8">
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">king_bed</span> Queen-size Bed</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">laptop_mac</span> Desk Area</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">shower</span> En-suite Bath</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">tv</span> Smart TV</li>
-                    </ul>
-                    <button class="w-full bg-wood-brown text-bone-white py-3 rounded hover:bg-leaf-green transition-colors font-semibold uppercase tracking-widest text-xs" onclick="openRoomModal('superior'); return false;">View Gallery</button>
+                </div>
+                <div
+                    class="col-span-12 lg:col-span-6 lg:text-right flex flex-col justify-end">
+                    <p
+                        class="text-[10px] uppercase tracking-[0.2em] text-on-surface/40 mb-2"
+                        style>© 2024 Pendopo Andari Yogyakarta</p>
+                    <p
+                        class="text-[10px] uppercase tracking-[0.2em] text-on-surface/40 italic"
+                        style>A Modern Keraton Experience — Quality Over
+                        Volume</p>
                 </div>
             </div>
-            
-            <!-- Standard Room Card -->
-            <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                <div class="h-64 overflow-hidden">
-                    <img alt="Standard Room" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="./assets/kamar_double_1.jpg" />
-                </div>
-                <div class="p-8">
-                    <span class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-3 block">03 / Essential</span>
-                    <h3 class="font-headline text-3xl text-wood-brown mb-4">Standard Room</h3>
-                    <p class="text-sm font-light text-on-surface/70 leading-relaxed mb-6">
-                        Pilihan cerdas dengan fasilitas lengkap. Nyaman, efisien, dan tetap mempertahankan karakter hangat Pendopo Andari.
-                    </p>
-                    <div class="mb-6 pb-6 border-b border-wood-brown/20">
-                        <p class="text-sm uppercase tracking-widest text-leaf-green font-semibold">Rp 150.000 / malam</p>
-                    </div>
-                    <ul class="grid grid-cols-2 gap-3 text-xs tracking-wide text-wood-brown mb-8">
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">bed</span> Twin/Double</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">window</span> Window View</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">shower</span> Private Bath</li>
-                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-base">wifi</span> High Speed Wi-Fi</li>
-                    </ul>
-                    <button class="w-full bg-wood-brown text-bone-white py-3 rounded hover:bg-leaf-green transition-colors font-semibold uppercase tracking-widest text-xs" onclick="openRoomModal('double'); return false;">View Gallery</button>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
-<section class="py-32 bg-surface-container-low px-8 lg:px-16" id="facilities">
-<div class="max-w-7xl mx-auto">
-<div class="flex flex-col lg:flex-row justify-between items-baseline mb-24 gap-8">
-<h2 class="font-headline text-5xl md:text-7xl text-wood-brown" style="">Daily Rituals</h2>
-<p class="max-w-xs text-on-surface/60 font-light text-sm tracking-widest uppercase" style="">Enhancing your stay with authentic Javanese hospitality.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-<div class="space-y-6 group stagger-item animate-scale-in opacity-0">
-<div class="aspect-square bg-white flex items-center justify-center mb-8 border border-wood-brown/5 group-hover:bg-wood-brown group-hover:text-bone-white transition-all duration-500">
-<span class="material-symbols-outlined text-4xl" style="">restaurant</span>
-</div>
-<h4 class="font-headline text-2xl text-wood-brown italic" style="">Authentic Breakfast</h4>
-<p class="text-sm font-light leading-relaxed text-on-surface/70" style="">Sarapan rumahan khas Yogyakarta yang dimasak segar setiap pagi oleh Ibu Andari sendiri.</p>
-</div>
-<div class="space-y-6 group stagger-item animate-scale-in opacity-0">
-<div class="aspect-square bg-white flex items-center justify-center mb-8 border border-wood-brown/5 group-hover:bg-wood-brown group-hover:text-bone-white transition-all duration-500">
-<span class="material-symbols-outlined text-4xl" style="">local_laundry_service</span>
-</div>
-<h4 class="font-headline text-2xl text-wood-brown italic" style="">Free Laundry</h4>
-<p class="text-sm font-light leading-relaxed text-on-surface/70" style="">Layanan cuci pakaian gratis untuk tamu, memastikan Anda bepergian lebih ringan dan nyaman.</p>
-</div>
-<div class="space-y-6 group stagger-item animate-scale-in opacity-0">
-<div class="aspect-square bg-white flex items-center justify-center mb-8 border border-wood-brown/5 group-hover:bg-wood-brown group-hover:text-bone-white transition-all duration-500">
-<span class="material-symbols-outlined text-4xl" style="">kitchen</span>
-</div>
-<h4 class="font-headline text-2xl text-wood-brown italic" style="">Shared Kitchen</h4>
-<p class="text-sm font-light leading-relaxed text-on-surface/70" style="">Dapur terbuka 24 jam dengan teh, kopi, dan camilan lokal yang bebas Anda nikmati kapan saja.</p>
-</div>
-<div class="space-y-6 group stagger-item animate-scale-in opacity-0">
-<div class="aspect-square bg-white flex items-center justify-center mb-8 border border-wood-brown/5 group-hover:bg-wood-brown group-hover:text-bone-white transition-all duration-500">
-<span class="material-symbols-outlined text-4xl" style="">deck</span>
-</div>
-<h4 class="font-headline text-2xl text-wood-brown italic" style="">Area Pendopo</h4>
-<p class="text-sm font-light leading-relaxed text-on-surface/70" style="">Ruang komunal berarsitektur Jawa untuk bersantai, membaca, atau berbincang di sore hari.</p>
-</div>
-</div>
-</div>
-</section>
-<section class="py-32 px-8 lg:px-16 overflow-hidden bg-bone-white">
-<div class="max-w-7xl mx-auto editorial-grid">
-<div class="col-span-12 lg:col-span-4 mb-16 lg:mb-0">
-<h2 class="font-headline text-5xl text-wood-brown mb-8 leading-tight" style="">Stories From <br/><span class="italic" style="">Our Guests</span></h2>
-<div class="w-24 h-px bg-leaf-green mb-8"></div>
-</div>
-<div class="col-span-12 lg:col-span-8 space-y-24">
-<div class="max-w-xl animate-slide-up opacity-0 lg:ml-auto">
-<p class="font-headline text-2xl italic text-on-surface/80 leading-relaxed mb-6" style="">"Menginap di sini benar-benar terasa seperti pulang ke rumah nenek di Jogja. Suasananya tenang sekali, sarapannya luar biasa enak, dan keramahan Bapak Dodi sangat berkesan."</p>
-<p class="text-xs uppercase tracking-widest text-leaf-green font-bold" style="">— Sarah &amp; Budi, Jakarta</p>
-</div>
-<div class="max-w-xl animate-slide-up opacity-0">
-<p class="font-headline text-2xl italic text-on-surface/80 leading-relaxed mb-6" style="">"Perfect oasis in the middle of Yogyakarta. It's so quiet despite being just a short walk to the main attractions. The small number of rooms means incredible personal attention."</p>
-<p class="text-xs uppercase tracking-widest text-leaf-green font-bold" style="">— Mark, Australia</p>
-</div>
-<div class="max-w-xl lg:ml-auto">
-<p class="font-headline text-2xl italic text-on-surface/80 leading-relaxed mb-6" style="">"Kebersihannya sangat terjaga, dan fasilitas gratis laundry sangat membantu kami yang sedang road trip. Area Pendopo sangat nyaman untuk minum teh sore. Pasti akan kembali lagi."</p>
-<p class="text-xs uppercase tracking-widest text-leaf-green font-bold" style="">— Keluarga Pratama, Surabaya</p>
-</div>
-</div>
-</div>
-</section>
-<section class="bg-wood-brown text-bone-white py-32 px-8 lg:px-16" id="location">
-<div class="max-w-7xl mx-auto editorial-grid gap-16 items-center">
-<div class="col-span-12 lg:col-span-5 order-2 lg:order-1 animate-slide-left opacity-0">
-<h2 class="font-headline text-5xl mb-12" style="">The Neighborhood</h2>
-<div class="space-y-12">
-<div>
-<span class="text-xs uppercase tracking-[0.4em] opacity-60 block mb-4" style="">Address</span>
-<p class="font-headline text-xl italic font-light" style="">Jl. Ibu Ruswo GM 2/232, Prawirodirjan, <br/>Gondomanan, Kota Yogyakarta 55121</p>
-</div>
-<div>
-<span class="text-xs uppercase tracking-[0.4em] opacity-60 block mb-2" style="">Walking Distances</span>
-<p class="text-xs opacity-40 italic mb-4" style="">Klik untuk melihat jarak pada peta</p>
-<ul class="space-y-4 font-light text-lg">
-<li class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item" data-attraction="Keraton Yogyakarta" style="">
-<span class="walking-distance-name" style="">Keraton Yogyakarta</span>
-<span class="italic text-leaf-green" style="">0.68 km</span>
-</li>
-<li class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item" data-attraction="Benteng Vredeburg" style="">
-<span class="walking-distance-name" style="">Benteng Vredeburg & Nol KM</span>
-<span class="italic text-leaf-green" style="">0.51 km</span>
-</li>
-<li class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item" data-attraction="Jalan Malioboro" style="">
-<span class="walking-distance-name" style="">Jalan Malioboro</span>
-<span class="italic text-leaf-green" style="">1.81 km</span>
-</li>
-<li class="flex justify-between border-b border-bone-white/10 pb-2 walking-distance-item" data-attraction="Taman Sari" style="">
-<span class="walking-distance-name" style="">Taman Sari</span>
-<span class="italic text-leaf-green" style="">1.55 km</span>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-span-12 lg:col-span-7 order-1 lg:order-2 h-[600px] rounded overflow-hidden">
-<div id="locationMap" class="w-full h-full" style="background: #f5f5f5; height: 600px; min-height: 600px;"></div>
-</div>
-</div>
-</section>
-<section class="py-48 px-8 bg-bone-white text-center" id="cta">
-<div class="max-w-3xl mx-auto animate-fade-in opacity-0">
-<span class="text-xs uppercase tracking-[0.4em] text-leaf-green mb-8 block" style="">Experience Pendopo Andari</span>
-<h2 class="font-headline text-6xl md:text-8xl text-wood-brown mb-16 leading-tight" style="">Ready to be <br/><span class="italic" style="">Our Guest?</span></h2>
-<div class="flex flex-col items-center space-y-8">
-<a class="bg-wood-brown text-bone-white px-12 py-5 text-sm uppercase tracking-[0.3em] font-medium hover:bg-leaf-green transition-all shadow-xl" href="#" style="">
-                Tanya Pak Dodi (WhatsApp)
-            </a>
-<div class="flex gap-8 text-xs uppercase tracking-widest text-wood-brown/60 font-semibold pt-8">
-<a class="hover:text-wood-brown transition-colors" href="#" style="">Booking.com</a>
-<a class="hover:text-wood-brown transition-colors" href="#" style="">Traveloka</a>
-<a class="hover:text-wood-brown transition-colors" href="#" style="">Instagram</a>
-</div>
-</div>
-</div>
-</section>
+        </footer>
 
-<!-- Room Gallery Modal -->
-<div id="roomModal" class="modal-overlay">
-  <div class="modal-container">
-    <button class="modal-close" onclick="closeRoomModal()">
-      <span class="material-symbols-outlined">close</span>
-    </button>
-    <h2 class="font-headline text-4xl text-wood-brown p-8 pb-4" id="modalTitle">Room Gallery</h2>
-    <div class="modal-gallery" id="modalGallery"></div>
-  </div>
-</div>
-
-<!-- FAQ Section -->
-<section class="py-32 lg:py-48 px-8 lg:px-16 bg-bone-white" id="faq">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="font-headline text-5xl md:text-7xl text-wood-brown mb-16 leading-tight animate-slide-left opacity-0">
-      Pertanyaan yang <br/>
-      <span class="italic text-leaf-green" style="">Sering Ditanyakan</span>
-    </h2>
-    <div class="space-y-4">
-      
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Apakah Pendopo Andari Homestay menawarkan layanan laundry?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">Ya. Pendopo Andari Homestay menawarkan layanan laundry yang siap membantu Anda kapan pun Anda membutuhkan pakaian favorit Anda bersih dan segar sepanjang liburan Anda. Silakan menghubungi properti untuk informasi lebih lanjut.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Tempat wisata menarik apa saja yang ada di sekitar Pendopo Andari Homestay yang dapat ditempuh dengan berjalan kaki?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">Saat menginap di Pendopo Andari Homestay, mulai liburan Anda dengan menjelajahi tempat-tempat wisata menarik di dekat properti dengan berjalan kaki, seperti Roket, Gereja Santo Fransiskus Xaverius Yogyakarta, dan Parabola Berbisik.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Taman umum apa saja yang ada di sekitar Pendopo Andari Homestay?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">Saat menginap di Pendopo Andari Homestay, nikmati jalan-jalan pagi atau sore di taman terdekat seperti Roket, Parabola Berbisik, dan Peraga Observatorium.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Berapa lama tamu biasanya menginap di Pendopo Andari Homestay?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">Tamu terverifikasi yang telah menginap di Pendopo Andari Homestay rata-rata menginap selama 1 malam malam di properti ini.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Dalam bahasa apa saja anggota staf Pendopo Andari Homestay dapat berkomunikasi?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">Pendopo Andari Homestay dapat berbicara dalam 2 bahasa yang mencakup Bahasa Inggris untuk tamu yang lebih memilih bahasa ini. Silakan merujuk ke bagian Fasilitas dan kelengkapan di kategori Bahasa yang digunakan untuk mengetahui bahasa lain yang didukung di properti ini.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Apa yang paling disukai tamu tentang Pendopo Andari Homestay?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">Tamu terverifikasi yang menginap di Pendopo Andari Homestay telah memberikan peringkat 9.211 untuk properti ini karena service yang luar biasa sebagai sorotan utama selama mereka menginap.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Bagaimana hasil konsensus dari ulasan tamu yang terverifikasi terkait kopi di Pendopo Andari Homestay?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">69.0% dari tamu terverifikasi kami memberikan komentar dan penilaian positif terkait kopi yang ditawarkan di properti ini. Anda dapat melihat ulasan dan komentar pelanggan lebih lanjut untuk Pendopo Andari Homestay di kolom ulasan.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Bagaimana hasil konsensus dari ulasan tamu yang terverifikasi terkait layanan untuk hewan peliharaan di Pendopo Andari Homestay?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">100.0% dari tamu terverifikasi kami memberikan komentar dan penilaian positif terkait layanan untuk hewan peliharaan yang ditawarkan di properti ini. Anda dapat melihat ulasan dan komentar pelanggan lebih lanjut untuk Pendopo Andari Homestay di kolom ulasan.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Berapa penilaian rata-rata yang diberikan oleh wisatawan keluarga dengan anak kecil terverifikasi untuk Pendopo Andari Homestay?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">Wisatawan keluarga dengan anak kecil yang pernah menginap sebelumnya di properti ini memberikan penilaian rata-rata sebesar 8.5 kepada Pendopo Andari Homestay. Anda dapat melihat ulasan dan komentar pelanggan yang lebih lanjut dengan mengaktifkan filter jenis wisatawan tertentu yang terverifikasi di kolom ulasan.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Berapa penilaian rata-rata yang diberikan oleh wisatawan keluarga dengan anak usia remaja terverifikasi untuk Pendopo Andari Homestay?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">Wisatawan keluarga dengan anak usia remaja yang pernah menginap sebelumnya di properti ini memberikan penilaian rata-rata sebesar 9.0 kepada Pendopo Andari Homestay. Anda dapat melihat ulasan dan komentar pelanggan yang lebih lanjut dengan mengaktifkan filter jenis wisatawan tertentu yang terverifikasi di kolom ulasan.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Berapa penilaian rata-rata yang diberikan oleh wisatawan rombongan terverifikasi untuk Pendopo Andari Homestay?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">Wisatawan rombongan yang pernah menginap sebelumnya di properti ini memberikan penilaian rata-rata sebesar 8.6 kepada Pendopo Andari Homestay. Anda dapat melihat ulasan dan komentar pelanggan yang lebih lanjut dengan mengaktifkan filter jenis wisatawan tertentu yang terverifikasi di kolom ulasan.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-question">
-          <div class="flex-1">Pukul berapa saya dapat melakukan check-in dan check-out di Pendopo Andari Homestay?</div>
-          <span class="material-symbols-outlined faq-icon">expand_more</span>
-        </div>
-        <div class="faq-answer">Waktu check-in dimulai pukul 12:00 PM dan waktu check-out adalah hingga pukul 12:00 PM. Anda dapat mengajukan check-in lebih awal atau check-out lebih lama saat memesan, namun tergantung pada ketersediaan. Tamu yang melakukan check-in atau check-out sebelum atau setelah periode waktu yang telah ditentukan dapat dibebankan biaya tambahan.</div>
-      </div>
-      
-    </div>
-  </div>
-</section>
-<footer class="bg-white py-24 px-8 lg:px-16 border-t border-wood-brown/5">
-<div class="max-w-7xl mx-auto editorial-grid gap-y-12">
-<div class="col-span-12 lg:col-span-6">
-<div class="text-3xl font-headline italic text-wood-brown mb-6" style="">Pendopo Andari</div>
-<p class="max-w-xs text-sm font-light text-on-surface/60 leading-relaxed" style="">
-                A private home experience in Yogyakarta. <br/>
-                Emphasizing the beauty of simplicity and the luxury of personal attention.
-            </p>
-</div>
-<div class="col-span-12 lg:col-span-6 lg:text-right flex flex-col justify-end">
-<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface/40 mb-2" style="">© 2024 Pendopo Andari Yogyakarta</p>
-<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface/40 italic" style="">A Modern Keraton Experience — Quality Over Volume</p>
-</div>
-</div>
-</footer>
-
-<script>
+        <script>
     // Global map data store
     let mapData = {
         map: null,
@@ -1012,7 +2082,7 @@
                     `<div style="text-align: center; padding: 12px; cursor: pointer;" class="attraction-popup">
                         <strong style="color: #5f3e32; display: block; margin-bottom: 8px; font-size: 14px;">${place.name}</strong>
                         <div style="background: #50652a; color: white; padding: 8px 12px; border-radius: 4px; margin-bottom: 6px; cursor: pointer; font-weight: 500; font-size: 13px; user-select: none;" class="distance-clickable">
-                            📍 ${distanceKm.toFixed(2)} km
+                            Jarak ${distanceKm.toFixed(2)} km
                         </div>
                         <span style="color: #50652a; font-size: 10px; display: block; margin-top: 6px; font-style: italic;">Klik untuk lihat pada peta</span>
                     </div>`,
@@ -1158,46 +2228,194 @@
         'superior': 'Superior Room',
         'double': 'Standard Room'
     };
-    
-    function openRoomModal(roomType) {
-        const modal = document.getElementById('roomModal');
-        const gallery = document.getElementById('modalGallery');
-        const title = document.getElementById('modalTitle');
-        
-        console.log('Opening modal for room:', roomType);
-        
-        if (!modal || !gallery) {
-            console.error('Modal elements not found');
+
+    let activeRoomType = null;
+    let currentModalImages = [];
+    let currentModalIndex = 0;
+
+    const visitorPhotos = [
+        './assets/foto_pengunjung.jpg',
+        './assets/foto_pengunjung_2.jpg'
+    ];
+
+    const testimonialEntries = [
+        { name: 'Rina', location: 'Bandung', quote: 'Kamarnya rapi, suasananya teduh, dan stafnya sangat membantu dari check-in sampai check-out.' },
+        { name: 'Andri & Nisa', location: 'Semarang', quote: 'Lokasi dekat tempat wisata, tapi suasananya tetap tenang. Cocok untuk istirahat yang benar-benar berkualitas.' },
+        { name: 'Kevin', location: 'Surabaya', quote: 'Proses menginap sederhana, bersih, dan tidak ribet. Saya suka area pendopo untuk kerja santai pagi hari.' },
+        { name: 'Maya', location: 'Bekasi', quote: 'Interiornya hangat dan terasa personal. Sarapan rumahan jadi salah satu highlight selama di Jogja.' },
+        { name: 'Rahmat', location: 'Malang', quote: 'Pelayanan cepat dan ramah. Laundry gratis sangat membantu untuk trip beberapa hari.' },
+        { name: 'Dina', location: 'Bali', quote: 'Vibenya homey, bukan seperti hotel besar. Tidurnya nyaman dan lingkungan sekitar aman.' },
+        { name: 'Fikri', location: 'Depok', quote: 'Kualitas tidur saya jauh lebih baik di sini. Malam hening, pagi segar, fasilitas sesuai kebutuhan.' },
+        { name: 'Elisa', location: 'Makassar', quote: 'Sangat cocok buat yang ingin eksplor kota lalu kembali ke tempat yang tenang dan terasa akrab.' },
+        { name: 'Rudi', location: 'Bogor', quote: 'Staff komunikatif dan informatif. Rekomendasi kuliner lokal dari host juga sangat tepat.' },
+        { name: 'Santi', location: 'Solo', quote: 'Pencahayaan kamar bagus, ventilasi enak, dan detail kecil di ruangan terasa dipikirkan dengan baik.' },
+        { name: 'Vina & Tyo', location: 'Tangerang', quote: 'Area komunalnya nyaman untuk ngobrol sore. Kami merasa disambut seperti keluarga.' },
+        { name: 'Nadia', location: 'Palembang', quote: 'Akses ke pusat kota mudah. Setelah seharian jalan, pulang ke sini rasanya menenangkan.' },
+        { name: 'Arman', location: 'Medan', quote: 'Value for money sangat baik. Fasilitas utama lengkap dan kondisinya terawat.' },
+        { name: 'Lukman', location: 'Balikpapan', quote: 'Saya suka konsep tenang dan personalnya. Tidak ramai, tidak bising, tetap hangat.' },
+        { name: 'Siska', location: 'Cirebon', quote: 'Tempatnya cocok untuk short stay maupun long stay. Semua kebutuhan dasar terpenuhi dengan baik.' },
+        { name: 'Nando', location: 'Pekanbaru', quote: 'Pengalaman menginap yang konsisten: bersih, ramah, dan nyaman untuk kembali lagi.' }
+    ];
+
+    function createTestimonialCard(entry, index) {
+        return `
+            <article class="testimonial-card" tabindex="0">
+                <p class="testimonial-quote">"${entry.quote}"</p>
+                <p class="testimonial-name mt-3">${entry.name}</p>
+                <p class="testimonial-meta">${entry.location}</p>
+            </article>
+        `;
+    }
+
+    function createPhotoCard(index) {
+        const photo = visitorPhotos[index % visitorPhotos.length];
+        const entry = testimonialEntries[index % testimonialEntries.length];
+        return `
+            <article class="testimonial-photo-card" tabindex="0">
+                <img src="${photo}" alt="Guest photo ${index + 1} - ${entry.name}" loading="lazy" />
+            </article>
+        `;
+    }
+
+    function renderInfiniteTestimonials() {
+        const marqueeTrack = document.getElementById('testimonialTrackComments');
+        const floatingTrack = document.getElementById('testimonialTrackPhotos');
+
+        if (!marqueeTrack || !floatingTrack) {
             return;
         }
-        
-        // Set title
-        if (title) {
-            title.textContent = roomTitles[roomType] + ' - Gallery';
+
+        const commentCards = testimonialEntries.map((entry, index) => createTestimonialCard(entry, index)).join('');
+        const photoCards = testimonialEntries.map((_, index) => createPhotoCard(index)).join('');
+
+        marqueeTrack.innerHTML = commentCards + commentCards;
+        floatingTrack.innerHTML = photoCards + photoCards;
+
+        floatingTrack.querySelectorAll('.testimonial-photo-card').forEach((card, index) => {
+            card.style.setProperty('--float-delay', `${(index % 8) * 0.35}s`);
+            card.style.setProperty('--float-duration', `${5.4 + (index % 4) * 0.55}s`);
+        });
+    }
+    
+    function renderModalMainImage() {
+        const mainImage = document.getElementById('modalMainImage');
+        const caption = document.getElementById('modalCaption');
+        const counter = document.getElementById('modalCounter');
+
+        if (!mainImage || !currentModalImages.length || !activeRoomType) {
+            return;
         }
-        
-        // Clear gallery
+
+        const fileName = currentModalImages[currentModalIndex];
+        const nextSrc = './assets/' + fileName;
+        const nextAlt = `${roomTitles[activeRoomType]} - Image ${currentModalIndex + 1}`;
+
+        const preloadImage = new Image();
+        let transitionHandled = false;
+        const applyTransition = () => {
+            if (transitionHandled) {
+                return;
+            }
+            transitionHandled = true;
+            mainImage.classList.add('is-switching');
+            setTimeout(() => {
+                mainImage.src = nextSrc;
+                mainImage.alt = nextAlt;
+                requestAnimationFrame(() => {
+                    mainImage.classList.remove('is-switching');
+                });
+            }, 110);
+        };
+
+        preloadImage.onload = applyTransition;
+        preloadImage.src = nextSrc;
+
+        if (preloadImage.complete) {
+            applyTransition();
+        }
+
+        if (caption) {
+            caption.textContent = `${roomTitles[activeRoomType]} • Frame ${currentModalIndex + 1}`;
+        }
+
+        if (counter) {
+            counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
+        }
+
+        document.querySelectorAll('#modalGallery .gallery-item').forEach((thumb, idx) => {
+            thumb.classList.toggle('active', idx === currentModalIndex);
+        });
+    }
+
+    function renderModalThumbnails() {
+        const gallery = document.getElementById('modalGallery');
+        if (!gallery || !activeRoomType) {
+            return;
+        }
+
         gallery.innerHTML = '';
-        
-        // Add images
-        if (roomImages[roomType]) {
-            roomImages[roomType].forEach((image, index) => {
-                const item = document.createElement('div');
-                item.className = 'gallery-item';
-                const img = document.createElement('img');
-                img.src = './assets/' + image;
-                img.alt = roomTitles[roomType] + ' - Image ' + (index + 1);
-                img.loading = 'lazy';
-                item.appendChild(img);
-                gallery.appendChild(item);
+        currentModalImages.forEach((image, index) => {
+            const item = document.createElement('button');
+            item.type = 'button';
+            item.className = 'gallery-item';
+            item.setAttribute('aria-label', `Show image ${index + 1}`);
+            item.addEventListener('click', () => {
+                currentModalIndex = index;
+                renderModalMainImage();
             });
+
+            const img = document.createElement('img');
+            img.src = './assets/' + image;
+            img.alt = `${roomTitles[activeRoomType]} thumbnail ${index + 1}`;
+            img.loading = 'lazy';
+
+            item.appendChild(img);
+            gallery.appendChild(item);
+        });
+    }
+
+    function nextModalImage() {
+        if (!currentModalImages.length) {
+            return;
         }
-        
-        // Show modal with active class
+        currentModalIndex = (currentModalIndex + 1) % currentModalImages.length;
+        renderModalMainImage();
+    }
+
+    function prevModalImage() {
+        if (!currentModalImages.length) {
+            return;
+        }
+        currentModalIndex = (currentModalIndex - 1 + currentModalImages.length) % currentModalImages.length;
+        renderModalMainImage();
+    }
+
+    function openRoomModal(roomType) {
+        const modal = document.getElementById('roomModal');
+        const title = document.getElementById('modalTitle');
+        const kicker = document.getElementById('modalKicker');
+
+        if (!modal || !roomImages[roomType]) {
+            return;
+        }
+
+        activeRoomType = roomType;
+        currentModalImages = roomImages[roomType];
+        currentModalIndex = 0;
+
+        if (title) {
+            title.textContent = `${roomTitles[roomType]} Gallery`;
+        }
+
+        if (kicker) {
+            kicker.textContent = `${roomImages[roomType].length} curated photos`;
+        }
+
+        renderModalThumbnails();
+        renderModalMainImage();
+
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        
-        console.log('Modal opened');
     }
     
     // Intersection Observer for scroll animations
@@ -1232,22 +2450,24 @@
     document.querySelectorAll('[class*="animate-"]').forEach(el => {
         observer.observe(el);
     });
+
+    renderInfiniteTestimonials();
     
     // Parallax effect for hero section
-    const heroSection = document.querySelector('section[class*="min-h-\[800px\]"]');
+    const heroSection = document.querySelector('[data-hero-stage]');
     if (heroSection) {
+        const heroImages = heroSection.querySelectorAll('[data-hero-parallax]');
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
-            const heroImage = heroSection.querySelector('img');
-            if (heroImage) {
-                heroImage.style.transform = `translateY(${scrolled * 0.3}px)`;
-            }
+            heroImages.forEach((heroImage, index) => {
+                heroImage.style.transform = `translateY(${scrolled * (0.03 + index * 0.02)}px)`;
+            });
         }, { passive: true });
     }
     
-    // Enhanced hover effects for facility cards
-    const facilityCards = document.querySelectorAll('.space-y-6.group');
-    facilityCards.forEach((card, index) => {
+    // Stagger animation for Daily Rituals cards
+    const ritualCards = document.querySelectorAll('[data-ritual-card]');
+    ritualCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
     });
     
@@ -1268,6 +2488,9 @@
     // Image reveal animations on page load
     const images = document.querySelectorAll('img');
     images.forEach((img, index) => {
+        if (img.closest('.room-image-showcase')) {
+            return;
+        }
         img.style.opacity = '0';
         img.style.transition = `opacity 0.8s ease-out ${index * 0.1}s`;
         // Trigger after a small delay to ensure image loading
@@ -1276,17 +2499,21 @@
         }, 50);
     });
     
-    // Dynamic animation for facility icons
-    const facilityIcons = document.querySelectorAll('.space-y-6 .material-symbols-outlined');
-    facilityIcons.forEach((icon, index) => {
-        const card = icon.closest('.space-y-6');
+    // Dynamic animation for ritual icons
+    const ritualIcons = document.querySelectorAll('[data-ritual-icon]');
+    ritualIcons.forEach((icon) => {
+        const card = icon.closest('[data-ritual-card]');
         if (card) {
             card.addEventListener('mouseenter', () => {
+                if (card.classList.contains('active')) {
+                    return;
+                }
                 icon.style.animation = 'floatIn 0.6s ease-out';
                 icon.style.transform = 'scale(1.1) rotate(5deg)';
             });
             card.addEventListener('mouseleave', () => {
-                icon.style.transform = 'scale(1) rotate(0deg)';
+                icon.style.removeProperty('transform');
+                icon.style.removeProperty('animation');
             });
         }
     });
@@ -1322,6 +2549,9 @@
         if (modal) {
             modal.classList.remove('active');
             document.body.style.overflow = 'auto';
+            activeRoomType = null;
+            currentModalImages = [];
+            currentModalIndex = 0;
             console.log('Modal closed');
         }
     }
@@ -1330,17 +2560,17 @@
     function initModalListeners() {
         const modal = document.getElementById('roomModal');
         if (!modal) {
-            console.error('❌ Modal element not found during initialization!');
+            console.error('Modal element not found during initialization.');
             return;
         }
         
-        console.log('✓ Initializing modal listeners...');
+        console.log('Initializing modal listeners...');
         
         // Close modal when clicking on overlay background
         modal.addEventListener('click', function(e) {
             // Check if click is directly on the overlay (not on container)
             if (e.target === this || e.target === modal) {
-                console.log('✓ Overlay click detected');
+                console.log('Overlay click detected');
                 closeRoomModal();
             }
         });
@@ -1352,20 +2582,30 @@
                 // Stop propagation so click doesn't bubble to overlay
                 e.stopPropagation();
             });
-            console.log('✓ Modal container click handler added');
+            console.log('Modal container click handler added');
         }
         
         // Also handle escape key to close
         const escapeHandler = function(e) {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                console.log('✓ Escape key pressed');
+            if (!modal.classList.contains('active')) {
+                return;
+            }
+
+            if (e.key === 'Escape') {
+                console.log('Escape key pressed');
                 closeRoomModal();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextModalImage();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevModalImage();
             }
         };
         
         document.addEventListener('keydown', escapeHandler);
-        console.log('✓ Escape key handler added');
-        console.log('✓ All modal listeners initialized');
+        console.log('Escape key handler added');
+        console.log('All modal listeners initialized');
     }
     
     // Initialize when DOM is ready
@@ -1374,10 +2614,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOMContentLoaded fired');
             initModalListeners();
+            initFaqVisibility();
         });
     } else {
         console.log('Document already loaded, initializing immediately...');
         initModalListeners();
+        initFaqVisibility();
     }
     
     // FAQ Accordion Functions
@@ -1385,6 +2627,71 @@
         element.classList.toggle('active');
     }
 
+    function initFaqVisibility() {
+        const faqList = document.getElementById('faqList');
+        const toggleButton = document.getElementById('faqToggleButton');
+        if (!faqList || !toggleButton) {
+            return;
+        }
+
+        const initialVisibleCount = 5;
+        const faqItems = Array.from(faqList.querySelectorAll('.faq-item'));
+        const hasExtraItems = faqItems.length > initialVisibleCount;
+
+        faqItems.forEach((item, index) => {
+            item.hidden = hasExtraItems && index >= initialVisibleCount;
+        });
+
+        toggleButton.hidden = !hasExtraItems;
+        if (hasExtraItems) {
+            toggleButton.dataset.expanded = 'false';
+            toggleButton.setAttribute('aria-expanded', 'false');
+            toggleButton.textContent = `Lihat semua FAQ (${faqItems.length})`;
+        }
+    }
+
+    function toggleFaqList(button) {
+        const faqList = document.getElementById('faqList');
+        if (!faqList) {
+            return;
+        }
+
+        const initialVisibleCount = 5;
+        const faqItems = Array.from(faqList.querySelectorAll('.faq-item'));
+        const isExpanded = button.dataset.expanded === 'true';
+
+        if (isExpanded) {
+            faqItems.forEach((item, index) => {
+                if (index >= initialVisibleCount) {
+                    item.hidden = true;
+                    item.classList.remove('active');
+                }
+            });
+            button.dataset.expanded = 'false';
+            button.setAttribute('aria-expanded', 'false');
+            button.textContent = `Lihat semua FAQ (${faqItems.length})`;
+            button.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            return;
+        }
+
+        faqItems.forEach((item) => {
+            item.hidden = false;
+        });
+        button.dataset.expanded = 'true';
+        button.setAttribute('aria-expanded', 'true');
+        button.textContent = 'Tampilkan lebih sedikit';
+    }
+
+    function toggleRitualDetail(button) {
+        const card = button.closest('[data-ritual-card]');
+        if (!card) {
+            return;
+        }
+
+        const isActive = card.classList.toggle('active');
+        button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    }
+
 </script>
 
-</body></html>
+    </body></html>
