@@ -651,6 +651,105 @@
         .cta-wa-icon {
             filter: brightness(0) invert(1);
         }
+
+        .booking-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .booking-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .booking-modal-container {
+            width: min(720px, 100%);
+            background: #ffffff;
+            border: 1px solid rgba(95, 62, 50, 0.16);
+            box-shadow: 0 24px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(10px) scale(0.98);
+            transition: transform 0.25s ease;
+        }
+
+        .booking-modal-overlay.active .booking-modal-container {
+            transform: translateY(0) scale(1);
+        }
+
+        .booking-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 28px 28px 18px;
+            border-bottom: 1px solid rgba(95, 62, 50, 0.12);
+        }
+
+        .booking-modal-close {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #5f3e32;
+            background: #ffffff;
+            color: #5f3e32;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .booking-modal-close:hover {
+            background: #5f3e32;
+            color: #ffffff;
+        }
+
+        .booking-modal-grid {
+            padding: 22px 28px 30px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .booking-option-card {
+            border: 1px solid rgba(95, 62, 50, 0.18);
+            background: #ffffff;
+            color: #5f3e32;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 74px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            transition: border-color 0.2s ease, transform 0.2s ease,
+                box-shadow 0.2s ease, color 0.2s ease;
+        }
+
+        .booking-option-card:hover {
+            border-color: #50652a;
+            color: #50652a;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 16px rgba(95, 62, 50, 0.12);
+        }
+
+        .booking-option-card img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
         
         @media (max-width: 768px) {
             .modal-container {
@@ -664,6 +763,15 @@
                 bottom: 16px;
                 width: 54px;
                 height: 54px;
+            }
+
+            .booking-modal-header {
+                padding: 20px 18px 14px;
+            }
+
+            .booking-modal-grid {
+                padding: 16px 18px 20px;
+                grid-template-columns: 1fr;
             }
 
             .modal-header {
@@ -707,7 +815,8 @@
             .modal-overlay, .modal-container, .gallery-item img, 
             .faq-icon, .faq-answer, .faq-question,
             .testimonial-track, .floating-track, .floating-track .testimonial-card,
-            .ritual-media img, .ritual-detail, .ritual-toggle-icon, .ritual-card {
+            .ritual-media img, .ritual-detail, .ritual-toggle-icon, .ritual-card,
+            .booking-modal-overlay, .booking-modal-container, .booking-option-card {
                 animation: none !important;
                 transition: none !important;
             }
@@ -848,6 +957,9 @@
                     <a
                         class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors"
                         href="#story" style>The Story</a>
+                    <a
+                        class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors"
+                        href="#host" style>Host</a>
                     <a
                         class="text-xs uppercase tracking-[0.2em] font-medium text-wood-brown hover:text-leaf-green transition-colors"
                         href="#rooms" style>Sanctuaries</a>
@@ -1023,6 +1135,52 @@
                         style>— Pak Dodi &amp; Ibu Andari</p>
                 </div>
             </div>
+            <section class="py-24 lg:py-32 px-8 lg:px-16 bg-bone-white" id="host">
+                <div class="max-w-7xl mx-auto editorial-grid gap-y-16 items-center">
+                    <div class="col-span-12 lg:col-span-5 animate-fade-in opacity-0">
+                        <div class="relative overflow-hidden shadow-2xl border border-wood-brown/10 aspect-[3/4]">
+                            <img alt="Pak Dodi - Host Pendopo Andari"
+                                class="w-full h-full object-cover"
+                                src="./assets/pakdodi.jpeg"
+                                style="object-position: center 40%;" />
+                        </div>
+                    </div>
+                    <div class="col-span-12 lg:col-span-7 animate-slide-left opacity-0 lg:pl-10">
+                        <p
+                            class="text-xs uppercase tracking-[0.35em] text-leaf-green font-semibold mb-5"
+                            style>Meet Your Host</p>
+                        <h2
+                            class="font-headline text-5xl md:text-6xl text-wood-brown leading-tight mb-8"
+                            style>Berkenalan dengan <br /><span
+                                class="italic text-leaf-green">Pak Dodi</span></h2>
+                        <div
+                            class="space-y-6 text-base md:text-lg font-light leading-relaxed text-on-surface/80 max-w-2xl">
+                            <p style>Pak Dodi adalah host yang menjaga ritme tinggal di Pendopo Andari tetap hangat, tenang, dan personal. Bersama Ibu Andari, beliau merancang pengalaman menginap agar tamu merasa seperti pulang ke rumah sendiri.</p>
+                            <p style>Mulai dari rekomendasi area sekitar Keraton, bantuan check-in/check-out, hingga kebutuhan harian selama menginap, komunikasi dilakukan langsung dan responsif agar setiap tamu merasa diperhatikan.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-3 mt-8">
+                            <div
+                                class="px-4 py-3 border border-wood-brown/15 text-xs uppercase tracking-[0.22em] text-wood-brown/80 font-semibold">Host
+                                On-site</div>
+                            <div
+                                class="px-4 py-3 border border-wood-brown/15 text-xs uppercase tracking-[0.22em] text-wood-brown/80 font-semibold">Respons
+                                Cepat</div>
+                            <div
+                                class="px-4 py-3 border border-wood-brown/15 text-xs uppercase tracking-[0.22em] text-wood-brown/80 font-semibold">Rekomendasi
+                                Lokal</div>
+                        </div>
+                        <a
+                            class="mt-10 bg-wood-brown text-bone-white px-7 py-4 text-xs uppercase tracking-[0.24em] font-medium hover:bg-leaf-green transition-colors inline-flex items-center gap-3"
+                            href="https://wa.me/6281268090284?text=Halo%20Pak%20Dodi%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih."
+                            rel="noopener noreferrer" target="_blank" style>
+                            <img alt="WhatsApp"
+                                class="w-4 h-4 object-contain cta-wa-icon"
+                                src="./assets/whatsapp.png" />
+                            Chat Pak Dodi
+                        </a>
+                    </div>
+                </div>
+            </section>
             <section class="bg-bone-white" id="rooms">
                 <div
                     class="max-w-[1500px] mx-auto px-6 lg:px-10 xl:px-14 py-16 lg:py-24">
@@ -1593,44 +1751,62 @@
                     style>Ready to be <br /><span class="italic" style>Our
                         Guest?</span></h2>
                 <div class="flex flex-col items-center space-y-8">
-                    <a
-                        class="bg-wood-brown text-bone-white px-12 py-5 text-sm uppercase tracking-[0.2em] font-medium hover:bg-leaf-green transition-all shadow-xl inline-flex items-center gap-3"
-                        href="https://wa.me/6281268090284"
-                        rel="noopener noreferrer" target="_blank" style>
-                        <img alt="WhatsApp"
-                            class="w-5 h-5 object-contain cta-wa-icon"
-                            src="./assets/whatsapp.png" />
-                        Tanya Pak Dodi WhatsApp
-                    </a>
-                    <div
-                        class="flex flex-wrap items-center justify-center gap-6 text-xs uppercase tracking-widest text-wood-brown/60 font-semibold pt-8">
-                        <a
-                            class="hover:text-wood-brown transition-colors inline-flex items-center gap-2"
-                            href="https://www.booking.com/hotel/id/pendopo-andari-homestay.id.html?aid=311984&label=pendopo-andari-homestay-U2%2AbG11iLxpfs0a_wDeCDgS590478339044%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-355404399543%3Alp9056704%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YbSsBl3MCvHsD8UKUHIRFxY&sid=83d5ce4a5cb12ff22d2605740a49954c&dest_id=-2703546&dest_type=city&dist=0&group_adults=2&hapos=1&hpos=1&no_rooms=1&req_adults=2&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1776766698&srpvid=faf34871ce7f0564&type=total&ucfs=1&"
-                            rel="noopener noreferrer" target="_blank" style><img
-                                alt="Booking.com"
-                                class="h-4 w-auto object-contain"
-                                src="./assets/bookingcom.webp" />Booking.com</a>
-                        <a
-                            class="hover:text-wood-brown transition-colors inline-flex items-center gap-2"
-                            href="https://www.agoda.com/id-id/pendopo-andari-homestay/hotel/yogyakarta-id.html?countryId=192&finalPriceView=1&isShowMobileAppPrice=false&cid=1922865&numberOfBedrooms=&familyMode=false&adults=1&children=0&rooms=1&maxRooms=0&checkIn=2026-04-30&isCalendarCallout=false&childAges=&numberOfGuest=0&missingChildAges=false&travellerType=-1&showReviewSubmissionEntry=false&currencyCode=IDR&isFreeOccSearch=false&tag=b28de321-04de-4480-9086-2b1fd8b42315&los=1&searchrequestid=b33a775e-e350-4a9b-a74c-d845d1512db7&ds=BZf6uxSDppAh31Pt"
-                            rel="noopener noreferrer" target="_blank" style><img
-                                alt="Agoda" class="h-4 w-auto object-contain"
-                                src="./assets/agoda.svg" />Agoda</a>
-                        <a
-                            class="hover:text-wood-brown transition-colors inline-flex items-center gap-2"
-                            href="https://www.tiket.com/id-id/hotel/indonesia/pendopo-andari-homestay-206001560510005545"
-                            rel="noopener noreferrer" target="_blank" style><img
-                                alt="Tiket.com"
-                                class="h-4 w-auto object-contain"
-                                src="./assets/tiketcom.webp" />Tiket.com</a>
-                    </div>
+                    <button
+                        class="bg-wood-brown text-bone-white px-12 py-5 text-sm uppercase tracking-[0.2em] font-medium hover:bg-leaf-green transition-all shadow-xl inline-flex items-center gap-3 btn-animate"
+                        onclick="openBookingModal()" type="button" style>
+                        <span
+                            class="material-symbols-outlined text-base">calendar_month</span>
+                        Book Now
+                    </button>
+                    <p
+                        class="text-[10px] uppercase tracking-[0.28em] text-wood-brown/55 font-semibold"
+                        style>Pilih channel pemesanan favorit Anda</p>
                 </div>
             </div>
         </section>
 
+        <div aria-hidden="true" class="booking-modal-overlay" id="bookingModal">
+            <div aria-labelledby="bookingModalTitle" aria-modal="true"
+                class="booking-modal-container" role="dialog">
+                <div class="booking-modal-header">
+                    <div>
+                        <p class="modal-kicker">Reservation Channels</p>
+                        <h3 class="font-headline text-4xl text-wood-brown"
+                            id="bookingModalTitle">Book Your Stay</h3>
+                    </div>
+                    <button aria-label="Close booking modal"
+                        class="booking-modal-close" onclick="closeBookingModal()"
+                        type="button">
+                        <span
+                            class="material-symbols-outlined">close</span></button>
+                </div>
+                <div class="booking-modal-grid">
+                    <a class="booking-option-card"
+                        href="https://wa.me/6281268090284?text=Halo%20Pak%20Dodi%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih."
+                        onclick="closeBookingModal()" rel="noopener noreferrer"
+                        target="_blank"><img alt="WhatsApp"
+                            src="./assets/whatsapp.png" />WhatsApp</a>
+                    <a class="booking-option-card"
+                        href="https://www.booking.com/hotel/id/pendopo-andari-homestay.id.html?aid=311984&label=pendopo-andari-homestay-U2%2AbG11iLxpfs0a_wDeCDgS590478339044%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-355404399543%3Alp9056704%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YbSsBl3MCvHsD8UKUHIRFxY&sid=83d5ce4a5cb12ff22d2605740a49954c&dest_id=-2703546&dest_type=city&dist=0&group_adults=2&hapos=1&hpos=1&no_rooms=1&req_adults=2&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1776766698&srpvid=faf34871ce7f0564&type=total&ucfs=1&"
+                        onclick="closeBookingModal()" rel="noopener noreferrer"
+                        target="_blank"><img alt="Booking.com"
+                            src="./assets/bookingcom.webp" />Booking.com</a>
+                    <a class="booking-option-card"
+                        href="https://www.agoda.com/id-id/pendopo-andari-homestay/hotel/yogyakarta-id.html?countryId=192&finalPriceView=1&isShowMobileAppPrice=false&cid=1922865&numberOfBedrooms=&familyMode=false&adults=1&children=0&rooms=1&maxRooms=0&checkIn=2026-04-30&isCalendarCallout=false&childAges=&numberOfGuest=0&missingChildAges=false&travellerType=-1&showReviewSubmissionEntry=false&currencyCode=IDR&isFreeOccSearch=false&tag=b28de321-04de-4480-9086-2b1fd8b42315&los=1&searchrequestid=b33a775e-e350-4a9b-a74c-d845d1512db7&ds=BZf6uxSDppAh31Pt"
+                        onclick="closeBookingModal()" rel="noopener noreferrer"
+                        target="_blank"><img alt="Agoda"
+                            src="./assets/agoda.svg" />Agoda</a>
+                    <a class="booking-option-card"
+                        href="https://www.tiket.com/id-id/hotel/indonesia/pendopo-andari-homestay-206001560510005545"
+                        onclick="closeBookingModal()" rel="noopener noreferrer"
+                        target="_blank"><img alt="Tiket.com"
+                            src="./assets/tiketcom.webp" />Tiket.com</a>
+                </div>
+            </div>
+        </div>
+
         <a aria-label="Chat WhatsApp" class="floating-wa-button"
-            href="https://wa.me/6281268090284" rel="noopener noreferrer"
+            href="https://wa.me/6281268090284?text=Halo%20Pak%20Dodi%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih." rel="noopener noreferrer"
             target="_blank">
             <img alt="WhatsApp" src="./assets/whatsapp.png" />
         </a>
@@ -2390,6 +2566,44 @@
         renderModalMainImage();
     }
 
+    function openBookingModal() {
+        const bookingModal = document.getElementById('bookingModal');
+        if (!bookingModal) {
+            return;
+        }
+        bookingModal.classList.add('active');
+        bookingModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeBookingModal() {
+        const bookingModal = document.getElementById('bookingModal');
+        if (!bookingModal) {
+            return;
+        }
+        bookingModal.classList.remove('active');
+        bookingModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = 'auto';
+    }
+
+    function initBookingModalListeners() {
+        const bookingModal = document.getElementById('bookingModal');
+        if (!bookingModal) {
+            return;
+        }
+        const bookingContainer = bookingModal.querySelector('.booking-modal-container');
+        bookingModal.addEventListener('click', (e) => {
+            if (e.target === bookingModal) {
+                closeBookingModal();
+            }
+        });
+        if (bookingContainer) {
+            bookingContainer.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+    }
+
     function openRoomModal(roomType) {
         const modal = document.getElementById('roomModal');
         const title = document.getElementById('modalTitle');
@@ -2587,6 +2801,12 @@
         
         // Also handle escape key to close
         const escapeHandler = function(e) {
+            const bookingModal = document.getElementById('bookingModal');
+            if (e.key === 'Escape' && bookingModal && bookingModal.classList.contains('active')) {
+                closeBookingModal();
+                return;
+            }
+
             if (!modal.classList.contains('active')) {
                 return;
             }
@@ -2614,11 +2834,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOMContentLoaded fired');
             initModalListeners();
+            initBookingModalListeners();
             initFaqVisibility();
         });
     } else {
         console.log('Document already loaded, initializing immediately...');
         initModalListeners();
+        initBookingModalListeners();
         initFaqVisibility();
     }
     
