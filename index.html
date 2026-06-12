@@ -449,6 +449,22 @@
             transform: scale(1.015);
         }
 
+        @media (min-width: 768px) {
+            .modal-main-frame {
+                height: min(62vh, 640px);
+                max-height: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f5f3f0;
+            }
+
+            .modal-main-image {
+                object-fit: contain;
+                max-height: none;
+            }
+        }
+
         .modal-nav {
             width: 56px;
             height: 56px;
@@ -1166,7 +1182,7 @@
                         <div
                             class="max-w-xl space-y-8 text-lg font-light leading-relaxed text-on-surface/80 animate-slide-left opacity-0">
                             <p id="storyBody1" class style>Pendopo Andari lahir dari dedikasi
-                                masa pensiun Bapak Dodi dan Ibu Andari. Kami
+                                masa pensiun Bapak Doddy dan Ibu Andari. Kami
                                 percaya bahwa perjalanan yang bermakna dimulai
                                 dari tempat Anda beristirahat.</p>
                             <p id="storyQuote"
@@ -1206,14 +1222,14 @@
                     </h3>
                     <p id="storyQuoteBy"
                         class="mt-8 text-xs uppercase tracking-[0.4em] opacity-60"
-                        style>— Pak Dodi &amp; Ibu Andari</p>
+                        style>— Pak Doddy &amp; Ibu Andari</p>
                 </div>
             </div>
             <section class="py-16 sm:py-24 md:py-32 lg:py-32 px-8 lg:px-16 bg-bone-white" id="host">
                 <div class="max-w-7xl mx-auto px-0 lg:px-8 xl:px-10 editorial-grid gap-y-16 items-center">
                     <div class="col-span-12 lg:col-span-5 animate-fade-in opacity-0">
                         <div class="relative overflow-hidden shadow-2xl border border-wood-brown/10 h-[420px] sm:h-[520px] lg:h-[620px]">
-                            <img alt="Pak Dodi - Host Pendopo Andari"
+                            <img alt="Pak Doddy - Host Pendopo Andari"
                                 class="w-full h-full object-cover"
                                 src="./assets/pakdodi.jpeg"
                                 style="object-position: center 30%;" />
@@ -1226,10 +1242,10 @@
                         <h2 id="hostTitle"
                             class="font-headline text-5xl md:text-6xl text-wood-brown leading-tight mb-8"
                             style>Berkenalan dengan <br /><span
-                                class="italic text-leaf-green">Pak Dodi  & Bu Andari</span></h2>
+                                class="italic text-leaf-green">Pak Doddy  & Ibu Andari</span></h2>
                         <div
                             class="space-y-6 text-base md:text-lg font-light leading-relaxed text-on-surface/80 max-w-2xl">
-                            <p id="hostBody1" style>Pak Dodi adalah host yang menjaga ritme tinggal di Pendopo Andari tetap hangat, tenang, dan personal. Bersama Ibu Andari, beliau merancang pengalaman menginap agar tamu merasa seperti pulang ke rumah sendiri.</p>
+                            <p id="hostBody1" style>Pak Doddy adalah host yang menjaga ritme tinggal di Pendopo Andari tetap hangat, tenang, dan personal. Bersama Ibu Andari, beliau merancang pengalaman menginap agar tamu merasa seperti pulang ke rumah sendiri.</p>
                             <p id="hostBody2" style>Mulai dari rekomendasi area sekitar Keraton, bantuan check-in/check-out, hingga kebutuhan harian selama menginap, komunikasi dilakukan langsung dan responsif agar setiap tamu merasa diperhatikan.</p>
                         </div>
                         <div class="flex flex-wrap gap-3 mt-8">
@@ -1245,12 +1261,12 @@
                         </div>
                         <a id="hostWhatsappLink"
                             class="mt-10 bg-wood-brown text-bone-white px-7 py-4 text-xs uppercase tracking-[0.24em] font-medium hover:bg-leaf-green transition-colors inline-flex items-center gap-3"
-                            href="https://wa.me/6282132550573?text=Halo%20Pak%20Dodi%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih."
+                            href="https://wa.me/6282132550573?text=Halo%20Pak%20Doddy%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih."
                             rel="noopener noreferrer" target="_blank" style>
                             <img alt="WhatsApp"
                                 class="w-4 h-4 object-contain cta-wa-icon"
                                 src="./assets/whatsapp.png" />
-                            Chat Pak Dodi
+                            Chat Pak Doddy
                         </a>
                     </div>
                 </div>
@@ -1293,7 +1309,7 @@
                                     class="md:col-span-1 room-image-showcase h-56 sm:h-64 md:h-full md:min-h-[340px]">
                                     <img alt="Double Room"
                                         class="w-full h-full object-cover"
-                                        src="./assets/kamar_double_1.jpg" />
+                                        src="./assets/double/double-01.jpeg" />
                                 </div>
                                 <div
                                     class="md:col-span-1 p-7 md:p-8 flex flex-col justify-between gap-6">
@@ -1365,7 +1381,7 @@
                                     class="md:col-span-1 room-image-showcase h-56 sm:h-64 md:h-full md:min-h-[340px]">
                                     <img alt="Superior Room"
                                         class="w-full h-full object-cover"
-                                        src="./assets/kamar_superior_1.webp" />
+                                        src="./assets/superior/superior-02.jpeg" />
                                 </div>
                                 <div
                                     class="md:col-span-1 p-7 md:p-8 flex flex-col justify-between gap-6">
@@ -1438,7 +1454,7 @@
                                     class="room-image-showcase h-72 sm:h-80 md:h-full md:min-h-[420px] lg:min-h-[460px]">
                                     <img alt="Deluxe Room"
                                         class="w-full h-full object-cover"
-                                        src="./assets/kamar_deluxe_1.jpg" />
+                                        src="./assets/deluxe/deluxe-01.jpg" />
                                 </div>
                                 <div
                                     class="p-8 md:p-9 lg:p-10 flex flex-col justify-between gap-8">
@@ -1592,8 +1608,8 @@
                                 <div class="flex gap-4">
                                     <div
                                         class="ritual-media w-20 h-20 shrink-0 border border-wood-brown/10">
-                                        <img alt="Laundry service"
-                                            src="./assets/ruang_tamu.jpg" />
+                                        <img alt="Laundry machine area"
+                                            src="./assets/laundy.jpeg" />
                                     </div>
                                     <div class="flex-1">
                                         <div
@@ -1606,15 +1622,14 @@
                                                 data-ritual-icon>local_laundry_service</span>
                                         </div>
                                         <h4
-                                            class="font-headline text-2xl text-wood-brown italic leading-tight">Free
-                                            Laundry</h4>
+                                            class="font-headline text-2xl text-wood-brown italic leading-tight">Laundry
+                                               Corner</h4>
                                     </div>
                                 </div>
                                 <p
-                                    class="mt-5 text-sm font-light leading-relaxed text-on-surface/75">Layanan
-                                    cuci pakaian gratis membantu Anda tetap
-                                    nyaman, terutama untuk perjalanan beberapa
-                                    hari.</p>
+                                    class="mt-5 text-sm font-light leading-relaxed text-on-surface/75">Mesin
+                                    cuci tersedia gratis, sementara deterjen
+                                    disediakan sendiri sesuai selera Anda.</p>
                                 <button aria-expanded="false"
                                     class="w-full mt-5 text-left flex items-center justify-between text-[11px] uppercase tracking-[0.24em] text-wood-brown font-semibold"
                                     onclick="toggleRitualDetail(this)"
@@ -1862,7 +1877,7 @@
                 </div>
                 <div class="booking-modal-grid">
                     <a class="booking-option-card" id="bookingWhatsappLink"
-                        href="https://wa.me/6282132550573?text=Halo%20Pak%20Dodi%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih."
+                        href="https://wa.me/6282132550573?text=Halo%20Pak%20Doddy%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih."
                         onclick="closeBookingModal()" rel="noopener noreferrer"
                         target="_blank"><img alt="WhatsApp"
                             src="./assets/whatsapp.png" />WhatsApp</a>
@@ -1881,7 +1896,7 @@
         </div>
 
         <a aria-label="Chat WhatsApp" class="floating-wa-button" id="floatingWhatsappLink"
-            href="https://wa.me/6282132550573?text=Halo%20Pak%20Dodi%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih." rel="noopener noreferrer"
+            href="https://wa.me/6282132550573?text=Halo%20Pak%20Doddy%2C%20saya%20ingin%20pesan%20kamar%20di%20Pendopo%20Andari%20Homestay.%0A%0AFormat%20pemesanan%3A%0ANama%3A%0ANomor%20HP%3A%0ATanggal%20Check-in%3A%0ATanggal%20Check-out%3A%0AJumlah%20Tamu%3A%0ATipe%20Kamar%20%28Deluxe%2FSuperior%2FDouble%29%3A%0AJumlah%20Kamar%3A%0ACatatan%20Tambahan%3A%0A%0AMohon%20info%20ketersediaan%20dan%20harga.%20Terima%20kasih." rel="noopener noreferrer"
             target="_blank">
             <img alt="WhatsApp" src="./assets/whatsapp.png" />
         </a>
@@ -1945,7 +1960,7 @@
                                 class="material-symbols-outlined faq-icon">expand_more</span>
                         </div>
                         <div class="faq-answer">Ya. Pendopo Andari Homestay
-                            menawarkan layanan laundry yang siap membantu Anda
+                            mesin cuci tersedia gratis untuk digunakan tamu,
                             kapan pun Anda membutuhkan pakaian favorit Anda
                             bersih dan segar sepanjang liburan Anda. Silakan
                             menghubungi properti untuk informasi lebih
@@ -2229,7 +2244,7 @@
 
     const faqEntriesByLanguage = {
         id: [
-            { q: 'Apakah Pendopo Andari Homestay menawarkan layanan laundry?', a: 'Ya. Pendopo Andari Homestay menawarkan layanan laundry yang siap membantu Anda kapan pun Anda membutuhkan pakaian favorit Anda bersih dan segar sepanjang liburan Anda. Silakan menghubungi properti untuk informasi lebih lanjut.' },
+            { q: 'Apakah Pendopo Andari Homestay menawarkan layanan laundry?', a: 'Ya. Mesin cuci tersedia gratis untuk digunakan tamu, sedangkan deterjen dibeli sendiri sesuai selera Anda. Silakan menghubungi properti untuk informasi lebih lanjut.' },
             { q: 'Tempat wisata menarik apa saja yang ada di sekitar Pendopo Andari Homestay yang dapat ditempuh dengan berjalan kaki?', a: 'Saat menginap di Pendopo Andari Homestay, mulai liburan Anda dengan menjelajahi tempat-tempat wisata menarik di dekat properti dengan berjalan kaki, seperti Roket, Gereja Santo Fransiskus Xaverius Yogyakarta, dan Parabola Berbisik.' },
             { q: 'Taman umum apa saja yang ada di sekitar Pendopo Andari Homestay?', a: 'Saat menginap di Pendopo Andari Homestay, nikmati jalan-jalan pagi atau sore di taman terdekat seperti Roket, Parabola Berbisik, dan Peraga Observatorium.' },
             { q: 'Berapa lama tamu biasanya menginap di Pendopo Andari Homestay?', a: 'Tamu terverifikasi yang telah menginap di Pendopo Andari Homestay rata-rata menginap selama 1 malam malam di properti ini.' },
@@ -2243,7 +2258,7 @@
             { q: 'Pukul berapa saya dapat melakukan check-in dan check-out di Pendopo Andari Homestay?', a: 'Waktu check-in dimulai pukul 12:00 PM dan waktu check-out adalah hingga pukul 12:00 PM. Anda dapat mengajukan check-in lebih awal atau check-out lebih lama saat memesan, namun tergantung pada ketersediaan. Tamu yang melakukan check-in atau check-out sebelum atau setelah periode waktu yang telah ditentukan dapat dibebankan biaya tambahan.' }
         ],
         en: [
-            { q: 'Does Pendopo Andari Homestay provide laundry service?', a: 'Yes. Pendopo Andari Homestay offers laundry service to help keep your clothes clean and fresh throughout your stay. Please contact the property for more details.' },
+            { q: 'Does Pendopo Andari Homestay provide laundry service?', a: 'Yes. A washing machine is available for guests to use free of charge, while detergent is purchased separately based on your preference. Please contact the property for more details.' },
             { q: 'What nearby attractions can be reached on foot from Pendopo Andari Homestay?', a: 'While staying at Pendopo Andari Homestay, you can start your trip by exploring nearby attractions on foot, such as Roket, St. Francis Xavier Church Yogyakarta, and Parabola Berbisik.' },
             { q: 'What public parks are near Pendopo Andari Homestay?', a: 'During your stay, enjoy a morning or evening walk in nearby parks such as Roket, Parabola Berbisik, and Peraga Observatorium.' },
             { q: 'How long do guests usually stay at Pendopo Andari Homestay?', a: 'Verified guests who stayed at Pendopo Andari Homestay typically stayed for 1 night on average.' },
@@ -2272,18 +2287,18 @@
             heroEditorialText: 'Rumah tenang dengan kehangatan yang terasa hidup, untuk tamu yang menyukai atmosfer dibanding keramaian.',
             sinceLabel: 'Sejak',
             storyTitle: 'Bukan Sekadar Penginapan, <br /><span class="italic text-leaf-green">Ini Rumah Anda</span>',
-            storyBody1: 'Pendopo Andari lahir dari dedikasi masa pensiun Bapak Dodi dan Ibu Andari. Kami percaya bahwa perjalanan yang bermakna dimulai dari tempat Anda beristirahat.',
+            storyBody1: 'Pendopo Andari lahir dari dedikasi masa pensiun Bapak Doddy dan Ibu Andari. Kami percaya bahwa perjalanan yang bermakna dimulai dari tempat Anda beristirahat.',
             storyQuote: '"Filosofi kami sederhana: Kualitas di atas kuantitas. Dengan hanya tujuh kamar, perhatian kami tak terbagi."',
             storyBody2: 'Setiap sudut dirancang dengan sentuhan personal, interaksi yang hangat, dan pelayanan dari hati yang layaknya keluarga sendiri. Di sini, Anda bukan sekadar nomor kamar, melainkan tamu di rumah kami.',
             storyCaption: 'The Living Sanctuary — Est. 2024',
             quoteBlock: '"Kami mengundang Anda untuk melambat, bernapas, dan merasapi keheningan Yogyakarta yang sesungguhnya."',
-            quoteBy: '— Pak Dodi & Ibu Andari',
+            quoteBy: '— Pak Doddy & Ibu Andari',
             hostKicker: 'Temui Host Anda',
-            hostTitle: 'Berkenalan dengan <br /><span class="italic text-leaf-green">Pak Dodi</span>',
-            hostBody1: 'Pak Dodi adalah host yang menjaga ritme tinggal di Pendopo Andari tetap hangat, tenang, dan personal. Bersama Ibu Andari, beliau merancang pengalaman menginap agar tamu merasa seperti pulang ke rumah sendiri.',
+            hostTitle: 'Berkenalan dengan <br /><span class="italic text-leaf-green">Pak Doddy & Ibu Andari</span>',
+            hostBody1: 'Pak Doddy adalah host yang menjaga ritme tinggal di Pendopo Andari tetap hangat, tenang, dan personal. Bersama Ibu Andari, beliau merancang pengalaman menginap agar tamu merasa seperti pulang ke rumah sendiri.',
             hostBody2: 'Mulai dari rekomendasi area sekitar Keraton, bantuan check-in/check-out, hingga kebutuhan harian selama menginap, komunikasi dilakukan langsung dan responsif agar setiap tamu merasa diperhatikan.',
             hostBadges: ['Host On-site', 'Respons Cepat', 'Rekomendasi Lokal'],
-            hostButton: 'Chat Pak Dodi',
+            hostButton: 'Chat Pak Doddy',
             roomsKicker: 'Pilihan yang lebih tenang',
             roomsTitle: 'Kamar <br /><span class="italic text-leaf-green">Pilihan Kami</span>',
             roomsIntro: 'Double dan Superior memiliki dua skema harga (tanpa sarapan & dengan sarapan), sementara Deluxe tersedia dengan sarapan.',
@@ -2310,10 +2325,10 @@
                 },
                 {
                     kicker: '02 / Praktis Nyaman',
-                    title: 'Laundry Gratis',
-                    desc: 'Layanan cuci pakaian gratis membantu Anda tetap nyaman, terutama untuk perjalanan beberapa hari.',
+                    title: 'Laundry Corner',
+                    desc: 'Mesin cuci tersedia gratis untuk digunakan tamu, sedangkan deterjen dibeli sendiri sesuai selera Anda.',
                     button: 'Detail Layanan',
-                    detail: 'Drop-off fleksibel sepanjang hari dan pengembalian menyesuaikan ritme aktivitas tamu, agar itinerary tetap ringan tanpa beban cucian.'
+                    detail: 'Gunakan mesin cuci kapan saja sesuai kebutuhan, lalu sesuaikan deterjen sendiri agar hasil cucian lebih pas dengan preferensi Anda.'
                 },
                 {
                     kicker: '03 / Dapur Terbuka',
@@ -2374,18 +2389,18 @@
             heroEditorialText: 'A calm house with a lived-in warmth, designed for guests who prefer atmosphere over volume.',
             sinceLabel: 'Since',
             storyTitle: 'Not Just a Stay, <br /><span class="italic text-leaf-green">A Home for You</span>',
-            storyBody1: 'Pendopo Andari was born from the retirement dream of Mr. Dodi and Mrs. Andari. We believe meaningful journeys begin with where you rest.',
+            storyBody1: 'Pendopo Andari was born from the retirement dream of Mr. Doddy and Mrs. Andari. We believe meaningful journeys begin with where you rest.',
             storyQuote: '"Our philosophy is simple: quality over quantity. With only seven rooms, our attention is never divided."',
             storyBody2: 'Every corner is shaped with personal touches, warm interaction, and heartfelt service like family. Here, you are never just a room number—you are a guest in our home.',
             storyCaption: 'The Living Sanctuary — Est. 2024',
             quoteBlock: '"We invite you to slow down, breathe, and feel the true quiet side of Yogyakarta."',
-            quoteBy: '— Mr. Dodi & Mrs. Andari',
+            quoteBy: '— Mr. Doddy & Mrs. Andari',
             hostKicker: 'Meet Your Host',
-            hostTitle: 'Meet <br /><span class="italic text-leaf-green">Mr. Dodi</span>',
-            hostBody1: 'Mr. Dodi keeps every stay at Pendopo Andari warm, calm, and personal. Together with Mrs. Andari, he designs each guest experience to feel like coming home.',
+            hostTitle: 'Meet <br /><span class="italic text-leaf-green">Mr. Doddy</span>',
+            hostBody1: 'Mr. Doddy keeps every stay at Pendopo Andari warm, calm, and personal. Together with Mrs. Andari, he designs each guest experience to feel like coming home.',
             hostBody2: 'From local recommendations around the palace area to check-in/check-out assistance and daily needs, communication is direct and responsive so every guest feels cared for.',
             hostBadges: ['Host On-site', 'Quick Response', 'Local Tips'],
-            hostButton: 'Chat with Mr. Dodi',
+            hostButton: 'Chat with Mr. Doddy',
             roomsKicker: 'A quieter selection',
             roomsTitle: 'Our <br /><span class="italic text-leaf-green">Sanctuaries</span>',
             roomsIntro: 'Double and Superior offer two pricing schemes (without breakfast & with breakfast), while Deluxe is available with breakfast.',
@@ -2412,8 +2427,8 @@
                 },
                 {
                     kicker: '02 / Practical Ease',
-                    title: 'Free Laundry',
-                    desc: 'Complimentary laundry service helps you stay comfortable, especially during multi-day trips.',
+                    title: 'Laundry Corner',
+                    desc: 'A free washing machine is available, while detergent is purchased separately based on your preference.',
                     button: 'Service Details',
                     detail: 'Flexible drop-off throughout the day with return timing adjusted to your activity rhythm, keeping your itinerary light and easy.'
                 },
@@ -2510,8 +2525,8 @@
 
     function getWhatsappHref() {
         const messages = {
-            id: `Halo Pak Dodi, saya ingin pesan kamar di Pendopo Andari Homestay.\n\nFormat pemesanan:\nNama:\nNomor HP:\nTanggal Check-in:\nTanggal Check-out:\nJumlah Tamu:\nTipe Kamar (Deluxe/Superior/Double):\nJumlah Kamar:\nCatatan Tambahan:\n\nMohon info ketersediaan dan harga. Terima kasih.`,
-            en: `Hello Mr. Dodi, I would like to book a room at Pendopo Andari Homestay.\n\nBooking details:\nName:\nPhone Number:\nCheck-in Date:\nCheck-out Date:\nNumber of Guests:\nRoom Type (Deluxe/Superior/Double):\nNumber of Rooms:\nAdditional Notes:\n\nPlease share availability and rates. Thank you.`
+            id: `Halo Pak Doddy, saya ingin pesan kamar di Pendopo Andari Homestay.\n\nFormat pemesanan:\nNama:\nNomor HP:\nTanggal Check-in:\nTanggal Check-out:\nJumlah Tamu:\nTipe Kamar (Deluxe/Superior/Double):\nJumlah Kamar:\nCatatan Tambahan:\n\nMohon info ketersediaan dan harga. Terima kasih.`,
+            en: `Hello Mr. Doddy, I would like to book a room at Pendopo Andari Homestay.\n\nBooking details:\nName:\nPhone Number:\nCheck-in Date:\nCheck-out Date:\nNumber of Guests:\nRoom Type (Deluxe/Superior/Double):\nNumber of Rooms:\nAdditional Notes:\n\nPlease share availability and rates. Thank you.`
         };
         return `https://wa.me/6282132550573?text=${encodeURIComponent(messages[currentLanguage])}`;
     }
@@ -2801,7 +2816,7 @@
             if (!place.marker) {
                 return;
             }
-            const distanceKm = calculateDistance(-7.8028947018100805, 110.36836481534104, place.coords[0], place.coords[1]);
+            const distanceKm = calculateDistance(-7.802987165179884, 110.36830586351834, place.coords[0], place.coords[1]);
             const placeName = currentLanguage === 'id' ? place.nameId : place.nameEn;
             place.marker.bindPopup(
                 `<div style="text-align: center; padding: 12px; cursor: pointer;" class="attraction-popup">
@@ -2865,7 +2880,7 @@
         mapContainer.style.width = '100%';
         
         try {
-            const map = L.map('locationMap').setView([-7.8028947018100805, 110.36836481534104], 15);
+            const map = L.map('locationMap').setView([-7.802987165179884, 110.36830586351834], 15);
             
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors',
@@ -2883,7 +2898,7 @@
                 className: 'pendopo-marker'
             });
             
-            const pendopoCoords = [-7.8028947018100805, 110.36836481534104];
+            const pendopoCoords = [-7.802987165179884, 110.36830586351834];
             
             // Main marker - Pendopo Andari
             const pendopoMarker = L.marker(pendopoCoords, { icon: pendopoIcon })
@@ -3095,31 +3110,31 @@
     
     // Room Modal Functions - MOVED TO TOP FOR EARLY AVAILABILITY
     const roomImages = {
-        'deluxe': [
-            'kamar_deluxe_1.jpg', 'kamar_deluxe_2.jpg', 'kamar_deluxe_3.webp', 'kamar_deluxe_4.jpg',
-            'kamar_deluxe_5.webp', 'kamar_deluxe_6.jpg', 'kamar_deluxe_7.jpg', 'kamar_deluxe_8.jpg',
-            'kamar_deluxe_9.jpg', 'kamar_deluxe_10.jpg', 'kamar_deluxe_11.jpg', 'kamar_deluxe_12.webp',
-            'kamar_deluxe_13.jpg', 'kamar_deluxe_14.jpg', 'kamar_deluxe_15.jpeg', 'kamar_deluxe_16.jpg',
-            'kamar_deluxe_17.jpeg', 'kamar_deluxe_19.webp'
+        deluxe: [
+            'deluxe-01.jpg', 'deluxe-02.jpg', 'deluxe-03.jpg', 'deluxe-04.webp',
+            'deluxe-05.jpg', 'deluxe-06.jpg', 'deluxe-07.jpeg', 'deluxe-08.jpg',
+            'deluxe-09.jpeg', 'deluxe-10.webp', 'deluxe-11.jpg', 'deluxe-12.webp',
+            'deluxe-13.jpg', 'deluxe-14.webp', 'deluxe-15.jpg', 'deluxe-16.jpg',
+            'deluxe-17.jpg', 'deluxe-18.jpg'
         ],
-        'superior': [
-            'kamar_superior_1.webp', 'kamar_superior_2.jpg', 'kamar_superior_3.webp', 'kamar_superior_4.jpg',
-            'kamar_superior_5.jpg', 'kamar_superior_6.jpg', 'kamar_superior_6.webp', 'kamar_superior_7.webp',
-            'kamar_superior_8.webp', 'kamar_superior_9.webp', 'kamar_superior_10.jpg', 'kamar_superior_11.jpg',
-            'kamar_superior_11.webp', 'kamar_superior_12.jpeg', 'kamar_superior_13.webp', 'kamar_superior_14.webp',
-            'kamar_superior_15.jpeg', 'kamar_superior_16.jpeg'
+        superior: [
+            'superior-01.jpeg', 'superior-02.jpeg', 'superior-03.jpeg', 'superior-04.jpeg',
+            'superior-05.jpeg', 'superior-06.jpeg', 'superior-07.jpeg', 'superior-08.jpeg',
+            'superior-09.jpeg', 'superior-10.jpeg', 'superior-11.jpeg'
         ],
-        'double': [
-            'kamar_double_1.jpg', 'kamar_double_2.webp', 'kamar_double_4.jpg', 'kamar_double_5.webp',
-            'kamar_double_6.webp', 'kamar_double_7.jpg', 'kamar_double_8.webp', 'kamar_double_9.jpg',
-            'kamar_double_10.jpeg', 'kamar_double_11.webp', 'kamar_double_12.jpg', 'kamar_double_13.webp',
-            'kamar_double_14.jpeg', 'kamar_double_15.jpg', 'kamar_double_16.jpg', 'kamar_double_17.jpg',
-            'kamar_double_18.jpeg'
+        double: [
+            'double-01.jpeg', 'double-02.jpeg', 'double-03.jpeg', 'double-04.jpeg',
+            'double-05.jpeg', 'double-06.jpeg', 'double-07.jpeg', 'double-08.jpeg',
+            'double-09.jpeg'
         ]
     };
     
     function getRoomTitle(roomType) {
         return roomTitlesByLanguage[currentLanguage]?.[roomType] || roomTitlesByLanguage.id[roomType] || '';
+    }
+
+    function getRoomImagePath(roomType, fileName) {
+        return `./assets/${roomType}/${fileName}`;
     }
 
     let activeRoomType = null;
@@ -3209,7 +3224,7 @@
         }
 
         const fileName = currentModalImages[currentModalIndex];
-        const nextSrc = './assets/' + fileName;
+        const nextSrc = getRoomImagePath(activeRoomType, fileName);
         const nextAlt = `${getRoomTitle(activeRoomType)} - ${t('showImage')} ${currentModalIndex + 1}`;
 
         const preloadImage = new Image();
@@ -3267,7 +3282,7 @@
             });
 
             const img = document.createElement('img');
-            img.src = './assets/' + image;
+            img.src = getRoomImagePath(activeRoomType, image);
             img.alt = `${getRoomTitle(activeRoomType)} thumbnail ${index + 1}`;
             img.loading = 'lazy';
 
