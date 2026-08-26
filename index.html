@@ -1275,7 +1275,7 @@
                 <div
                     class="max-w-7xl mx-auto py-16 lg:py-24">
                     <div
-                        class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 lg:mb-20">
+                        class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8 lg:mb-10">
                         <div>
                             <p id="roomsKicker"
                                 class="text-xs uppercase tracking-[0.35em] text-leaf-green font-semibold mb-5">A
@@ -1287,13 +1287,19 @@
                                     class="italic text-leaf-green">Sanctuaries</span>
                             </h2>
                         </div>
-                        <p id="roomsIntro"
-                            class="max-w-xl text-sm md:text-base leading-relaxed text-on-surface/65 font-light">
-                            Tiga pilihan kamar disusun dengan hierarki visual
-                            yang lebih hidup: satu featured room, dua supporting
-                            rooms, dan ruang kosong yang cukup agar tiap tipe
-                            terasa berbeda.
-                        </p>
+                        <div class="max-w-xl lg:text-right">
+                            <p id="roomsPriceNotice"
+                                class="inline-flex items-center gap-2 text-xs md:text-sm text-leaf-green/90 bg-leaf-green/5 border border-leaf-green/20 rounded-full px-4 py-2 mb-4">
+                                Harga berlaku hingga 20 Desember 2026.
+                            </p>
+                            <p id="roomsIntro"
+                                class="text-sm md:text-base leading-relaxed text-on-surface/65 font-light">
+                                Tiga pilihan kamar disusun dengan hierarki visual
+                                yang lebih hidup: satu featured room, dua supporting
+                                rooms, dan ruang kosong yang cukup agar tiap tipe
+                                terasa berbeda.
+                            </p>
+                        </div>
                     </div>
 
                     <div
@@ -1306,7 +1312,7 @@
                             <div
                                 class="grid grid-cols-1 md:grid-cols-2 items-stretch h-full">
                                 <div
-                                    class="md:col-span-1 room-image-showcase h-56 sm:h-64 md:h-full md:min-h-[340px]">
+                                    class="md:col-span-1 room-image-showcase h-56 sm:h-64 md:h-[340px]">
                                     <img alt="Double Room"
                                         class="w-full h-full object-cover"
                                         src="./assets/double/double-01.jpeg" />
@@ -1378,7 +1384,7 @@
                             <div
                                 class="grid grid-cols-1 md:grid-cols-2 items-stretch h-full">
                                 <div
-                                    class="md:col-span-1 room-image-showcase h-56 sm:h-64 md:h-full md:min-h-[340px]">
+                                    class="md:col-span-1 room-image-showcase h-56 sm:h-64 md:h-[340px]">
                                     <img alt="Superior Room"
                                         class="w-full h-full object-cover"
                                         src="./assets/superior/superior-02.jpeg" />
@@ -1451,10 +1457,10 @@
                             <div
                                 class="grid grid-cols-1 md:grid-cols-2 items-stretch h-full">
                                 <div
-                                    class="room-image-showcase h-72 sm:h-80 md:h-full md:min-h-[420px] lg:min-h-[460px]">
+                                    class="room-image-showcase h-72 sm:h-80 md:h-[420px] lg:h-[460px]">
                                     <img alt="Deluxe Room"
                                         class="w-full h-full object-cover"
-                                        src="./assets/deluxe/deluxe-01.jpg" />
+                                        src="./assets/deluxe/deluxe-01.jpeg" />
                                 </div>
                                 <div
                                     class="p-8 md:p-9 lg:p-10 flex flex-col justify-between gap-8">
@@ -2350,6 +2356,7 @@
             roomsKicker: 'Pilihan yang lebih tenang',
             roomsTitle: 'Kamar <br /><span class="italic text-leaf-green">Pilihan Kami</span>',
             roomsIntro: 'Double dan Superior memiliki dua skema harga (tanpa sarapan & dengan sarapan), sementara Deluxe tersedia dengan sarapan.',
+            roomsPriceNotice: 'Harga berlaku hingga 20 Desember 2026.',
             roomsCards: [
                 { top: '01 / Esensial', sub: 'Nyaman ringkas', title: 'Kamar Double', desc: 'Pilihan cerdas dengan fasilitas lengkap. Nyaman dan efisien.', prices: ['Tanpa sarapan: Rp 200.000 / malam', 'Dengan sarapan: Rp 250.000 / malam'], features: ['AC & Wi-Fi', 'Teh & Air Panas/Dingin', 'Handuk • Sabun • Sampo', 'Kamar Mandi Bersama'] },
                 { top: '02 / Intim', sub: 'Skala romantis', title: 'Kamar Superior', desc: 'Keseimbangan sempurna antara kenyamanan modern dan nuansa tradisional.', prices: ['Tanpa sarapan: Rp 300.000 / malam', 'Dengan sarapan: Rp 350.000 / malam'], features: ['AC & Wi-Fi', 'Teh & Air Panas/Dingin', 'Handuk • Sabun • Sampo', 'Kamar Mandi Dalam'] },
@@ -2459,6 +2466,7 @@
             roomsKicker: 'A quieter selection',
             roomsTitle: 'Our <br /><span class="italic text-leaf-green">Sanctuaries</span>',
             roomsIntro: 'Double and Superior offer two pricing schemes (without breakfast & with breakfast), while Deluxe is available with breakfast.',
+            roomsPriceNotice: 'Prices valid until December 20, 2026.',
             roomsCards: [
                 { top: '01 / Essential', sub: 'Compact comfort', title: 'Double Room', desc: 'A smart choice with complete essentials. Comfortable and efficient.', prices: ['Without breakfast: IDR 200,000 / night', 'With breakfast: IDR 250,000 / night'], features: ['AC & Wi-Fi', 'Tea & Hot/Cold Water', 'Towel • Soap • Shampoo', 'Shared Bathroom'] },
                 { top: '02 / Intimate', sub: 'Romantic scale', title: 'Superior Room', desc: 'A perfect balance of modern comfort and traditional atmosphere.', prices: ['Without breakfast: IDR 300,000 / night', 'With breakfast: IDR 350,000 / night'], features: ['AC & Wi-Fi', 'Tea & Hot/Cold Water', 'Towel • Soap • Shampoo', 'En-suite Bathroom'] },
@@ -2691,6 +2699,7 @@
         setText('#roomsKicker', t('roomsKicker'));
         setHTML('#roomsTitle', t('roomsTitle'));
         setText('#roomsIntro', t('roomsIntro'));
+        setText('#roomsPriceNotice', t('roomsPriceNotice'));
 
         const roomCards = document.querySelectorAll('#rooms .room-clickable');
         roomCards.forEach((card, index) => {
@@ -3173,11 +3182,9 @@
     // Room Modal Functions - MOVED TO TOP FOR EARLY AVAILABILITY
     const roomImages = {
         deluxe: [
-            'deluxe-01.jpg', 'deluxe-02.jpg', 'deluxe-03.jpg', 'deluxe-04.webp',
-            'deluxe-05.jpg', 'deluxe-06.jpg', 'deluxe-07.jpeg', 'deluxe-08.jpg',
-            'deluxe-09.jpeg', 'deluxe-10.webp', 'deluxe-11.jpg', 'deluxe-12.webp',
-            'deluxe-13.jpg', 'deluxe-14.webp', 'deluxe-15.jpg', 'deluxe-16.jpg',
-            'deluxe-17.jpg', 'deluxe-18.jpg'
+            'deluxe-01.jpeg', 'deluxe-02.jpeg', 'deluxe-03.jpeg', 'deluxe-04.jpeg',
+            'deluxe-05.jpeg', 'deluxe-06.jpeg', 'deluxe-07.webp', 'deluxe-08.jpg',
+            'deluxe-09.webp', 'deluxe-10.webp'
         ],
         superior: [
             'superior-01.jpeg', 'superior-02.jpeg', 'superior-03.jpeg', 'superior-04.jpeg',
