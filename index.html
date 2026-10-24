@@ -2357,6 +2357,7 @@
             roomsTitle: 'Kamar <br /><span class="italic text-leaf-green">Pilihan Kami</span>',
             roomsIntro: 'Double dan Superior memiliki dua skema harga (tanpa sarapan & dengan sarapan), sementara Deluxe tersedia dengan sarapan.',
             roomsPriceNotice: 'Harga berlaku hingga 20 Desember 2026.',
+            roomsPriceNoticePeak: 'Harga berlaku mulai 20 Desember 2026.',
             roomsCards: [
                 { top: '01 / Esensial', sub: 'Nyaman ringkas', title: 'Kamar Double', desc: 'Pilihan cerdas dengan fasilitas lengkap. Nyaman dan efisien.', prices: ['Tanpa sarapan: Rp 200.000 / malam', 'Dengan sarapan: Rp 250.000 / malam'], features: ['AC & Wi-Fi', 'Teh & Air Panas/Dingin', 'Handuk • Sabun • Sampo', 'Kamar Mandi Bersama'] },
                 { top: '02 / Intim', sub: 'Skala romantis', title: 'Kamar Superior', desc: 'Keseimbangan sempurna antara kenyamanan modern dan nuansa tradisional.', prices: ['Tanpa sarapan: Rp 300.000 / malam', 'Dengan sarapan: Rp 350.000 / malam'], features: ['AC & Wi-Fi', 'Teh & Air Panas/Dingin', 'Handuk • Sabun • Sampo', 'Kamar Mandi Dalam'] },
@@ -2467,6 +2468,7 @@
             roomsTitle: 'Our <br /><span class="italic text-leaf-green">Sanctuaries</span>',
             roomsIntro: 'Double and Superior offer two pricing schemes (without breakfast & with breakfast), while Deluxe is available with breakfast.',
             roomsPriceNotice: 'Prices valid until December 20, 2026.',
+            roomsPriceNoticePeak: 'Prices valid from December 20, 2026.',
             roomsCards: [
                 { top: '01 / Essential', sub: 'Compact comfort', title: 'Double Room', desc: 'A smart choice with complete essentials. Comfortable and efficient.', prices: ['Without breakfast: IDR 200,000 / night', 'With breakfast: IDR 250,000 / night'], features: ['AC & Wi-Fi', 'Tea & Hot/Cold Water', 'Towel • Soap • Shampoo', 'Shared Bathroom'] },
                 { top: '02 / Intimate', sub: 'Romantic scale', title: 'Superior Room', desc: 'A perfect balance of modern comfort and traditional atmosphere.', prices: ['Without breakfast: IDR 300,000 / night', 'With breakfast: IDR 350,000 / night'], features: ['AC & Wi-Fi', 'Tea & Hot/Cold Water', 'Towel • Soap • Shampoo', 'En-suite Bathroom'] },
@@ -2643,6 +2645,26 @@
         applyTranslations();
     }
 
+
+    // Harga naik Rp 50.000 per kamar mulai 20 Desember 2026 (WIB)
+    const PEAK_PRICING_START = new Date('2026-12-20T00:00:00+07:00');
+    const PEAK_PRICING_SURCHARGE = 50000;
+
+    function isPeakPricing() {
+        return Date.now() >= PEAK_PRICING_START.getTime();
+    }
+
+    function applyPeakPricing(line) {
+        if (!isPeakPricing()) {
+            return line;
+        }
+        return line.replace(/(Rp|IDR) ?([\d.,]+)/, (match, currency, amount) => {
+            const value = parseInt(amount.replace(/[.,]/g, ''), 10) + PEAK_PRICING_SURCHARGE;
+            const sep = currency === 'Rp' ? '.' : ',';
+            return `${currency} ${String(value).replace(/\B(?=(\d{3})+(?!\d))/g, sep)}`;
+        });
+    }
+
     function applyTranslations() {
         document.documentElement.lang = currentLanguage;
 
@@ -2699,7 +2721,7 @@
         setText('#roomsKicker', t('roomsKicker'));
         setHTML('#roomsTitle', t('roomsTitle'));
         setText('#roomsIntro', t('roomsIntro'));
-        setText('#roomsPriceNotice', t('roomsPriceNotice'));
+        setText('#roomsPriceNotice', isPeakPricing() ? t('roomsPriceNoticePeak') : t('roomsPriceNotice'));
 
         const roomCards = document.querySelectorAll('#rooms .room-clickable');
         roomCards.forEach((card, index) => {
@@ -2725,6 +2747,7 @@
             const priceContainer = card.querySelector('.border-b');
             if (priceContainer && Array.isArray(content.prices)) {
                 priceContainer.innerHTML = `<div class="flex flex-wrap gap-2">${content.prices
+                    .map(applyPeakPricing)
                     .map((line, lineIndex) => `<span class="inline-flex items-center px-3 py-1 text-[10px] sm:text-xs uppercase tracking-[0.16em] font-semibold border ${lineIndex === 0 ? 'text-leaf-green border-leaf-green/35 bg-leaf-green/5' : 'text-wood-brown border-wood-brown/30 bg-wood-brown/5'}">${line}</span>`)
                     .join('')}</div>`;
             }
